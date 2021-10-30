@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.knightboost.moonlight.apm.mapper.mysql.TestDao">
+  <resultMap id="BaseResultMap" type="com.knightboost.moonlight.apm.model.Test">
+    <id column="id" jdbcType="INTEGER" property="id" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from test
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.knightboost.moonlight.apm.model.Test" useGeneratedKeys="true">
+    insert into test ()
+    values ()
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.knightboost.moonlight.apm.model.Test" useGeneratedKeys="true">
+    insert into test
+    <trim prefix="(" suffix=")" suffixOverrides="," />
+    <trim prefix="values (" suffix=")" suffixOverrides="," />
+  </insert>
+</mapper>

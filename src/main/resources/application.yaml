@@ -1,0 +1,6 @@
+datasourceconfig:
+  mysql:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://localhost:3306/moonlight
+    username: root
+    password: 123456
