@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
-import java.beans.ConstructorProperties;
 
 @Configuration
 @MapperScan(basePackages = "com.knightboost.moonlight.**.mapper.mysql")
