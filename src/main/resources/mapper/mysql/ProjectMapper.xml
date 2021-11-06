@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.knightboost.moonlight.mapper.ProjectMapper">
+    <resultMap id="BaseResultMap" type="com.knightboost.moonlight.domain.Project">
+        <id column="id" jdbcType="INTEGER" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="platform" jdbcType="VARCHAR" property="platform" />
+        <result column="organization_id" jdbcType="INTEGER" property="organizationId" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="modify_time" jdbcType="TIMESTAMP" property="modifyTime" />
+        <result column="public_key" jdbcType="VARCHAR" property="publicKey" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, `name`, `status`, platform, organization_id, create_time, modify_time, public_key
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from moonlight_project
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from moonlight_project
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.knightboost.moonlight.domain.Project" useGeneratedKeys="true">
+        insert into moonlight_project (`name`, `status`, platform,
+                                       organization_id, create_time, modify_time,
+                                       public_key)
+        values (#{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{platform,jdbcType=VARCHAR},
+                #{organizationId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP},
+                #{publicKey,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.knightboost.moonlight.domain.Project" useGeneratedKeys="true">
+        insert into moonlight_project
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                `name`,
+            </if>
+            <if test="status != null">
+                `status`,
+            </if>
+            <if test="platform != null">
+                platform,
+            </if>
+            <if test="organizationId != null">
+                organization_id,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="modifyTime != null">
+                modify_time,
+            </if>
+            <if test="publicKey != null">
+                public_key,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="platform != null">
+                #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="organizationId != null">
+                #{organizationId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="publicKey != null">
+                #{publicKey,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.knightboost.moonlight.domain.Project">
+        update moonlight_project
+        <set>
+            <if test="name != null">
+                `name` = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                `status` = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="platform != null">
+                platform = #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="organizationId != null">
+                organization_id = #{organizationId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="modifyTime != null">
+                modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="publicKey != null">
+                public_key = #{publicKey,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.knightboost.moonlight.domain.Project">
+        update moonlight_project
+        set `name` = #{name,jdbcType=VARCHAR},
+            `status` = #{status,jdbcType=INTEGER},
+            platform = #{platform,jdbcType=VARCHAR},
+            organization_id = #{organizationId,jdbcType=INTEGER},
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+            modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+            public_key = #{publicKey,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

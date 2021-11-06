@@ -14,7 +14,12 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import javax.sql.DataSource;
 
 @Configuration
-@MapperScan(basePackages = "com.knightboost.moonlight.**.mapper.mysql")
+@MapperScan(basePackages = {
+        "com.knightboost.moonlight.mapper",
+        "com.knightboost.moonlight.**.mapper.**",
+        "com.knightboost.moonlight.**.dao.**",
+        "com.knightboost.moonlight.**.mapper.*",
+        "com.knightboost.moonlight.**.dao.*"})
 public class DbConfig {
 
     @Bean(name = "mysqlDataSource")
