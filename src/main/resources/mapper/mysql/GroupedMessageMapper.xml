@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.knightboost.moonlight.mapper.GroupedMessageMapper">
+
+    <resultMap id="BaseResultMap" type="com.knightboost.moonlight.domain.GroupedMessage">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="level" column="level" jdbcType="INTEGER"/>
+            <result property="message" column="message" jdbcType="VARCHAR"/>
+            <result property="view" column="view" jdbcType="VARCHAR"/>
+            <result property="numComments" column="num_comments" jdbcType="INTEGER"/>
+            <result property="platform" column="platform" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="timesSeen" column="times_seen" jdbcType="INTEGER"/>
+            <result property="firstSeen" column="first_seen" jdbcType="TIMESTAMP"/>
+            <result property="lastSeen" column="last_seen" jdbcType="TIMESTAMP"/>
+            <result property="resolvedAt" column="resolved_at" jdbcType="TIMESTAMP"/>
+            <result property="data" column="data" jdbcType="VARCHAR"/>
+            <result property="projectId" column="project_id" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,level,message,
+        view,num_comments,platform,
+        status,times_seen,first_seen,
+        last_seen,resolved_at,data,
+        project_id
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from apm_grouped_message
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from apm_grouped_message
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.knightboost.moonlight.domain.GroupedMessage" useGeneratedKeys="true">
+        insert into apm_grouped_message
+        ( id,level,message
+        ,view,num_comments,platform
+        ,status,times_seen,first_seen
+        ,last_seen,resolved_at,data
+        ,project_id)
+        values (#{id,jdbcType=BIGINT},#{level,jdbcType=INTEGER},#{message,jdbcType=VARCHAR}
+        ,#{view,jdbcType=VARCHAR},#{numComments,jdbcType=INTEGER},#{platform,jdbcType=VARCHAR}
+        ,#{status,jdbcType=INTEGER},#{timesSeen,jdbcType=INTEGER},#{firstSeen,jdbcType=TIMESTAMP}
+        ,#{lastSeen,jdbcType=TIMESTAMP},#{resolvedAt,jdbcType=TIMESTAMP},#{data,jdbcType=VARCHAR}
+        ,#{projectId,jdbcType=BIGINT})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.knightboost.moonlight.domain.GroupedMessage" useGeneratedKeys="true">
+        insert into apm_grouped_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="level != null">level,</if>
+                <if test="message != null">message,</if>
+                <if test="view != null">view,</if>
+                <if test="numComments != null">numComments,</if>
+                <if test="platform != null">platform,</if>
+                <if test="status != null">status,</if>
+                <if test="timesSeen != null">timesSeen,</if>
+                <if test="firstSeen != null">firstSeen,</if>
+                <if test="lastSeen != null">lastSeen,</if>
+                <if test="resolvedAt != null">resolvedAt,</if>
+                <if test="data != null">data,</if>
+                <if test="projectId != null">projectId,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">id = #{id,jdbcType=BIGINT},</if>
+                <if test="level != null">level = #{level,jdbcType=INTEGER},</if>
+                <if test="message != null">message = #{message,jdbcType=VARCHAR},</if>
+                <if test="view != null">view = #{view,jdbcType=VARCHAR},</if>
+                <if test="numComments != null">num_comments = #{numComments,jdbcType=INTEGER},</if>
+                <if test="platform != null">platform = #{platform,jdbcType=VARCHAR},</if>
+                <if test="status != null">status = #{status,jdbcType=INTEGER},</if>
+                <if test="timesSeen != null">times_seen = #{timesSeen,jdbcType=INTEGER},</if>
+                <if test="firstSeen != null">first_seen = #{firstSeen,jdbcType=TIMESTAMP},</if>
+                <if test="lastSeen != null">last_seen = #{lastSeen,jdbcType=TIMESTAMP},</if>
+                <if test="resolvedAt != null">resolved_at = #{resolvedAt,jdbcType=TIMESTAMP},</if>
+                <if test="data != null">data = #{data,jdbcType=VARCHAR},</if>
+                <if test="projectId != null">project_id = #{projectId,jdbcType=BIGINT},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.knightboost.moonlight.domain.GroupedMessage">
+        update apm_grouped_message
+        <set>
+                <if test="level != null">
+                    level = #{level,jdbcType=INTEGER},
+                </if>
+                <if test="message != null">
+                    message = #{message,jdbcType=VARCHAR},
+                </if>
+                <if test="view != null">
+                    view = #{view,jdbcType=VARCHAR},
+                </if>
+                <if test="numComments != null">
+                    num_comments = #{numComments,jdbcType=INTEGER},
+                </if>
+                <if test="platform != null">
+                    platform = #{platform,jdbcType=VARCHAR},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=INTEGER},
+                </if>
+                <if test="timesSeen != null">
+                    times_seen = #{timesSeen,jdbcType=INTEGER},
+                </if>
+                <if test="firstSeen != null">
+                    first_seen = #{firstSeen,jdbcType=TIMESTAMP},
+                </if>
+                <if test="lastSeen != null">
+                    last_seen = #{lastSeen,jdbcType=TIMESTAMP},
+                </if>
+                <if test="resolvedAt != null">
+                    resolved_at = #{resolvedAt,jdbcType=TIMESTAMP},
+                </if>
+                <if test="data != null">
+                    data = #{data,jdbcType=VARCHAR},
+                </if>
+                <if test="projectId != null">
+                    project_id = #{projectId,jdbcType=BIGINT},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.knightboost.moonlight.domain.GroupedMessage">
+        update apm_grouped_message
+        set 
+            level =  #{level,jdbcType=INTEGER},
+            message =  #{message,jdbcType=VARCHAR},
+            view =  #{view,jdbcType=VARCHAR},
+            num_comments =  #{numComments,jdbcType=INTEGER},
+            platform =  #{platform,jdbcType=VARCHAR},
+            status =  #{status,jdbcType=INTEGER},
+            times_seen =  #{timesSeen,jdbcType=INTEGER},
+            first_seen =  #{firstSeen,jdbcType=TIMESTAMP},
+            last_seen =  #{lastSeen,jdbcType=TIMESTAMP},
+            resolved_at =  #{resolvedAt,jdbcType=TIMESTAMP},
+            data =  #{data,jdbcType=VARCHAR},
+            project_id =  #{projectId,jdbcType=BIGINT}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+</mapper>

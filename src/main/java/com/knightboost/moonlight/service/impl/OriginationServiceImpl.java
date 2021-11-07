@@ -1,6 +1,7 @@
 package com.knightboost.moonlight.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.knightboost.moonlight.domain.ApmLog;
 import com.knightboost.moonlight.domain.Organization;
 import com.knightboost.moonlight.mapper.OrganizationMapper;
 import com.knightboost.moonlight.service.OrganizationService;

@@ -1,0 +1,631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.knightboost.moonlight.mapper.ck.ApmLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.knightboost.moonlight.domain.ApmLog">
+            <result property="eventId" column="event_id" jdbcType="OTHER"/>
+            <result property="projectId" column="project_id" jdbcType="INTEGER"/>
+            <result property="groupId" column="group_id" jdbcType="INTEGER"/>
+            <result property="timestamp" column="timestamp" jdbcType="TIMESTAMP"/>
+            <result property="deleted" column="deleted" jdbcType="INTEGER"/>
+            <result property="retentionDays" column="retention_days" jdbcType="INTEGER"/>
+            <result property="platform" column="platform" jdbcType="OTHER"/>
+            <result property="message" column="message" jdbcType="OTHER"/>
+            <result property="primaryHash" column="primary_hash" jdbcType="OTHER"/>
+            <result property="hierarchicalHashes" column="hierarchical_hashes" jdbcType="OTHER"/>
+            <result property="received" column="received" jdbcType="TIMESTAMP"/>
+            <result property="searchMessage" column="search_message" jdbcType="OTHER"/>
+            <result property="title" column="title" jdbcType="OTHER"/>
+            <result property="location" column="location" jdbcType="OTHER"/>
+            <result property="userId" column="user_id" jdbcType="OTHER"/>
+            <result property="username" column="username" jdbcType="OTHER"/>
+            <result property="email" column="email" jdbcType="OTHER"/>
+            <result property="ipAddress" column="ip_address" jdbcType="OTHER"/>
+            <result property="geoCountryCode" column="geo_country_code" jdbcType="OTHER"/>
+            <result property="geoRegion" column="geo_region" jdbcType="OTHER"/>
+            <result property="geoCity" column="geo_city" jdbcType="OTHER"/>
+            <result property="sdkName" column="sdk_name" jdbcType="OTHER"/>
+            <result property="sdkVersion" column="sdk_version" jdbcType="OTHER"/>
+            <result property="type" column="type" jdbcType="OTHER"/>
+            <result property="version" column="version" jdbcType="OTHER"/>
+            <result property="messageTimestamp" column="message_timestamp" jdbcType="TIMESTAMP"/>
+            <result property="osBuild" column="os_build" jdbcType="OTHER"/>
+            <result property="osKernelVersion" column="os_kernel_version" jdbcType="OTHER"/>
+            <result property="deviceName" column="device_name" jdbcType="OTHER"/>
+            <result property="deviceBrand" column="device_brand" jdbcType="OTHER"/>
+            <result property="deviceLocale" column="device_locale" jdbcType="OTHER"/>
+            <result property="deviceUuid" column="device_uuid" jdbcType="OTHER"/>
+            <result property="deviceModelId" column="device_model_id" jdbcType="OTHER"/>
+            <result property="deviceArch" column="device_arch" jdbcType="OTHER"/>
+            <result property="deviceBatteryLevel" column="device_battery_level" jdbcType="FLOAT"/>
+            <result property="deviceOrientation" column="device_orientation" jdbcType="OTHER"/>
+            <result property="deviceSimulator" column="device_simulator" jdbcType="INTEGER"/>
+            <result property="deviceOnline" column="device_online" jdbcType="INTEGER"/>
+            <result property="deviceCharging" column="device_charging" jdbcType="INTEGER"/>
+            <result property="level" column="level" jdbcType="OTHER"/>
+            <result property="logger" column="logger" jdbcType="OTHER"/>
+            <result property="serverName" column="server_name" jdbcType="OTHER"/>
+            <result property="transaction" column="transaction" jdbcType="OTHER"/>
+            <result property="environment" column="environment" jdbcType="OTHER"/>
+            <result property="url" column="url" jdbcType="OTHER"/>
+            <result property="appDevice" column="app_device" jdbcType="OTHER"/>
+            <result property="device" column="device" jdbcType="OTHER"/>
+            <result property="deviceFamily" column="device_family" jdbcType="OTHER"/>
+            <result property="runtime" column="runtime" jdbcType="OTHER"/>
+            <result property="runtimeName" column="runtime_name" jdbcType="OTHER"/>
+            <result property="browser" column="browser" jdbcType="OTHER"/>
+            <result property="browserName" column="browser_name" jdbcType="OTHER"/>
+            <result property="os" column="os" jdbcType="OTHER"/>
+            <result property="osName" column="os_name" jdbcType="OTHER"/>
+            <result property="osRooted" column="os_rooted" jdbcType="INTEGER"/>
+            <result property="contextsKey" column="contexts_key" jdbcType="OTHER"/>
+            <result property="contextsValue" column="contexts_value" jdbcType="OTHER"/>
+            <result property="httpMethod" column="http_method" jdbcType="OTHER"/>
+            <result property="httpReferer" column="http_referer" jdbcType="OTHER"/>
+            <result property="exceptionStacksType" column="exception_stacks_type" jdbcType="OTHER"/>
+            <result property="exceptionStacksValue" column="exception_stacks_value" jdbcType="OTHER"/>
+            <result property="exceptionStacksMechanismType" column="exception_stacks_mechanism_type" jdbcType="OTHER"/>
+            <result property="exceptionStacksMechanismHandled" column="exception_stacks_mechanism_handled" jdbcType="OTHER"/>
+            <result property="exceptionFramesAbsPath" column="exception_frames_abs_path" jdbcType="OTHER"/>
+            <result property="exceptionFramesFilename" column="exception_frames_filename" jdbcType="OTHER"/>
+            <result property="exceptionFramesPackage" column="exception_frames_package" jdbcType="OTHER"/>
+            <result property="exceptionFramesModule" column="exception_frames_module" jdbcType="OTHER"/>
+            <result property="exceptionFramesFunction" column="exception_frames_function" jdbcType="OTHER"/>
+            <result property="exceptionFramesInApp" column="exception_frames_in_app" jdbcType="OTHER"/>
+            <result property="exceptionFramesColno" column="exception_frames_colno" jdbcType="OTHER"/>
+            <result property="exceptionFramesLineno" column="exception_frames_lineno" jdbcType="OTHER"/>
+            <result property="exceptionFramesStackLevel" column="exception_frames_stack_level" jdbcType="OTHER"/>
+            <result property="culprit" column="culprit" jdbcType="OTHER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        event_id,project_id,group_id,
+        timestamp,deleted,retention_days,
+        platform,message,primary_hash,
+        hierarchical_hashes,received,search_message,
+        title,location,user_id,
+        username,email,ip_address,
+        geo_country_code,geo_region,geo_city,
+        sdk_name,sdk_version,type,
+        version,message_timestamp,os_build,
+        os_kernel_version,device_name,device_brand,
+        device_locale,device_uuid,device_model_id,
+        device_arch,device_battery_level,device_orientation,
+        device_simulator,device_online,device_charging,
+        level,logger,server_name,
+        transaction,environment,url,
+        app_device,device,device_family,
+        runtime,runtime_name,browser,
+        browser_name,os,os_name,
+        os_rooted,contexts_key,contexts_value,
+        http_method,http_referer,exception_stacks_type,
+        exception_stacks_value,exception_stacks_mechanism_type,exception_stacks_mechanism_handled,
+        exception_frames_abs_path,exception_frames_filename,exception_frames_package,
+        exception_frames_module,exception_frames_function,exception_frames_in_app,
+        exception_frames_colno,exception_frames_lineno,exception_frames_stack_level,
+        culprit
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from apm_log
+        where 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from apm_log
+        where 
+    </delete>
+    <insert id="insert">
+        insert into apm_log
+        ( event_id,project_id,group_id
+        ,timestamp,deleted,retention_days
+        ,platform,message,primary_hash
+        ,hierarchical_hashes,received,search_message
+        ,title,location,user_id
+        ,username,email,ip_address
+        ,geo_country_code,geo_region,geo_city
+        ,sdk_name,sdk_version,type
+        ,version,message_timestamp,os_build
+        ,os_kernel_version,device_name,device_brand
+        ,device_locale,device_uuid,device_model_id
+        ,device_arch,device_battery_level,device_orientation
+        ,device_simulator,device_online,device_charging
+        ,level,logger,server_name
+        ,transaction,environment,url
+        ,app_device,device,device_family
+        ,runtime,runtime_name,browser
+        ,browser_name,os,os_name
+        ,os_rooted,contexts_key,contexts_value
+        ,http_method,http_referer,exception_stacks_type
+        ,exception_stacks_value,exception_stacks_mechanism_type,exception_stacks_mechanism_handled
+        ,exception_frames_abs_path,exception_frames_filename,exception_frames_package
+        ,exception_frames_module,exception_frames_function,exception_frames_in_app
+        ,exception_frames_colno,exception_frames_lineno,exception_frames_stack_level
+        ,culprit)
+        values (#{eventId,jdbcType=OTHER},#{projectId,jdbcType=INTEGER},#{groupId,jdbcType=INTEGER}
+        ,#{timestamp,jdbcType=TIMESTAMP},#{deleted,jdbcType=INTEGER},#{retentionDays,jdbcType=INTEGER}
+        ,#{platform,jdbcType=OTHER},#{message,jdbcType=OTHER},#{primaryHash,jdbcType=OTHER}
+        ,#{hierarchicalHashes,jdbcType=OTHER},#{received,jdbcType=TIMESTAMP},#{searchMessage,jdbcType=OTHER}
+        ,#{title,jdbcType=OTHER},#{location,jdbcType=OTHER},#{userId,jdbcType=OTHER}
+        ,#{username,jdbcType=OTHER},#{email,jdbcType=OTHER},#{ipAddress,jdbcType=OTHER}
+        ,#{geoCountryCode,jdbcType=OTHER},#{geoRegion,jdbcType=OTHER},#{geoCity,jdbcType=OTHER}
+        ,#{sdkName,jdbcType=OTHER},#{sdkVersion,jdbcType=OTHER},#{type,jdbcType=OTHER}
+        ,#{version,jdbcType=OTHER},#{messageTimestamp,jdbcType=TIMESTAMP},#{osBuild,jdbcType=OTHER}
+        ,#{osKernelVersion,jdbcType=OTHER},#{deviceName,jdbcType=OTHER},#{deviceBrand,jdbcType=OTHER}
+        ,#{deviceLocale,jdbcType=OTHER},#{deviceUuid,jdbcType=OTHER},#{deviceModelId,jdbcType=OTHER}
+        ,#{deviceArch,jdbcType=OTHER},#{deviceBatteryLevel,jdbcType=FLOAT},#{deviceOrientation,jdbcType=OTHER}
+        ,#{deviceSimulator,jdbcType=INTEGER},#{deviceOnline,jdbcType=INTEGER},#{deviceCharging,jdbcType=INTEGER}
+        ,#{level,jdbcType=OTHER},#{logger,jdbcType=OTHER},#{serverName,jdbcType=OTHER}
+        ,#{transaction,jdbcType=OTHER},#{environment,jdbcType=OTHER},#{url,jdbcType=OTHER}
+        ,#{appDevice,jdbcType=OTHER},#{device,jdbcType=OTHER},#{deviceFamily,jdbcType=OTHER}
+        ,#{runtime,jdbcType=OTHER},#{runtimeName,jdbcType=OTHER},#{browser,jdbcType=OTHER}
+        ,#{browserName,jdbcType=OTHER},#{os,jdbcType=OTHER},#{osName,jdbcType=OTHER}
+        ,#{osRooted,jdbcType=INTEGER},#{contextsKey,jdbcType=OTHER},#{contextsValue,jdbcType=OTHER}
+        ,#{httpMethod,jdbcType=OTHER},#{httpReferer,jdbcType=OTHER},#{exceptionStacksType,jdbcType=OTHER}
+        ,#{exceptionStacksValue,jdbcType=OTHER},#{exceptionStacksMechanismType,jdbcType=OTHER},#{exceptionStacksMechanismHandled,jdbcType=OTHER}
+        ,#{exceptionFramesAbsPath,jdbcType=OTHER},#{exceptionFramesFilename,jdbcType=OTHER},#{exceptionFramesPackage,jdbcType=OTHER}
+        ,#{exceptionFramesModule,jdbcType=OTHER},#{exceptionFramesFunction,jdbcType=OTHER},#{exceptionFramesInApp,jdbcType=OTHER}
+        ,#{exceptionFramesColno,jdbcType=OTHER},#{exceptionFramesLineno,jdbcType=OTHER},#{exceptionFramesStackLevel,jdbcType=OTHER}
+        ,#{culprit,jdbcType=OTHER})
+    </insert>
+    <insert id="insertSelective">
+        insert into apm_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="eventId != null">eventId,</if>
+                <if test="projectId != null">projectId,</if>
+                <if test="groupId != null">groupId,</if>
+                <if test="timestamp != null">timestamp,</if>
+                <if test="deleted != null">deleted,</if>
+                <if test="retentionDays != null">retentionDays,</if>
+                <if test="platform != null">platform,</if>
+                <if test="message != null">message,</if>
+                <if test="primaryHash != null">primaryHash,</if>
+                <if test="hierarchicalHashes != null">hierarchicalHashes,</if>
+                <if test="received != null">received,</if>
+                <if test="searchMessage != null">searchMessage,</if>
+                <if test="title != null">title,</if>
+                <if test="location != null">location,</if>
+                <if test="userId != null">userId,</if>
+                <if test="username != null">username,</if>
+                <if test="email != null">email,</if>
+                <if test="ipAddress != null">ipAddress,</if>
+                <if test="geoCountryCode != null">geoCountryCode,</if>
+                <if test="geoRegion != null">geoRegion,</if>
+                <if test="geoCity != null">geoCity,</if>
+                <if test="sdkName != null">sdkName,</if>
+                <if test="sdkVersion != null">sdkVersion,</if>
+                <if test="type != null">type,</if>
+                <if test="version != null">version,</if>
+                <if test="messageTimestamp != null">messageTimestamp,</if>
+                <if test="osBuild != null">osBuild,</if>
+                <if test="osKernelVersion != null">osKernelVersion,</if>
+                <if test="deviceName != null">deviceName,</if>
+                <if test="deviceBrand != null">deviceBrand,</if>
+                <if test="deviceLocale != null">deviceLocale,</if>
+                <if test="deviceUuid != null">deviceUuid,</if>
+                <if test="deviceModelId != null">deviceModelId,</if>
+                <if test="deviceArch != null">deviceArch,</if>
+                <if test="deviceBatteryLevel != null">deviceBatteryLevel,</if>
+                <if test="deviceOrientation != null">deviceOrientation,</if>
+                <if test="deviceSimulator != null">deviceSimulator,</if>
+                <if test="deviceOnline != null">deviceOnline,</if>
+                <if test="deviceCharging != null">deviceCharging,</if>
+                <if test="level != null">level,</if>
+                <if test="logger != null">logger,</if>
+                <if test="serverName != null">serverName,</if>
+                <if test="transaction != null">transaction,</if>
+                <if test="environment != null">environment,</if>
+                <if test="url != null">url,</if>
+                <if test="appDevice != null">appDevice,</if>
+                <if test="device != null">device,</if>
+                <if test="deviceFamily != null">deviceFamily,</if>
+                <if test="runtime != null">runtime,</if>
+                <if test="runtimeName != null">runtimeName,</if>
+                <if test="browser != null">browser,</if>
+                <if test="browserName != null">browserName,</if>
+                <if test="os != null">os,</if>
+                <if test="osName != null">osName,</if>
+                <if test="osRooted != null">osRooted,</if>
+                <if test="contextsKey != null">contextsKey,</if>
+                <if test="contextsValue != null">contextsValue,</if>
+                <if test="httpMethod != null">httpMethod,</if>
+                <if test="httpReferer != null">httpReferer,</if>
+                <if test="exceptionStacksType != null">exceptionStacksType,</if>
+                <if test="exceptionStacksValue != null">exceptionStacksValue,</if>
+                <if test="exceptionStacksMechanismType != null">exceptionStacksMechanismType,</if>
+                <if test="exceptionStacksMechanismHandled != null">exceptionStacksMechanismHandled,</if>
+                <if test="exceptionFramesAbsPath != null">exceptionFramesAbsPath,</if>
+                <if test="exceptionFramesFilename != null">exceptionFramesFilename,</if>
+                <if test="exceptionFramesPackage != null">exceptionFramesPackage,</if>
+                <if test="exceptionFramesModule != null">exceptionFramesModule,</if>
+                <if test="exceptionFramesFunction != null">exceptionFramesFunction,</if>
+                <if test="exceptionFramesInApp != null">exceptionFramesInApp,</if>
+                <if test="exceptionFramesColno != null">exceptionFramesColno,</if>
+                <if test="exceptionFramesLineno != null">exceptionFramesLineno,</if>
+                <if test="exceptionFramesStackLevel != null">exceptionFramesStackLevel,</if>
+                <if test="culprit != null">culprit,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="eventId != null">event_id = #{eventId,jdbcType=OTHER},</if>
+                <if test="projectId != null">project_id = #{projectId,jdbcType=INTEGER},</if>
+                <if test="groupId != null">group_id = #{groupId,jdbcType=INTEGER},</if>
+                <if test="timestamp != null">timestamp = #{timestamp,jdbcType=TIMESTAMP},</if>
+                <if test="deleted != null">deleted = #{deleted,jdbcType=INTEGER},</if>
+                <if test="retentionDays != null">retention_days = #{retentionDays,jdbcType=INTEGER},</if>
+                <if test="platform != null">platform = #{platform,jdbcType=OTHER},</if>
+                <if test="message != null">message = #{message,jdbcType=OTHER},</if>
+                <if test="primaryHash != null">primary_hash = #{primaryHash,jdbcType=OTHER},</if>
+                <if test="hierarchicalHashes != null">hierarchical_hashes = #{hierarchicalHashes,jdbcType=OTHER},</if>
+                <if test="received != null">received = #{received,jdbcType=TIMESTAMP},</if>
+                <if test="searchMessage != null">search_message = #{searchMessage,jdbcType=OTHER},</if>
+                <if test="title != null">title = #{title,jdbcType=OTHER},</if>
+                <if test="location != null">location = #{location,jdbcType=OTHER},</if>
+                <if test="userId != null">user_id = #{userId,jdbcType=OTHER},</if>
+                <if test="username != null">username = #{username,jdbcType=OTHER},</if>
+                <if test="email != null">email = #{email,jdbcType=OTHER},</if>
+                <if test="ipAddress != null">ip_address = #{ipAddress,jdbcType=OTHER},</if>
+                <if test="geoCountryCode != null">geo_country_code = #{geoCountryCode,jdbcType=OTHER},</if>
+                <if test="geoRegion != null">geo_region = #{geoRegion,jdbcType=OTHER},</if>
+                <if test="geoCity != null">geo_city = #{geoCity,jdbcType=OTHER},</if>
+                <if test="sdkName != null">sdk_name = #{sdkName,jdbcType=OTHER},</if>
+                <if test="sdkVersion != null">sdk_version = #{sdkVersion,jdbcType=OTHER},</if>
+                <if test="type != null">type = #{type,jdbcType=OTHER},</if>
+                <if test="version != null">version = #{version,jdbcType=OTHER},</if>
+                <if test="messageTimestamp != null">message_timestamp = #{messageTimestamp,jdbcType=TIMESTAMP},</if>
+                <if test="osBuild != null">os_build = #{osBuild,jdbcType=OTHER},</if>
+                <if test="osKernelVersion != null">os_kernel_version = #{osKernelVersion,jdbcType=OTHER},</if>
+                <if test="deviceName != null">device_name = #{deviceName,jdbcType=OTHER},</if>
+                <if test="deviceBrand != null">device_brand = #{deviceBrand,jdbcType=OTHER},</if>
+                <if test="deviceLocale != null">device_locale = #{deviceLocale,jdbcType=OTHER},</if>
+                <if test="deviceUuid != null">device_uuid = #{deviceUuid,jdbcType=OTHER},</if>
+                <if test="deviceModelId != null">device_model_id = #{deviceModelId,jdbcType=OTHER},</if>
+                <if test="deviceArch != null">device_arch = #{deviceArch,jdbcType=OTHER},</if>
+                <if test="deviceBatteryLevel != null">device_battery_level = #{deviceBatteryLevel,jdbcType=FLOAT},</if>
+                <if test="deviceOrientation != null">device_orientation = #{deviceOrientation,jdbcType=OTHER},</if>
+                <if test="deviceSimulator != null">device_simulator = #{deviceSimulator,jdbcType=INTEGER},</if>
+                <if test="deviceOnline != null">device_online = #{deviceOnline,jdbcType=INTEGER},</if>
+                <if test="deviceCharging != null">device_charging = #{deviceCharging,jdbcType=INTEGER},</if>
+                <if test="level != null">level = #{level,jdbcType=OTHER},</if>
+                <if test="logger != null">logger = #{logger,jdbcType=OTHER},</if>
+                <if test="serverName != null">server_name = #{serverName,jdbcType=OTHER},</if>
+                <if test="transaction != null">transaction = #{transaction,jdbcType=OTHER},</if>
+                <if test="environment != null">environment = #{environment,jdbcType=OTHER},</if>
+                <if test="url != null">url = #{url,jdbcType=OTHER},</if>
+                <if test="appDevice != null">app_device = #{appDevice,jdbcType=OTHER},</if>
+                <if test="device != null">device = #{device,jdbcType=OTHER},</if>
+                <if test="deviceFamily != null">device_family = #{deviceFamily,jdbcType=OTHER},</if>
+                <if test="runtime != null">runtime = #{runtime,jdbcType=OTHER},</if>
+                <if test="runtimeName != null">runtime_name = #{runtimeName,jdbcType=OTHER},</if>
+                <if test="browser != null">browser = #{browser,jdbcType=OTHER},</if>
+                <if test="browserName != null">browser_name = #{browserName,jdbcType=OTHER},</if>
+                <if test="os != null">os = #{os,jdbcType=OTHER},</if>
+                <if test="osName != null">os_name = #{osName,jdbcType=OTHER},</if>
+                <if test="osRooted != null">os_rooted = #{osRooted,jdbcType=INTEGER},</if>
+                <if test="contextsKey != null">contexts_key = #{contextsKey,jdbcType=OTHER},</if>
+                <if test="contextsValue != null">contexts_value = #{contextsValue,jdbcType=OTHER},</if>
+                <if test="httpMethod != null">http_method = #{httpMethod,jdbcType=OTHER},</if>
+                <if test="httpReferer != null">http_referer = #{httpReferer,jdbcType=OTHER},</if>
+                <if test="exceptionStacksType != null">exception_stacks_type = #{exceptionStacksType,jdbcType=OTHER},</if>
+                <if test="exceptionStacksValue != null">exception_stacks_value = #{exceptionStacksValue,jdbcType=OTHER},</if>
+                <if test="exceptionStacksMechanismType != null">exception_stacks_mechanism_type = #{exceptionStacksMechanismType,jdbcType=OTHER},</if>
+                <if test="exceptionStacksMechanismHandled != null">exception_stacks_mechanism_handled = #{exceptionStacksMechanismHandled,jdbcType=OTHER},</if>
+                <if test="exceptionFramesAbsPath != null">exception_frames_abs_path = #{exceptionFramesAbsPath,jdbcType=OTHER},</if>
+                <if test="exceptionFramesFilename != null">exception_frames_filename = #{exceptionFramesFilename,jdbcType=OTHER},</if>
+                <if test="exceptionFramesPackage != null">exception_frames_package = #{exceptionFramesPackage,jdbcType=OTHER},</if>
+                <if test="exceptionFramesModule != null">exception_frames_module = #{exceptionFramesModule,jdbcType=OTHER},</if>
+                <if test="exceptionFramesFunction != null">exception_frames_function = #{exceptionFramesFunction,jdbcType=OTHER},</if>
+                <if test="exceptionFramesInApp != null">exception_frames_in_app = #{exceptionFramesInApp,jdbcType=OTHER},</if>
+                <if test="exceptionFramesColno != null">exception_frames_colno = #{exceptionFramesColno,jdbcType=OTHER},</if>
+                <if test="exceptionFramesLineno != null">exception_frames_lineno = #{exceptionFramesLineno,jdbcType=OTHER},</if>
+                <if test="exceptionFramesStackLevel != null">exception_frames_stack_level = #{exceptionFramesStackLevel,jdbcType=OTHER},</if>
+                <if test="culprit != null">culprit = #{culprit,jdbcType=OTHER},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.knightboost.moonlight.domain.ApmLog">
+        update apm_log
+        <set>
+                <if test="eventId != null">
+                    event_id = #{eventId,jdbcType=OTHER},
+                </if>
+                <if test="projectId != null">
+                    project_id = #{projectId,jdbcType=INTEGER},
+                </if>
+                <if test="groupId != null">
+                    group_id = #{groupId,jdbcType=INTEGER},
+                </if>
+                <if test="timestamp != null">
+                    timestamp = #{timestamp,jdbcType=TIMESTAMP},
+                </if>
+                <if test="deleted != null">
+                    deleted = #{deleted,jdbcType=INTEGER},
+                </if>
+                <if test="retentionDays != null">
+                    retention_days = #{retentionDays,jdbcType=INTEGER},
+                </if>
+                <if test="platform != null">
+                    platform = #{platform,jdbcType=OTHER},
+                </if>
+                <if test="message != null">
+                    message = #{message,jdbcType=OTHER},
+                </if>
+                <if test="primaryHash != null">
+                    primary_hash = #{primaryHash,jdbcType=OTHER},
+                </if>
+                <if test="hierarchicalHashes != null">
+                    hierarchical_hashes = #{hierarchicalHashes,jdbcType=OTHER},
+                </if>
+                <if test="received != null">
+                    received = #{received,jdbcType=TIMESTAMP},
+                </if>
+                <if test="searchMessage != null">
+                    search_message = #{searchMessage,jdbcType=OTHER},
+                </if>
+                <if test="title != null">
+                    title = #{title,jdbcType=OTHER},
+                </if>
+                <if test="location != null">
+                    location = #{location,jdbcType=OTHER},
+                </if>
+                <if test="userId != null">
+                    user_id = #{userId,jdbcType=OTHER},
+                </if>
+                <if test="username != null">
+                    username = #{username,jdbcType=OTHER},
+                </if>
+                <if test="email != null">
+                    email = #{email,jdbcType=OTHER},
+                </if>
+                <if test="ipAddress != null">
+                    ip_address = #{ipAddress,jdbcType=OTHER},
+                </if>
+                <if test="geoCountryCode != null">
+                    geo_country_code = #{geoCountryCode,jdbcType=OTHER},
+                </if>
+                <if test="geoRegion != null">
+                    geo_region = #{geoRegion,jdbcType=OTHER},
+                </if>
+                <if test="geoCity != null">
+                    geo_city = #{geoCity,jdbcType=OTHER},
+                </if>
+                <if test="sdkName != null">
+                    sdk_name = #{sdkName,jdbcType=OTHER},
+                </if>
+                <if test="sdkVersion != null">
+                    sdk_version = #{sdkVersion,jdbcType=OTHER},
+                </if>
+                <if test="type != null">
+                    type = #{type,jdbcType=OTHER},
+                </if>
+                <if test="version != null">
+                    version = #{version,jdbcType=OTHER},
+                </if>
+                <if test="messageTimestamp != null">
+                    message_timestamp = #{messageTimestamp,jdbcType=TIMESTAMP},
+                </if>
+                <if test="osBuild != null">
+                    os_build = #{osBuild,jdbcType=OTHER},
+                </if>
+                <if test="osKernelVersion != null">
+                    os_kernel_version = #{osKernelVersion,jdbcType=OTHER},
+                </if>
+                <if test="deviceName != null">
+                    device_name = #{deviceName,jdbcType=OTHER},
+                </if>
+                <if test="deviceBrand != null">
+                    device_brand = #{deviceBrand,jdbcType=OTHER},
+                </if>
+                <if test="deviceLocale != null">
+                    device_locale = #{deviceLocale,jdbcType=OTHER},
+                </if>
+                <if test="deviceUuid != null">
+                    device_uuid = #{deviceUuid,jdbcType=OTHER},
+                </if>
+                <if test="deviceModelId != null">
+                    device_model_id = #{deviceModelId,jdbcType=OTHER},
+                </if>
+                <if test="deviceArch != null">
+                    device_arch = #{deviceArch,jdbcType=OTHER},
+                </if>
+                <if test="deviceBatteryLevel != null">
+                    device_battery_level = #{deviceBatteryLevel,jdbcType=FLOAT},
+                </if>
+                <if test="deviceOrientation != null">
+                    device_orientation = #{deviceOrientation,jdbcType=OTHER},
+                </if>
+                <if test="deviceSimulator != null">
+                    device_simulator = #{deviceSimulator,jdbcType=INTEGER},
+                </if>
+                <if test="deviceOnline != null">
+                    device_online = #{deviceOnline,jdbcType=INTEGER},
+                </if>
+                <if test="deviceCharging != null">
+                    device_charging = #{deviceCharging,jdbcType=INTEGER},
+                </if>
+                <if test="level != null">
+                    level = #{level,jdbcType=OTHER},
+                </if>
+                <if test="logger != null">
+                    logger = #{logger,jdbcType=OTHER},
+                </if>
+                <if test="serverName != null">
+                    server_name = #{serverName,jdbcType=OTHER},
+                </if>
+                <if test="transaction != null">
+                    transaction = #{transaction,jdbcType=OTHER},
+                </if>
+                <if test="environment != null">
+                    environment = #{environment,jdbcType=OTHER},
+                </if>
+                <if test="url != null">
+                    url = #{url,jdbcType=OTHER},
+                </if>
+                <if test="appDevice != null">
+                    app_device = #{appDevice,jdbcType=OTHER},
+                </if>
+                <if test="device != null">
+                    device = #{device,jdbcType=OTHER},
+                </if>
+                <if test="deviceFamily != null">
+                    device_family = #{deviceFamily,jdbcType=OTHER},
+                </if>
+                <if test="runtime != null">
+                    runtime = #{runtime,jdbcType=OTHER},
+                </if>
+                <if test="runtimeName != null">
+                    runtime_name = #{runtimeName,jdbcType=OTHER},
+                </if>
+                <if test="browser != null">
+                    browser = #{browser,jdbcType=OTHER},
+                </if>
+                <if test="browserName != null">
+                    browser_name = #{browserName,jdbcType=OTHER},
+                </if>
+                <if test="os != null">
+                    os = #{os,jdbcType=OTHER},
+                </if>
+                <if test="osName != null">
+                    os_name = #{osName,jdbcType=OTHER},
+                </if>
+                <if test="osRooted != null">
+                    os_rooted = #{osRooted,jdbcType=INTEGER},
+                </if>
+                <if test="contextsKey != null">
+                    contexts_key = #{contextsKey,jdbcType=OTHER},
+                </if>
+                <if test="contextsValue != null">
+                    contexts_value = #{contextsValue,jdbcType=OTHER},
+                </if>
+                <if test="httpMethod != null">
+                    http_method = #{httpMethod,jdbcType=OTHER},
+                </if>
+                <if test="httpReferer != null">
+                    http_referer = #{httpReferer,jdbcType=OTHER},
+                </if>
+                <if test="exceptionStacksType != null">
+                    exception_stacks_type = #{exceptionStacksType,jdbcType=OTHER},
+                </if>
+                <if test="exceptionStacksValue != null">
+                    exception_stacks_value = #{exceptionStacksValue,jdbcType=OTHER},
+                </if>
+                <if test="exceptionStacksMechanismType != null">
+                    exception_stacks_mechanism_type = #{exceptionStacksMechanismType,jdbcType=OTHER},
+                </if>
+                <if test="exceptionStacksMechanismHandled != null">
+                    exception_stacks_mechanism_handled = #{exceptionStacksMechanismHandled,jdbcType=OTHER},
+                </if>
+                <if test="exceptionFramesAbsPath != null">
+                    exception_frames_abs_path = #{exceptionFramesAbsPath,jdbcType=OTHER},
+                </if>
+                <if test="exceptionFramesFilename != null">
+                    exception_frames_filename = #{exceptionFramesFilename,jdbcType=OTHER},
+                </if>
+                <if test="exceptionFramesPackage != null">
+                    exception_frames_package = #{exceptionFramesPackage,jdbcType=OTHER},
+                </if>
+                <if test="exceptionFramesModule != null">
+                    exception_frames_module = #{exceptionFramesModule,jdbcType=OTHER},
+                </if>
+                <if test="exceptionFramesFunction != null">
+                    exception_frames_function = #{exceptionFramesFunction,jdbcType=OTHER},
+                </if>
+                <if test="exceptionFramesInApp != null">
+                    exception_frames_in_app = #{exceptionFramesInApp,jdbcType=OTHER},
+                </if>
+                <if test="exceptionFramesColno != null">
+                    exception_frames_colno = #{exceptionFramesColno,jdbcType=OTHER},
+                </if>
+                <if test="exceptionFramesLineno != null">
+                    exception_frames_lineno = #{exceptionFramesLineno,jdbcType=OTHER},
+                </if>
+                <if test="exceptionFramesStackLevel != null">
+                    exception_frames_stack_level = #{exceptionFramesStackLevel,jdbcType=OTHER},
+                </if>
+                <if test="culprit != null">
+                    culprit = #{culprit,jdbcType=OTHER},
+                </if>
+        </set>
+        where  
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.knightboost.moonlight.domain.ApmLog">
+        update apm_log
+        set 
+            event_id =  #{eventId,jdbcType=OTHER},
+            project_id =  #{projectId,jdbcType=INTEGER},
+            group_id =  #{groupId,jdbcType=INTEGER},
+            timestamp =  #{timestamp,jdbcType=TIMESTAMP},
+            deleted =  #{deleted,jdbcType=INTEGER},
+            retention_days =  #{retentionDays,jdbcType=INTEGER},
+            platform =  #{platform,jdbcType=OTHER},
+            message =  #{message,jdbcType=OTHER},
+            primary_hash =  #{primaryHash,jdbcType=OTHER},
+            hierarchical_hashes =  #{hierarchicalHashes,jdbcType=OTHER},
+            received =  #{received,jdbcType=TIMESTAMP},
+            search_message =  #{searchMessage,jdbcType=OTHER},
+            title =  #{title,jdbcType=OTHER},
+            location =  #{location,jdbcType=OTHER},
+            user_id =  #{userId,jdbcType=OTHER},
+            username =  #{username,jdbcType=OTHER},
+            email =  #{email,jdbcType=OTHER},
+            ip_address =  #{ipAddress,jdbcType=OTHER},
+            geo_country_code =  #{geoCountryCode,jdbcType=OTHER},
+            geo_region =  #{geoRegion,jdbcType=OTHER},
+            geo_city =  #{geoCity,jdbcType=OTHER},
+            sdk_name =  #{sdkName,jdbcType=OTHER},
+            sdk_version =  #{sdkVersion,jdbcType=OTHER},
+            type =  #{type,jdbcType=OTHER},
+            version =  #{version,jdbcType=OTHER},
+            message_timestamp =  #{messageTimestamp,jdbcType=TIMESTAMP},
+            os_build =  #{osBuild,jdbcType=OTHER},
+            os_kernel_version =  #{osKernelVersion,jdbcType=OTHER},
+            device_name =  #{deviceName,jdbcType=OTHER},
+            device_brand =  #{deviceBrand,jdbcType=OTHER},
+            device_locale =  #{deviceLocale,jdbcType=OTHER},
+            device_uuid =  #{deviceUuid,jdbcType=OTHER},
+            device_model_id =  #{deviceModelId,jdbcType=OTHER},
+            device_arch =  #{deviceArch,jdbcType=OTHER},
+            device_battery_level =  #{deviceBatteryLevel,jdbcType=FLOAT},
+            device_orientation =  #{deviceOrientation,jdbcType=OTHER},
+            device_simulator =  #{deviceSimulator,jdbcType=INTEGER},
+            device_online =  #{deviceOnline,jdbcType=INTEGER},
+            device_charging =  #{deviceCharging,jdbcType=INTEGER},
+            level =  #{level,jdbcType=OTHER},
+            logger =  #{logger,jdbcType=OTHER},
+            server_name =  #{serverName,jdbcType=OTHER},
+            transaction =  #{transaction,jdbcType=OTHER},
+            environment =  #{environment,jdbcType=OTHER},
+            url =  #{url,jdbcType=OTHER},
+            app_device =  #{appDevice,jdbcType=OTHER},
+            device =  #{device,jdbcType=OTHER},
+            device_family =  #{deviceFamily,jdbcType=OTHER},
+            runtime =  #{runtime,jdbcType=OTHER},
+            runtime_name =  #{runtimeName,jdbcType=OTHER},
+            browser =  #{browser,jdbcType=OTHER},
+            browser_name =  #{browserName,jdbcType=OTHER},
+            os =  #{os,jdbcType=OTHER},
+            os_name =  #{osName,jdbcType=OTHER},
+            os_rooted =  #{osRooted,jdbcType=INTEGER},
+            contexts_key =  #{contextsKey,jdbcType=OTHER},
+            contexts_value =  #{contextsValue,jdbcType=OTHER},
+            http_method =  #{httpMethod,jdbcType=OTHER},
+            http_referer =  #{httpReferer,jdbcType=OTHER},
+            exception_stacks_type =  #{exceptionStacksType,jdbcType=OTHER},
+            exception_stacks_value =  #{exceptionStacksValue,jdbcType=OTHER},
+            exception_stacks_mechanism_type =  #{exceptionStacksMechanismType,jdbcType=OTHER},
+            exception_stacks_mechanism_handled =  #{exceptionStacksMechanismHandled,jdbcType=OTHER},
+            exception_frames_abs_path =  #{exceptionFramesAbsPath,jdbcType=OTHER},
+            exception_frames_filename =  #{exceptionFramesFilename,jdbcType=OTHER},
+            exception_frames_package =  #{exceptionFramesPackage,jdbcType=OTHER},
+            exception_frames_module =  #{exceptionFramesModule,jdbcType=OTHER},
+            exception_frames_function =  #{exceptionFramesFunction,jdbcType=OTHER},
+            exception_frames_in_app =  #{exceptionFramesInApp,jdbcType=OTHER},
+            exception_frames_colno =  #{exceptionFramesColno,jdbcType=OTHER},
+            exception_frames_lineno =  #{exceptionFramesLineno,jdbcType=OTHER},
+            exception_frames_stack_level =  #{exceptionFramesStackLevel,jdbcType=OTHER},
+            culprit =  #{culprit,jdbcType=OTHER}
+        where  
+    </update>
+</mapper>
