@@ -8,5 +8,6 @@ public class ApmLogEventProcessService {
     public void onApmLog(ApmLog apmLog){
         String type = apmLog.getType();
 
+
     }
 }
