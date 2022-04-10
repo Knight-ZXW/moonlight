@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>moonlight-boot</artifactId>
+        <groupId>com.knightboost.moonlight</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <version>0.0.1-SNAPSHOT</version>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>basic-util</artifactId>
+    <packaging>pom</packaging>
+
+    <properties>
+        <moonlight-basic.version>0.0.1-SNAPSHOT</moonlight-basic.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <!--
+            注意： lamp-cloud和lamp-boot都依赖于lamp-util项目，请一定要先编译（mvn install) lamp-util项目，然后在编译 lamp-cloud 或者 lamp-boot。
+            注意： lamp-cloud和lamp-boot项目代码结构基本一致、实现的功能完全一致，请不要在同一个IDE的工作空间同时导入 lamp-cloud 和 lamp-boot 项目！！！
+            注意：top.tangyh.basic:lamp-xxx 相关的依赖，全部在lamp-util项目。 下载地址： https://github.com/zuihou
+            -->
+            <dependency>
+                <groupId>com.knightboost.moonlight</groupId>
+                <artifactId>moonlight-dependencies</artifactId>
+                <version>0.0.1-SNAPSHOT</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.knightboost.moonlight</groupId>
+                <artifactId>basic-annotation</artifactId>
+                <version>${moonlight-basic.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <modules>
+        <module>moonlight-annotation</module>
+        <module>moonlight-core</module>
+        <module>basic-uid</module>
+        <module>basic-databases</module>
+        <module>boot-util</module>
+        <module>basic-cache-starter</module>
+        <module>basic-log-starter</module>
+        <module>basic-echo-starter</module>
+        <module>basic-jwt-starter</module>
+        <module>basic-swagger2-starter</module>
+        <module>basic-validator-starter</module>
+        <module>basic-xss-starter</module>
+        <module>basic-security-starter</module>
+        <module>basic-cloud-starter</module>
+        <module>basic-mq-starter</module>
+    </modules>
+
+
+
+</project>

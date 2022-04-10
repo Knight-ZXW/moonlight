@@ -1,195 +1,230 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.5.6</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
-	<groupId>com.knightboost</groupId>
-	<artifactId>moonlight</artifactId>
+	<groupId>com.knightboost.moonlight</groupId>
+	<artifactId>moonlight-boot</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>moonlight</name>
-	<description>moonlight</description>
+	<packaging>pom</packaging>
+	<url>https://gitee.com/zuihou111/lamp-boot</url>
+	<name>${project.artifactId}</name>
+	<description>lamp-boot</description>
+	<developers>
+		<developer>
+			<name>knight-zxw</name>
+			<email>nimdanoob@163.com</email>
+		</developer>
+	</developers>
+
+	<modules>
+		<module>moonlight-dependencies</module>
+		<module>moonlight-util</module>
+        <module>moonlight-boost-server</module>
+		<module>moonlight-public/moonlight-common-api</module>
+		<module>moonlight-public/moonlight-common</module>
+		<module>moonlight-public/moonlight-file-sdk</module>
+		<module>moonlight-tenant</module>
+		<module>moonlight-oauth</module>
+		<module>moonlight-authority</module>
+		<module>moonlight-file</module>
+        <module>moonlight-msg</module>
+    </modules>
+
 	<properties>
-		<java.version>1.8</java.version>
-		<kotlin.version>1.6.0-RC2</kotlin.version>
+		<moonlight-basic.version>0.0.1-SNAPSHOT</moonlight-basic.version>
+		<moonlight.version>0.0.1-SNAPSHOT</moonlight.version>
+
+		<lamp-util.version>3.6.0</lamp-util.version>
+		<lamp-project.version>3.6.0</lamp-project.version>
+		<!-- jdk8 将这里改成 8 -->
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<docker.image.prefix>zuihou</docker.image.prefix>
+		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
+		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
+		<dockerfile-maven-plugin.version>1.4.12</dockerfile-maven-plugin.version>
+		<spring-boot-maven-plugin.version>2.5.8</spring-boot-maven-plugin.version>
 	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<!--
+            注意： lamp-cloud和lamp-boot都依赖于lamp-util项目，请一定要先编译（mvn install) lamp-util项目，然后在编译 lamp-cloud 或者 lamp-boot。
+            注意： lamp-cloud和lamp-boot项目代码结构基本一致、实现的功能完全一致，请不要在同一个IDE的工作空间同时导入 lamp-cloud 和 lamp-boot 项目！！！
+            注意：top.tangyh.basic:lamp-xxx 相关的依赖，全部在lamp-util项目。 下载地址： https://github.com/zuihou
+            -->
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>moonlight-dependencies</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>moonlight-file-sdk</artifactId>
+				<version>${moonlight.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>basic-databases</artifactId>
+				<version>${moonlight-basic.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>basic-cache-starter</artifactId>
+				<version>${moonlight-basic.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>basic-echo-starter</artifactId>
+				<version>${moonlight-basic.version}</version>
+
+			</dependency>
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>basic-boot-util</artifactId>
+				<version>${moonlight-basic.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>basic-security-starter</artifactId>
+				<version>${moonlight-basic.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>basic-mq-starter</artifactId>
+				<version>${moonlight-basic.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>basic-databases</artifactId>
+				<version>${moonlight-basic.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>moonlight-tenant-entity</artifactId>
+				<version>${moonlight.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>moonlight-authority-biz</artifactId>
+				<version>${moonlight.version}</version>
+			</dependency>
+
+
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis-reactive</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-jdbc</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.kafka</groupId>
-			<artifactId>kafka-streams</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis.spring.boot</groupId>
-			<artifactId>mybatis-spring-boot-starter</artifactId>
-			<version>2.2.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.baomidou</groupId>
-			<artifactId>mybatis-plus-boot-starter</artifactId>
-			<version>3.4.3.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>org.postgresql</groupId>-->
-<!--			<artifactId>postgresql</artifactId>-->
-<!--			<scope>runtime</scope>-->
-<!--		</dependency>-->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-configuration-processor</artifactId>
-			<optional>true</optional>
-		</dependency>
+		<!--Lombok-->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<optional>true</optional>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
-			<groupId>io.projectreactor</groupId>
-			<artifactId>reactor-test</artifactId>
-			<scope>test</scope>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.kafka</groupId>
-			<artifactId>spring-kafka-test</artifactId>
-			<scope>test</scope>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-stdlib-jdk8</artifactId>
-			<version>${kotlin.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-test</artifactId>
-			<version>${kotlin.version}</version>
-			<scope>test</scope>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
 		</dependency>
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.jetbrains.kotlin</groupId>
-				<artifactId>kotlin-maven-plugin</artifactId>
-				<version>${kotlin.version}</version>
-				<executions>
-					<execution>
-						<id>compile</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>test-compile</id>
-						<phase>test-compile</phase>
-						<goals>
-							<goal>test-compile</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<jvmTarget>1.8</jvmTarget>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>compile</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>testCompile</id>
-						<phase>test-compile</phase>
-						<goals>
-							<goal>testCompile</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.mybatis.generator</groupId>
-				<artifactId>mybatis-generator-maven-plugin</artifactId>
-				<version>1.3.7</version>
-				<configuration>
-					<configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
-					<verbose>true</verbose>
-					<overwrite>true</overwrite>
-				</configuration>
-				<dependencies>
-					<dependency>
-						<groupId>org.mybatis.generator</groupId>
-						<artifactId>mybatis-generator-core</artifactId>
-						<version>1.3.7</version>
-					</dependency>
-					<dependency>
-						<groupId>tk.mybatis</groupId>
-						<artifactId>mapper</artifactId>
-						<version>4.1.5</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-		</plugins>
-	</build>
+		<finalName>${project.artifactId}</finalName>
 
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+					<configuration>
+						<source>${maven.compiler.source}</source>
+						<target>${maven.compiler.target}</target>
+						<encoding>${project.build.sourceEncoding}</encoding>
+					</configuration>
+				</plugin>
+				<!-- resources资源插件 -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+					<configuration>
+						<delimiters>
+							<delimiter>@</delimiter>
+						</delimiters>
+						<useDefaultDelimiters>false</useDefaultDelimiters>
+						<encoding>UTF-8</encoding>
+						<!-- 后缀为pem、pfx的证书文件 -->
+						<nonFilteredFileExtensions>
+							<nonFilteredFileExtension>pem</nonFilteredFileExtension>
+							<nonFilteredFileExtension>pfx</nonFilteredFileExtension>
+							<nonFilteredFileExtension>p12</nonFilteredFileExtension>
+							<nonFilteredFileExtension>key</nonFilteredFileExtension>
+							<nonFilteredFileExtension>db</nonFilteredFileExtension>
+							<nonFilteredFileExtension>eot</nonFilteredFileExtension>
+							<nonFilteredFileExtension>otf</nonFilteredFileExtension>
+							<nonFilteredFileExtension>svg</nonFilteredFileExtension>
+							<nonFilteredFileExtension>ttf</nonFilteredFileExtension>
+							<nonFilteredFileExtension>woff</nonFilteredFileExtension>
+							<nonFilteredFileExtension>woff2</nonFilteredFileExtension>
+						</nonFilteredFileExtensions>
+					</configuration>
+				</plugin>
+
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+					<version>${spring-boot-maven-plugin.version}</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>repackage</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
 </project>
