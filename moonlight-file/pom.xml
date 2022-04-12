@@ -10,6 +10,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>moonlight-file</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>moonlight-file-entity</module>
+        <module>moonlight-file-biz</module>
+        <module>moonlight-file-controller</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

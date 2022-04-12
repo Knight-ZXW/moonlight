@@ -17,16 +17,17 @@
     </properties>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.knightboost.moonlight</groupId>-->
-<!--            <artifactId>moonlight-authority-biz</artifactId>-->
-<!--            <version>${moonlight.versionn}</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>top.tangyh.lamp</groupId>-->
-<!--            <artifactId>lamp-tenant-biz</artifactId>-->
-<!--            <version>${moonlight.versionn}</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>moonlight-authority-biz</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>moonlight-tenant-biz</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
 
         <!-- jwt 只有认证服务需要使用 -->
         <dependency>

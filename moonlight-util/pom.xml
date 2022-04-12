@@ -59,6 +59,7 @@
         <module>basic-security-starter</module>
         <module>basic-cloud-starter</module>
         <module>basic-mq-starter</module>
+        <module>basic-dozer-starter</module>
     </modules>
 
 

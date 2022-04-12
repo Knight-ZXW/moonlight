@@ -10,6 +10,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>moonlight-msg</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>moonlight-msg-entity</module>
+        <module>moonlight-msg-biz</module>
+        <module>moonlight-sms-biz</module>
+        <module>moonlight-msg-controller</module>
+        <module>moonlight-sms-controller</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
