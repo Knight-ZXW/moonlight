@@ -188,13 +188,6 @@ public class SysLogAspect {
         optLogDTO.setRequestUri(URLUtil.getPath(request.getRequestURI()));
         optLogDTO.setHttpMethod(request.getMethod());
         optLogDTO.setUa(StrUtil.sub(request.getHeader("user-agent"), 0, 500));
-        if (ContextUtil.getBoot()) {
-            optLogDTO.setTenantCode(ContextUtil.getTenant());
-            optLogDTO.setSubTenantCode(ContextUtil.getSubTenant());
-        } else {
-            optLogDTO.setTenantCode(request.getHeader(ContextConstants.JWT_KEY_TENANT));
-            optLogDTO.setSubTenantCode(request.getHeader(ContextConstants.JWT_KEY_SUB_TENANT));
-        }
         optLogDTO.setTrace(MDC.get(ContextConstants.LOG_TRACE_ID));
         if (StrUtil.isEmpty(optLogDTO.getTrace())) {
             optLogDTO.setTrace(request.getHeader(ContextConstants.TRACE_ID_HEADER));

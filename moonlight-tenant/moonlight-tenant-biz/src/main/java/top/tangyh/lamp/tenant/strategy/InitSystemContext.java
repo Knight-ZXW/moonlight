@@ -21,8 +21,9 @@ public class InitSystemContext {
     private final Map<String, InitSystemStrategy> initSystemStrategyMap = new ConcurrentHashMap<>();
     private final DatabaseProperties databaseProperties;
 
-    public InitSystemContext(Map<String, InitSystemStrategy> strategyMap, DatabaseProperties databaseProperties) {
-        strategyMap.forEach(this.initSystemStrategyMap::put);
+    public InitSystemContext(Map<String, InitSystemStrategy> strategyMap,
+                             DatabaseProperties databaseProperties) {
+        this.initSystemStrategyMap.putAll(strategyMap);
         this.databaseProperties = databaseProperties;
     }
 
@@ -45,7 +46,9 @@ public class InitSystemContext {
      */
     public boolean reset(String tenant) {
         InitSystemStrategy initSystemStrategy = initSystemStrategyMap.get(databaseProperties.getMultiTenantType().name());
-        ArgumentAssert.notNull(initSystemStrategy, StrUtil.format("您配置的租户模式:{}不可用", databaseProperties.getMultiTenantType().name()));
+        ArgumentAssert.notNull(initSystemStrategy,
+                StrUtil.format("您配置的租户模式:{}不可用",
+                        databaseProperties.getMultiTenantType().name()));
         return initSystemStrategy.reset(tenant);
     }
 

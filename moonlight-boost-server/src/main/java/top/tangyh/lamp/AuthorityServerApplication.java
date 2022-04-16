@@ -17,8 +17,7 @@ import top.tangyh.basic.validator.annotation.EnableFormValidator;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import static top.tangyh.lamp.common.constant.BizConstant.BUSINESS_PACKAGE;
-import static top.tangyh.lamp.common.constant.BizConstant.UTIL_PACKAGE;
+import static top.tangyh.lamp.common.constant.BizConstant.*;
 
 /**
  * https://mp.weixin.qq.com/s/zkxI5IQP0jFTjVYe5pTsXw
@@ -34,16 +33,15 @@ import static top.tangyh.lamp.common.constant.BizConstant.UTIL_PACKAGE;
 @EnableDiscoveryClient
 @Configuration
 @ComponentScan({
-        UTIL_PACKAGE, BUSINESS_PACKAGE
+        MOONLIGHT_BUSINESS_PACKAGE,UTIL_PACKAGE, BUSINESS_PACKAGE
 })
 @EnableFeignClients(value = {
-        UTIL_PACKAGE, BUSINESS_PACKAGE
+        MOONLIGHT_BUSINESS_PACKAGE,UTIL_PACKAGE, BUSINESS_PACKAGE
 })
 @Slf4j
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @EnableLoginArgResolver
 @EnableFormValidator
-//@ComponentScan({"springfox.documentation.schema"})
 public class AuthorityServerApplication {
     public static void main(String[] args) throws UnknownHostException {
         ConfigurableApplicationContext application = SpringApplication.run(AuthorityServerApplication.class, args);
@@ -54,7 +52,7 @@ public class AuthorityServerApplication {
                         "数据库监控: \t\thttp://{}:{}/druid\n" +
                         "----------------------------------------------------------",
                 env.getProperty("spring.application.name"),
-                InetAddress.getLocalHost().getHostAddress(),
+                "127.0.0.1",
                 env.getProperty("server.port"),
                 "127.0.0.1",
                 env.getProperty("server.port"));

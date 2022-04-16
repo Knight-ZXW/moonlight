@@ -32,11 +32,9 @@ public class SysLogListener {
         OptLogDTO sysLog = (OptLogDTO) event.getSource();
 
         // 非租户模式 (NONE) ， 需要修改这里的判断
-        if (sysLog == null || StrUtil.isEmpty(sysLog.getTenantCode())) {
-            log.warn("租户编码不存在，忽略操作日志=={}", sysLog != null ? sysLog.getRequestUri() : "");
+        if (sysLog == null) {
             return;
         }
-        ContextUtil.setTenant(sysLog.getTenantCode());
 
         consumer.accept(sysLog);
     }

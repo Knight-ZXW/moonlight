@@ -131,8 +131,12 @@ public class ColumnInitSystemStrategy implements InitSystemStrategy {
 
     private boolean initSuperUser() {
         User user = User.builder()
-                .account("lampAdmin").name("内置超级管理员").password("lamp")
-                .readonly(true).sex(Sex.M).avatar("cnrhVkzwxjPwAaCfPbdc.png")
+                .account("lampAdmin")
+                .name("内置超级管理员")
+                .password("lamp")
+                .readonly(true)
+                .sex(Sex.M)
+                .avatar("cnrhVkzwxjPwAaCfPbdc.png")
                 .state(true).passwordErrorNum(0)
                 .build();
         return userService.initUser(user);

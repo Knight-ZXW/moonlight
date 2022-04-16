@@ -16,6 +16,11 @@ public interface BizConstant {
      */
     String BUSINESS_PACKAGE = "top.tangyh.lamp";
     /**
+     * 业务项目 需要扫描的包
+     */
+    String MOONLIGHT_BUSINESS_PACKAGE = "com.knightboost.moonlight";
+
+    /**
      * 超级租户编码
      */
     String SUPER_TENANT = "admin";

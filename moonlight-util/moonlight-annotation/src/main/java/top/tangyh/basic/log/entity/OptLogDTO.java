@@ -30,12 +30,6 @@ public class OptLogDTO {
     private String requestIp;
 
     /**
-     * 租户编码
-     */
-    private String tenantCode;
-    private String subTenantCode;
-
-    /**
      * 日志链路追踪id日志标志
      */
     private String trace;

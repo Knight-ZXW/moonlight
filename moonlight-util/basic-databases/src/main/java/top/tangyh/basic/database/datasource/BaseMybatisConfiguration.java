@@ -94,7 +94,7 @@ public abstract class BaseMybatisConfiguration {
             interceptor.addInnerInterceptor(schemaInterceptor);
         }
         if (StrUtil.equalsAny(databaseProperties.getMultiTenantType().name(),
-                MultiTenantType.COLUMN.name(), MultiTenantType.SCHEMA_COLUMN.name(), MultiTenantType.DATASOURCE_COLUMN.name())) {
+                MultiTenantType.COLUMN.name(), MultiTenantType.SCHEMA_COLUMN.name())) {
             // COLUMN 模式 多租户插件
             TenantLineInnerInterceptor tli = new TenantLineInnerInterceptor();
             tli.setTenantLineHandler(new TenantLineHandler() {

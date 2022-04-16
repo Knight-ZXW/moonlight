@@ -38,7 +38,12 @@ import java.util.List;
 @RequestMapping("/menu")
 @Api(value = "Menu", tags = "菜单")
 @PreAuth(replace = "authority:menu:")
-public class MenuController extends SuperCacheController<MenuService, Long, Menu, Menu, MenuSaveDTO, MenuUpdateDTO> {
+public class MenuController extends SuperCacheController<MenuService,
+        Long,
+        Menu,
+        Menu,
+        MenuSaveDTO,
+        MenuUpdateDTO> {
 
     @Override
     public R<Menu> handlerSave(MenuSaveDTO menuSaveDTO) {
@@ -62,7 +67,6 @@ public class MenuController extends SuperCacheController<MenuService, Long, Menu
 
     /**
      * 查询系统中所有的的菜单树结构， 不用缓存，因为该接口很少会使用，就算使用，也会管理员维护菜单时使用
-     *
      */
     @ApiOperation(value = "查询系统所有的菜单", notes = "查询系统所有的菜单")
     @PostMapping("/tree")
@@ -81,6 +85,7 @@ public class MenuController extends SuperCacheController<MenuService, Long, Menu
     public R<List<MenuResourceTreeVO>> menuResourceTree() {
         return success(baseService.findMenuResourceTree());
     }
+
     /**
      * 查询系统所有的数据权限  不用缓存，因为该接口很少会使用，就算使用，也会管理员维护菜单时使用
      */

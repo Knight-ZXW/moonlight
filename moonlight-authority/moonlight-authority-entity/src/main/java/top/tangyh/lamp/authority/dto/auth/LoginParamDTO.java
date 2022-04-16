@@ -1,9 +1,11 @@
 package top.tangyh.lamp.authority.dto.auth;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import lombok.experimental.Accessors;
+import springfox.documentation.service.GrantType;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -28,7 +30,10 @@ public class LoginParamDTO {
     private String code;
 
     @ApiModelProperty(value = "账号")
+
+    @JsonAlias("username")
     private String account;
+
     @ApiModelProperty(value = "密码")
     private String password;
 
@@ -37,9 +42,11 @@ public class LoginParamDTO {
      * refresh_token: 刷新token
      * captcha: 验证码
      */
-    @ApiModelProperty(value = "授权类型", example = "captcha", allowableValues = "captcha,refresh_token,password")
+    @ApiModelProperty(value = "授权类型",
+            example = "password",
+            allowableValues = "captcha, refresh_token, password")
     @NotEmpty(message = "授权类型不能为空")
-    private String grantType;
+    private String grantType = "password";
 
     /**
      * 前端界面点击清空缓存时调用

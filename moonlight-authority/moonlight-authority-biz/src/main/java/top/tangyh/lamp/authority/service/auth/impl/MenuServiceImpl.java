@@ -98,13 +98,22 @@ public class MenuServiceImpl extends SuperCacheServiceImpl<MenuMapper, Menu> imp
     @Override
     public List<Menu> findVisibleMenu(String group, Long userId) {
         CacheKey userMenuKey = new UserMenuCacheKeyBuilder().key(userId);
-        List<Menu> visibleMenu = new ArrayList<>();
+        final List<Menu> visibleMenu;
+        List<Long> list;
+        //TODO 开发阶段不使用缓存
+        if (false){
+             list = cacheOps.get(userMenuKey, k -> {
+                log.info("userMenuKey={}", userMenuKey.getKey());
+                visibleMenu.addAll(baseMapper.findVisibleMenu(userId));
+                return visibleMenu.stream().map(Menu::getId).collect(Collectors.toList());
+            });
+        }else {
+            visibleMenu = new ArrayList<>(baseMapper.findVisibleMenu(userId));
+            list = new ArrayList<>(visibleMenu.stream()
+                    .map(Menu::getId)
+                    .collect(Collectors.toList()));
+        }
 
-        List<Long> list = cacheOps.get(userMenuKey, k -> {
-            log.info("userMenuKey={}", userMenuKey.getKey());
-            visibleMenu.addAll(baseMapper.findVisibleMenu(userId));
-            return visibleMenu.stream().map(Menu::getId).collect(Collectors.toList());
-        });
         log.info("visibleMenu={}", visibleMenu.size());
         if (!visibleMenu.isEmpty()) {
             visibleMenu.forEach(this::setCache);

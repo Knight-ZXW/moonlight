@@ -105,24 +105,30 @@ public class TokenHandlerInterceptor extends HandlerInterceptorAdapter {
         String token = getHeader(BEARER_HEADER_KEY, request);
 
         AuthInfo authInfo;
-        //添加测试环境的特殊token
+        //是否为测试环境硬编码的特殊 Mock Token
         if (isDev(token)) {
-            authInfo = new AuthInfo().setAccount("lamp").setUserId(2L).setTokenType(BEARER_HEADER_KEY).setName("平台管理员");
+            authInfo = new AuthInfo().
+                    setAccount("lamp")
+                    .setUserId(2L)
+                    .setTokenType(BEARER_HEADER_KEY)
+                    .setName("平台管理员");
         } else {
             authInfo = tokenUtil.getAuthInfo(token);
 
+            //todo 实现登录 将之前token失效的功能
             // 5，验证 是否在其他设备登录或被挤下线
-            String newToken = JwtUtil.getToken(token);
-            CacheKey cacheKey = new TokenUserIdCacheKeyBuilder().key(newToken);
-            String tokenCache = cacheOps.get(cacheKey);
-
-            if (StrUtil.isEmpty(tokenCache)) {
-                log.error("token is empty");
-                throw UnauthorizedException.wrap(JWT_NOT_LOGIN.getMsg());
-            } else if (StrUtil.equals(BizConstant.LOGIN_STATUS, tokenCache)) {
-                log.error("您被踢了");
-                throw UnauthorizedException.wrap(JWT_OFFLINE.getMsg());
-            }
+//            String tokenContent = JwtUtil.getToken(token);
+//
+//            CacheKey cacheKey = new TokenUserIdCacheKeyBuilder()
+//                    .key(tokenContent);
+//            String tokenCache = cacheOps.get(cacheKey);
+//            if (StrUtil.isEmpty(tokenCache)) {
+//                log.error("token is empty");
+//                throw UnauthorizedException.wrap(JWT_NOT_LOGIN.getMsg());
+//            } else if (StrUtil.equals(BizConstant.LOGIN_STATUS, tokenCache)) {
+//                log.error("您被踢了");
+//                throw UnauthorizedException.wrap(JWT_OFFLINE.getMsg());
+//            }
         }
 
         //6, 转换，将 token 解析出来的用户身份 和 解码后的tenant、Authorization 重新封装到请求头

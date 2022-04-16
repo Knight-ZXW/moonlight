@@ -27,6 +27,10 @@
             <groupId>com.knightboost.moonlight</groupId>
             <artifactId>basic-security-starter</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+        </dependency>
     </dependencies>
 
 

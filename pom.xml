@@ -29,21 +29,21 @@
 		<module>moonlight-authority</module>
 		<module>moonlight-file</module>
         <module>moonlight-msg</module>
-    </modules>
+        <module>moonlight-admin</module>
+	</modules>
 
 	<properties>
 		<moonlight-basic.version>0.0.1-SNAPSHOT</moonlight-basic.version>
 		<moonlight.version>0.0.1-SNAPSHOT</moonlight.version>
 
-		<lamp-util.version>3.6.0</lamp-util.version>
-		<lamp-project.version>3.6.0</lamp-project.version>
 		<!-- jdk8 将这里改成 8 -->
 		<maven.compiler.source>11</maven.compiler.source>
 		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
+		<lombok.version>1.18.22</lombok.version>
 		<docker.image.prefix>zuihou</docker.image.prefix>
+		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
 		<maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
 		<maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
 		<maven-javadoc-plugin.version>3.2.0</maven-javadoc-plugin.version>
@@ -61,7 +61,7 @@
 			<dependency>
 				<groupId>com.knightboost.moonlight</groupId>
 				<artifactId>moonlight-dependencies</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<version>1.0.0</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -121,6 +121,12 @@
 				<artifactId>moonlight-authority-biz</artifactId>
 				<version>${moonlight.version}</version>
 			</dependency>
+
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>moonlight-oauth-biz</artifactId>
+				<version>${moonlight.version}</version>
+			</dependency>
 			<dependency>
 				<groupId>com.knightboost.moonlight</groupId>
 				<artifactId>basic-swagger2-starter</artifactId>
@@ -137,6 +143,29 @@
 				<artifactId>basic-xss-starter</artifactId>
 				<version>${moonlight-basic.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>basic-dozer-starter</artifactId>
+				<version>${moonlight.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>basic-jwt-starter</artifactId>
+				<version>${moonlight.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>moonlight-file-entity</artifactId>
+				<version>${moonlight.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.knightboost.moonlight</groupId>
+				<artifactId>moonlight-msg</artifactId>
+				<version>${moonlight.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -145,7 +174,7 @@
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -196,6 +225,23 @@
 						<source>${maven.compiler.source}</source>
 						<target>${maven.compiler.target}</target>
 						<encoding>${project.build.sourceEncoding}</encoding>
+						<annotationProcessorPaths>
+							<path>
+								<groupId>org.mapstruct</groupId>
+								<artifactId>mapstruct-processor</artifactId>
+								<version>1.4.2.Final</version>
+							</path>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok</artifactId>
+								<version>${lombok.version}</version>
+							</path>
+							<path>
+								<groupId>org.projectlombok</groupId>
+								<artifactId>lombok-mapstruct-binding</artifactId>
+								<version>0.2.0</version>
+							</path>
+						</annotationProcessorPaths>
 					</configuration>
 				</plugin>
 				<!-- resources资源插件 -->
@@ -238,7 +284,12 @@
 						</execution>
 					</executions>
 				</plugin>
+
+
 			</plugins>
 		</pluginManagement>
+
 	</build>
+
+
 </project>

@@ -21,37 +21,41 @@
     <dependencies>
         <dependency>
             <groupId>com.knightboost.moonlight</groupId>
-
+            <artifactId>moonlight-admin-controller</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>moonlight-admin-biz</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
             <artifactId>moonlight-authority-controller</artifactId>
             <version>${moonlight.version}</version>
         </dependency>
         <dependency>
             <groupId>com.knightboost.moonlight</groupId>
-
             <artifactId>moonlight-file-controller</artifactId>
             <version>${moonlight.version}</version>
         </dependency>
         <dependency>
             <groupId>com.knightboost.moonlight</groupId>
-
             <artifactId>moonlight-msg-controller</artifactId>
             <version>${moonlight.version}</version>
         </dependency>
         <dependency>
             <groupId>com.knightboost.moonlight</groupId>
-
             <artifactId>moonlight-sms-controller</artifactId>
             <version>${moonlight.version}</version>
         </dependency>
         <dependency>
             <groupId>com.knightboost.moonlight</groupId>
-
             <artifactId>moonlight-oauth-controller</artifactId>
             <version>${moonlight.version}</version>
         </dependency>
         <dependency>
             <groupId>com.knightboost.moonlight</groupId>
-
             <artifactId>moonlight-tenant-controller</artifactId>
             <version>${moonlight.version}</version>
         </dependency>

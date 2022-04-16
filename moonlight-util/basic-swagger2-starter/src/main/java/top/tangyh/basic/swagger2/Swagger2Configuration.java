@@ -10,6 +10,7 @@ import org.springframework.util.ReflectionUtils;
 import org.springframework.web.servlet.mvc.method.RequestMappingInfoHandlerMapping;
 import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
 import springfox.documentation.spring.web.plugins.WebMvcRequestHandlerProvider;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 import java.lang.reflect.Field;
@@ -27,18 +28,20 @@ import static top.tangyh.basic.swagger2.Swagger2Configuration.TRUE;
  * @author zuihou
  * @date 2018/11/18 9:20
  */
-@EnableSwagger2WebMvc
-@ConditionalOnProperty(prefix = "knife4j", name = "enable", havingValue = TRUE, matchIfMissing = true)
+@EnableSwagger2
+@ConditionalOnProperty(prefix = "knife4j",
+        name = "enable",
+        havingValue = TRUE, matchIfMissing = true)
 @Import(BeanValidatorPluginsConfiguration.class)
 public class Swagger2Configuration {
 
     public static final String TRUE = "true";
 
-    @Bean
-    @ConditionalOnClass(SwaggerWebMvcConfigurer.class)
-    public SwaggerWebMvcConfigurer getSwaggerWebMvcConfigurer() {
-        return new SwaggerWebMvcConfigurer();
-    }
+//    @Bean
+//    @ConditionalOnClass(SwaggerWebMvcConfigurer.class)
+//    public SwaggerWebMvcConfigurer getSwaggerWebMvcConfigurer() {
+//        return new SwaggerWebMvcConfigurer();
+//    }
 
 
 }

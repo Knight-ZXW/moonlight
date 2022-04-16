@@ -73,7 +73,9 @@ public class IgnoreProperties {
      *
      * @see 3.x
      */
-    private List<String> token = CollUtil.newArrayList("/**/noToken/**", "/ds/**");
+    private List<String> token = CollUtil.newArrayList(
+            "/**/login", "/**/logout",
+            "/ds/**");
 
     public boolean isIgnoreToken(String path) {
         List<String> all = new ArrayList<>();

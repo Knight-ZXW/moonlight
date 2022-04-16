@@ -2,9 +2,9 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>top.tangyh.basic</groupId>
-    <artifactId>lamp-dependencies</artifactId>
-    <version>3.6.1</version>
+    <groupId>com.knightboost.moonlight</groupId>
+    <artifactId>moonlight-dependencies</artifactId>
+    <version>1.0.0</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
     <description>Spring Boot 2.x项目依赖管理</description>
@@ -40,6 +40,7 @@
         <jjwt.version>0.11.2</jjwt.version>
         <lombok.version>1.18.22</lombok.version>
         <dozer.version>6.5.0</dozer.version>
+        <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <easypoi.version>4.2.0</easypoi.version>
         <caffeine.version>2.9.3</caffeine.version>
@@ -177,13 +178,13 @@
                 </exclusions>
             </dependency>
 
-<!--            <dependency>-->
-<!--                <groupId>com.github.xiaoymin</groupId>-->
-<!--                <artifactId>knife4j-dependencies</artifactId>-->
-<!--                <version>${knife4j.version}</version>-->
-<!--                <type>pom</type>-->
-<!--                <scope>import</scope>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-dependencies</artifactId>
+                <version>${knife4j.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <dependency>
                 <groupId>org.lionsoul</groupId>
@@ -325,22 +326,29 @@
                 <version>${dozer.version}</version>
             </dependency>
 
-<!--            <dependency>-->
-<!--                <groupId>io.springfox</groupId>-->
-<!--                <artifactId>springfox-core</artifactId>-->
-<!--                <version>${springfox.version}</version>-->
-<!--            </dependency>-->
+            <!--  map struct 对象转换           -->
+            <dependency>
+                <groupId>org.mapstruct</groupId>
+                <artifactId>mapstruct</artifactId>
+                <version>${org.mapstruct.version}</version>
+            </dependency>
 
-<!--            <dependency>-->
-<!--                <groupId>io.swagger</groupId>-->
-<!--                <artifactId>swagger-annotations</artifactId>-->
-<!--                <version>${swagger-models.version}</version>-->
-<!--            </dependency>-->
-<!--            <dependency>-->
-<!--                <groupId>io.swagger</groupId>-->
-<!--                <artifactId>swagger-models</artifactId>-->
-<!--                <version>${swagger-models.version}</version>-->
-<!--            </dependency>-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-core</artifactId>
+                <version>${springfox.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger-models.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>${swagger-models.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>

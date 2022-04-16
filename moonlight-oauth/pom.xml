@@ -16,9 +16,42 @@
         <module>moonlight-oauth-controller</module>
     </modules>
 
-    <properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>moonlight-oauth-biz</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>moonlight-authority-biz</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>moonlight-tenant-biz</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
+        <!-- jwt 只有Oauth服务需要使用 -->
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>basic-jwt-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>basic-dozer-starter</artifactId>
+        </dependency>
 
-
-    </properties>
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>moonlight-file-entity</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>moonlight-msg</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>

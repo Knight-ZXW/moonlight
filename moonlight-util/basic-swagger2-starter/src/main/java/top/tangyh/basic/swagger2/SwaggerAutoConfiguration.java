@@ -60,7 +60,9 @@ import java.util.stream.Collectors;
 @Import({
         Swagger2Configuration.class
 })
-@ConditionalOnProperty(prefix = "knife4j", name = "enable", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(prefix = "knife4j",
+        name = "enable",
+        havingValue = "true", matchIfMissing = true)
 @EnableConfigurationProperties(SwaggerProperties.class)
 public class SwaggerAutoConfiguration implements BeanFactoryAware {
     private static final String SEMICOLON = ";";
@@ -213,7 +215,6 @@ public class SwaggerAutoConfiguration implements BeanFactoryAware {
                         buildGlobalOperationParametersFromSwaggerProperties(
                                 swaggerProperties.getGlobalOperationParameters()))
                 .select()
-
                 .apis(basePackage(swaggerProperties.getBasePackage()))
                 .paths(Predicates.and(Predicates.not(Predicates.or(excludePath)), Predicates.or(basePath)))
                 .build()
