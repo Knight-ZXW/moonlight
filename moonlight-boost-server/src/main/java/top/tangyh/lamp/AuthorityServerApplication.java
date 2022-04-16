@@ -43,6 +43,7 @@ import static top.tangyh.lamp.common.constant.BizConstant.UTIL_PACKAGE;
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @EnableLoginArgResolver
 @EnableFormValidator
+//@ComponentScan({"springfox.documentation.schema"})
 public class AuthorityServerApplication {
     public static void main(String[] args) throws UnknownHostException {
         ConfigurableApplicationContext application = SpringApplication.run(AuthorityServerApplication.class, args);

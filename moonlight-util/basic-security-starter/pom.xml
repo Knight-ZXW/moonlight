@@ -13,8 +13,8 @@
     <description>当前登录用户信息注入模块</description>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+
+
     </properties>
 
     <dependencies>

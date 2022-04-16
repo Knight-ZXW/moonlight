@@ -12,8 +12,8 @@
     <artifactId>moonlight-boost-server</artifactId>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+
+
     </properties>
 
     <description>单体服务启动模块</description>

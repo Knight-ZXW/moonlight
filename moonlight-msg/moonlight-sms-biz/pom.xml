@@ -12,8 +12,8 @@
     <artifactId>moonlight-sms-biz</artifactId>
 
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+
+
     </properties>
 
     <description>短信服务业务模块</description>

@@ -76,7 +76,7 @@ public class FileServerProperties {
         /**
          * 文件存储路径
          */
-        private String storagePath = "/Users/tangyh/webs/projects/uploadfile/file/";
+        private String storagePath = "temp/uploadfile/file/";
         /**
          * 内网通道前缀 主要用于解决文件下载时， 文件服务无法通过urlPrefix访问文件时，通过此参数转换
          */
