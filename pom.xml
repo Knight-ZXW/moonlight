@@ -30,6 +30,9 @@
 		<module>moonlight-file</module>
         <module>moonlight-msg</module>
         <module>moonlight-admin</module>
+		<module>moonlight-upms</module>
+        <module>moonlight-user</module>
+		<module>moonlight-base</module>
 	</modules>
 
 	<properties>

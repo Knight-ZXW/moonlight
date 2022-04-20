@@ -155,18 +155,6 @@ public class User extends Entity<Long> implements EchoVO {
     private String nation;
 
     /**
-     * 学历
-     *
-     * @Echo(api = DICTIONARY_ITEM_CLASS,  dictType = DictionaryType.EDUCATION)
-     */
-    @ApiModelProperty(value = "学历")
-    @Size(max = 2, message = "学历长度不能超过2")
-    @TableField(value = "education", condition = LIKE)
-    @Echo(api = DICTIONARY_ITEM_CLASS, dictType = DictionaryType.EDUCATION)
-    @Excel(name = "学历")
-    private String education;
-
-    /**
      * 职位状态
      *
      * @Echo(api = DICTIONARY_ITEM_CLASS,  dictType = DictionaryType.POSITION_STATUS)
@@ -238,7 +226,7 @@ public class User extends Entity<Long> implements EchoVO {
     public User(Long id, Long createdBy, LocalDateTime createTime, Long updatedBy, LocalDateTime updateTime,
                 String account, String name, Long orgId, Long stationId, Boolean readonly,
                 String email, String mobile, Sex sex, Boolean state, String avatar, String nation,
-                String education, String positionStatus, String workDescribe, LocalDateTime passwordErrorLastTime, Integer passwordErrorNum, LocalDateTime passwordExpireTime,
+                String positionStatus, String workDescribe, LocalDateTime passwordErrorLastTime, Integer passwordErrorNum, LocalDateTime passwordExpireTime,
                 String password, String salt, LocalDateTime lastLoginTime) {
         this.id = id;
         this.createdBy = createdBy;
@@ -256,7 +244,6 @@ public class User extends Entity<Long> implements EchoVO {
         this.state = state;
         this.avatar = avatar;
         this.nation = nation;
-        this.education = education;
         this.positionStatus = positionStatus;
         this.workDescribe = workDescribe;
         this.passwordErrorLastTime = passwordErrorLastTime;

@@ -1,8 +1,7 @@
 package top.tangyh.basic.security.annotation;
 
-import top.tangyh.basic.security.config.LoginArgResolverConfig;
-import top.tangyh.basic.security.config.UserResolveFeignConfiguration;
 import org.springframework.context.annotation.Import;
+import top.tangyh.basic.security.config.LoginArgResolverConfig;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -17,6 +16,6 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import({UserResolveFeignConfiguration.class, LoginArgResolverConfig.class})
+@Import({LoginArgResolverConfig.class})
 public @interface EnableLoginArgResolver {
 }

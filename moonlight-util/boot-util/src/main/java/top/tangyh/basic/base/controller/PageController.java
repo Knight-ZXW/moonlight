@@ -24,7 +24,7 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
      * @date 2021/7/3 3:25 下午
      * @create [2021/7/3 3:25 下午 ] [tangyh] [初始创建]
      */
-    default void handlerQueryParams(PageParams<PageQuery> params) {
+    default void handlerPageParams(PageParams<PageQuery> params) {
     }
 
     /**
@@ -37,11 +37,12 @@ public interface PageController<Entity, PageQuery> extends BaseController<Entity
      */
     default IPage<Entity> query(PageParams<PageQuery> params) {
         // 处理查询参数，如：覆盖前端传递的 current、size、sort 等参数 以及 model 中的参数 【提供给之类重写】【无默认实现】
-        handlerQueryParams(params);
+        handlerPageParams(params);
 
         // 构建分页参数(current、size)和排序字段等
         IPage<Entity> page = params.buildPage(getEntityClass());
-        Entity model = BeanUtil.toBean(params.getModel(), getEntityClass());
+        PageQuery queryModel = params.getModel();
+        Entity model = BeanUtil.toBean(queryModel, getEntityClass());
 
         // 根据前端传递的参数，构建查询条件【提供给之类重写】【有默认实现】
         QueryWrap<Entity> wrapper = handlerWrapper(model, params);

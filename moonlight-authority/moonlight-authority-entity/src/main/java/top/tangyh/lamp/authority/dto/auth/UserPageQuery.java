@@ -95,13 +95,7 @@ public class UserPageQuery implements Serializable {
      */
     @ApiModelProperty(value = "民族")
     private List<String> nation;
-    /**
-     * 学历
-     *
-     * @Echo(api = DICTIONARY_ITEM_CLASS,  dictType = DictionaryType.EDUCATION)
-     */
-    @ApiModelProperty(value = "学历")
-    private List<String> education;
+
     /**
      * 职位状态
      *

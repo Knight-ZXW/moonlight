@@ -10,7 +10,7 @@ import java.lang.reflect.ParameterizedType;
  * SuperNoPoiController
  * <p>
  * 继承该类，就拥有了如下方法：
- * 1，page 分页查询，并支持子类扩展4个方法：handlerQueryParams、query、handlerWrapper、handlerResult
+ * 1，page 分页查询，并支持子类扩展4个方法：handlerPageParams、query、handlerWrapper、handlerResult
  * 2，save 保存，并支持子类扩展方法：handlerSave
  * 3，update 修改，并支持子类扩展方法：handlerUpdate
  * 4，delete 删除，并支持子类扩展方法：handlerDelete

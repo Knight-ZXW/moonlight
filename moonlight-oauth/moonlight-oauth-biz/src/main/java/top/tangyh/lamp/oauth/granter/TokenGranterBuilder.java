@@ -30,7 +30,7 @@ public class TokenGranterBuilder {
     public TokenGranter getGranter(String grantType) {
         TokenGranter tokenGranter = granterPool.get(grantType);
         if (tokenGranter == null) {
-            throw new BizException("grantType 不支持，请传递正确的 grantType 参数");
+            throw new BizException("code 不支持，请传递正确的 code 参数");
         }
         return tokenGranter;
     }

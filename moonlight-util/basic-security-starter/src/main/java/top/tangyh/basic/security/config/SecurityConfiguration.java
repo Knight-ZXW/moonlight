@@ -1,15 +1,9 @@
 package top.tangyh.basic.security.config;
 
-import top.tangyh.basic.security.aspect.UriSecurityPreAuthAspect;
-import top.tangyh.basic.security.aspect.VerifyAuthFunction;
-import top.tangyh.basic.security.feign.UserResolverService;
-import top.tangyh.basic.security.properties.SecurityProperties;
 import lombok.AllArgsConstructor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
+import top.tangyh.basic.security.properties.SecurityProperties;
 
 /**
  * 权限认证配置类
@@ -23,16 +17,19 @@ import org.springframework.core.annotation.Order;
 public class SecurityConfiguration {
     private final SecurityProperties securityProperties;
 
-    @Bean
-    @ConditionalOnProperty(prefix = SecurityProperties.PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
-    public UriSecurityPreAuthAspect uriSecurityPreAuthAspect(VerifyAuthFunction verifyAuthFunction) {
-        return new UriSecurityPreAuthAspect(verifyAuthFunction);
-    }
-
-    @Bean("fun")
-    @ConditionalOnMissingBean(VerifyAuthFunction.class)
-    public VerifyAuthFunction getVerifyAuthFunction(UserResolverService userResolverService) {
-        return new VerifyAuthFunction(userResolverService, securityProperties);
-    }
+//    @Bean
+//    @ConditionalOnProperty(prefix = SecurityProperties.PREFIX,
+//            name = "enabled",
+//            havingValue = "true",
+//            matchIfMissing = true)
+//    public UriSecurityPreAuthAspect uriSecurityPreAuthAspect(VerifyAuthFunction verifyAuthFunction) {
+//        return new UriSecurityPreAuthAspect(verifyAuthFunction);
+//    }
+//
+//    @Bean("fun")
+//    @ConditionalOnMissingBean(VerifyAuthFunction.class)
+//    public VerifyAuthFunction getVerifyAuthFunction(UserResolverService userResolverService) {
+//        return new VerifyAuthFunction(userResolverService, securityProperties);
+//    }
 
 }

@@ -18,11 +18,13 @@ import cn.hutool.crypto.SecureUtil;
 import cn.hutool.extra.servlet.ServletUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import top.tangyh.basic.base.R;
 import top.tangyh.basic.boot.utils.WebUtils;
-import top.tangyh.basic.context.ContextUtil;
 import top.tangyh.basic.database.properties.DatabaseProperties;
-import top.tangyh.basic.database.properties.MultiTenantType;
 import top.tangyh.basic.exception.code.ExceptionCode;
 import top.tangyh.basic.jwt.TokenUtil;
 import top.tangyh.basic.jwt.model.AuthInfo;
@@ -42,14 +44,11 @@ import top.tangyh.lamp.common.vo.result.AppendixResultVO;
 import top.tangyh.lamp.file.service.AppendixService;
 import top.tangyh.lamp.oauth.event.LoginEvent;
 import top.tangyh.lamp.oauth.event.model.LoginStatusDTO;
-import top.tangyh.lamp.tenant.entity.Tenant;
-import top.tangyh.lamp.tenant.enumeration.TenantStatusEnum;
 import top.tangyh.lamp.tenant.service.TenantService;
 
 import java.time.LocalDateTime;
 
 import static top.tangyh.basic.context.ContextConstants.BASIC_HEADER_KEY;
-import static top.tangyh.basic.utils.ArgumentAssert.notNull;
 
 /**
  * 验证码TokenGranter
@@ -89,8 +88,21 @@ public abstract class AbstractTokenGranter implements TokenGranter {
 
         // 3. 验证登录
         R<User> result = this.getUser(loginParam.getAccount(), loginParam.getPassword());
+
         if (!result.getIsSuccess()) {
             return R.fail(result.getCode(), result.getMsg());
+        }
+
+        //邮箱注册的，账号为邮箱。  用户名注册的，账号为用户名，并且必须绑定邮箱？
+        // 邮箱只能和一个账号绑定，冲突情况下 可以选择邮箱和账号解绑
+
+        UsernamePasswordToken token = new UsernamePasswordToken(loginParam.getAccount(),
+                loginParam.getPassword());
+        Subject subject = SecurityUtils.getSubject();
+        try {
+            subject.login(token);
+        }catch (AuthenticationException e){
+            return R.fail("账号或密码错误");
         }
 
         // 4.生成 token
@@ -105,7 +117,13 @@ public abstract class AbstractTokenGranter implements TokenGranter {
         SpringUtils.publishEvent(new LoginEvent(loginStatus));
 
         onlineService.save(online);
-        return R.success(authInfo);
+        /**Shiro验证后,跳转到此处,这里判断验证是否通过 */
+        if(subject.isAuthenticated()){  //验证身份通过
+            return R.success(authInfo);
+        }else{
+            return R.fail("验证失败");
+        }
+
     }
 
     protected Online getOnline(String clientId, AuthInfo authInfo) {

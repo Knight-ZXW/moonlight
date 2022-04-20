@@ -51,7 +51,9 @@ public class RoleAuthority extends SuperEntity<Long> {
     @ApiModelProperty(value = "权限类型")
     @NotNull(message = "权限类型不能为空")
     @TableField("authority_type")
-    @Excel(name = "权限类型", replace = {"菜单_MENU", "资源_RESOURCE", "_null"})
+    @Excel(name = "权限类型", replace = {"菜单_MENU",
+            "资源_RESOURCE",
+            "_null"})
     private AuthorizeType authorityType;
 
     /**

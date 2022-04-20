@@ -47,6 +47,7 @@ public class Menu extends TreeEntity<Menu, Long> {
     @TableField(value = "describe_", condition = LIKE)
     @Excel(name = "描述")
     private String describe;
+
     /**
      * 类型;[20-菜单 60-数据]
      */

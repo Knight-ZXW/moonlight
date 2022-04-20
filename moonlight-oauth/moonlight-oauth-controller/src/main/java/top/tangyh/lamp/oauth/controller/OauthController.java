@@ -1,12 +1,17 @@
 package top.tangyh.lamp.oauth.controller;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import top.tangyh.basic.annotation.base.IgnoreResponseBodyAdvice;
 import top.tangyh.basic.base.R;
 import top.tangyh.basic.exception.BizException;
 import top.tangyh.basic.jwt.TokenUtil;
 import top.tangyh.basic.jwt.model.AuthInfo;
+import top.tangyh.basic.security.auth.MoonLightAuthToken;
 import top.tangyh.lamp.authority.dto.auth.LoginParamDTO;
+import top.tangyh.lamp.authority.entity.auth.User;
 import top.tangyh.lamp.authority.service.auth.OnlineService;
+import top.tangyh.lamp.authority.service.auth.UserService;
 import top.tangyh.lamp.oauth.granter.TokenGranterBuilder;
 import top.tangyh.lamp.oauth.service.ValidateCodeService;
 import io.swagger.annotations.Api;
@@ -42,6 +47,9 @@ public class OauthController {
     private final TokenUtil tokenUtil;
     private final OnlineService onlineService;
 
+    private final UserService userService;
+
+
     /**
      * 租户登录 lamp-ui 系统
      */
@@ -50,6 +58,27 @@ public class OauthController {
     public R<AuthInfo> login(@Validated @RequestBody LoginParamDTO login) throws BizException {
         return tokenGranterBuilder.getGranter(login.getGrantType()).grant(login);
     }
+
+    /**
+     * 租户登录 lamp-ui 系统
+     */
+    @ApiOperation(value = "登录接口", notes = "登录或者清空缓存时调用")
+    @PostMapping(value = "/login2")
+    public R<User> login2(@Validated @RequestBody LoginParamDTO login) throws BizException {
+        String account = login.getAccount();
+        String password = login.getPassword();
+        String grantType = login.getGrantType();
+        try {
+            MoonLightAuthToken token = new MoonLightAuthToken(account, password, grantType);
+            Subject subject = SecurityUtils.getSubject();
+            subject.login(token);
+        }catch (Exception e){
+            return R.fail("登录失败");
+        }
+        return R.success(userService.getByAccount(account));
+    }
+
+
 
     @ApiOperation(value = "退出", notes = "退出")
     @PostMapping(value = "/logout")

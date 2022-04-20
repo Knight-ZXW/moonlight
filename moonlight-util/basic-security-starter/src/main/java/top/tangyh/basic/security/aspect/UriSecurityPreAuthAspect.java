@@ -1,15 +1,9 @@
 package top.tangyh.basic.security.aspect;
 
 import cn.hutool.core.util.StrUtil;
-import top.tangyh.basic.annotation.security.PreAuth;
-import top.tangyh.basic.context.ContextConstants;
-import top.tangyh.basic.exception.ForbiddenException;
-import top.tangyh.basic.exception.code.ExceptionCode;
-import top.tangyh.basic.utils.StrPool;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -29,6 +23,11 @@ import org.springframework.lang.Nullable;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import top.tangyh.basic.annotation.security.PreAuth;
+import top.tangyh.basic.context.ContextConstants;
+import top.tangyh.basic.exception.ForbiddenException;
+import top.tangyh.basic.exception.code.ExceptionCode;
+import top.tangyh.basic.utils.StrPool;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
@@ -39,7 +38,7 @@ import java.lang.reflect.Method;
  * @author zuihou
  * @date 2020年03月29日21:17:49
  */
-@Aspect
+//@Aspect
 @Slf4j
 public class UriSecurityPreAuthAspect implements ApplicationContextAware {
 

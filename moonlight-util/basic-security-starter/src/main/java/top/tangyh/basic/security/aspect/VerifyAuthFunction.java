@@ -26,7 +26,8 @@ public class VerifyAuthFunction {
     private final UserResolverService userResolverService;
     private final SecurityProperties securityProperties;
 
-    public VerifyAuthFunction(UserResolverService userResolverService, SecurityProperties securityProperties) {
+    public VerifyAuthFunction(UserResolverService userResolverService,
+                              SecurityProperties securityProperties) {
         this.userResolverService = userResolverService;
         this.securityProperties = securityProperties;
     }
@@ -61,7 +62,9 @@ public class VerifyAuthFunction {
         // 查询当前用户拥有的所有资源
         Set<String> resources = getAllResources();
         // 判断是否包含所需的角色
-        return AuthorizingRealm.hasAnyPermission(resources, permit, securityProperties.getCaseSensitive());
+        return AuthorizingRealm.hasAnyPermission(resources,
+                permit,
+                securityProperties.getCaseSensitive());
     }
 
     /**

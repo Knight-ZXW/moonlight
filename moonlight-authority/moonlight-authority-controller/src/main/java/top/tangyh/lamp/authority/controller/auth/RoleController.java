@@ -57,14 +57,16 @@ public class RoleController extends SuperCacheController<RoleService, Long, Role
     }
 
     @Override
+    public void handlerPageParams(PageParams<RolePageQuery> params) {
+    }
+
+    @Override
     public IPage<Role> query(PageParams<RolePageQuery> params) {
         IPage<Role> page = params.buildPage(Role.class);
         RolePageQuery roleQuery = params.getModel();
 
         QueryWrap<Role> wrap = handlerWrapper(null, params);
-
         LbqWrapper<Role> wrapper = wrap.lambda();
-
         wrapper.like(Role::getName, roleQuery.getName())
                 .like(Role::getCode, roleQuery.getCode())
                 .in(Role::getState, roleQuery.getState())

@@ -14,6 +14,7 @@ import top.tangyh.lamp.authority.service.auth.UserService;
  * @date 2020年02月24日10:51:46
  */
 public class UserResolverServiceImpl implements UserResolverService {
+
     private final UserService userService;
 
     public UserResolverServiceImpl(UserService userService) {

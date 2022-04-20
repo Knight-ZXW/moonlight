@@ -71,7 +71,6 @@ public class RedisAutoConfigure {
     @Bean("redisTemplate")
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory, RedisSerializer<Object> redisSerializer) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
-
         setSerializer(factory, template, redisSerializer);
         return template;
     }

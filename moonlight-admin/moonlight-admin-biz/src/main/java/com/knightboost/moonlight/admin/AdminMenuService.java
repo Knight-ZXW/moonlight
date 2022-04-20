@@ -14,6 +14,7 @@ import top.tangyh.lamp.authority.entity.auth.Menu;
 import top.tangyh.lamp.authority.entity.auth.Resource;
 import top.tangyh.lamp.authority.service.auth.MenuService;
 import top.tangyh.lamp.authority.service.auth.ResourceService;
+import top.tangyh.lamp.authority.service.auth.RoleAuthorityService;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,8 +25,13 @@ import java.util.List;
 public class AdminMenuService {
     @Autowired
     MenuService menuService;
+
     @Autowired
     ResourceService resourceService;
+
+    @Autowired
+    RoleAuthorityService roleAuthorityService;
+
 
     public List<AdminMenuDTO> getMenuTree(Long userId) {
         List<Menu> visibleMenus = menuService.findVisibleMenu(null, userId);
@@ -46,6 +52,10 @@ public class AdminMenuService {
             Long id = menuDto.getId();
             menuMap.put(id, menuDto);
             Long parentId = menuDto.getParentId();
+
+            //获取能够访问此菜单的角色
+
+
             ResourceQueryDTO resourceQueryDto = new ResourceQueryDTO();
             resourceQueryDto.setMenuId(id);
             List<Resource> visibleResource = resourceService.findVisibleResource(resourceQueryDto);

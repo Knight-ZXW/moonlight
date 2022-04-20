@@ -296,7 +296,6 @@ public class UserController extends SuperCacheController<UserService, Long, User
                 .like(User::getMobile, userPage.getMobile())
                 .eq(User::getStationId, userPage.getStationId())
                 .in(User::getPositionStatus, userPage.getPositionStatus())
-                .in(User::getEducation, userPage.getEducation())
                 .in(User::getNation, userPage.getNation())
                 .in(User::getSex, userPage.getSex())
                 .eq(User::getState, userPage.getState());
@@ -346,7 +345,6 @@ public class UserController extends SuperCacheController<UserService, Long, User
                 .like(User::getMobile, userPage.getMobile())
                 .eq(User::getStationId, userPage.getStationId())
                 .in(User::getPositionStatus, userPage.getPositionStatus())
-                .in(User::getEducation, userPage.getEducation())
                 .in(User::getNation, userPage.getNation())
                 .in(User::getSex, userPage.getSex())
                 .eq(User::getState, userPage.getState());

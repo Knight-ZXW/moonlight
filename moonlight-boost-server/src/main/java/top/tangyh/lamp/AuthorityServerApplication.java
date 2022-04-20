@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -13,8 +14,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.core.env.Environment;
 import top.tangyh.basic.security.annotation.EnableLoginArgResolver;
 import top.tangyh.basic.validator.annotation.EnableFormValidator;
+import top.tangyh.lamp.common.properties.IgnoreProperties;
+import top.tangyh.lamp.common.properties.SystemProperties;
 
-import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import static top.tangyh.lamp.common.constant.BizConstant.*;
@@ -42,6 +44,7 @@ import static top.tangyh.lamp.common.constant.BizConstant.*;
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 @EnableLoginArgResolver
 @EnableFormValidator
+@EnableConfigurationProperties({IgnoreProperties.class, SystemProperties.class})
 public class AuthorityServerApplication {
     public static void main(String[] args) throws UnknownHostException {
         ConfigurableApplicationContext application = SpringApplication.run(AuthorityServerApplication.class, args);

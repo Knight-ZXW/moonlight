@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import lombok.experimental.Accessors;
-import springfox.documentation.service.GrantType;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -30,7 +29,6 @@ public class LoginParamDTO {
     private String code;
 
     @ApiModelProperty(value = "账号")
-
     @JsonAlias("username")
     private String account;
 

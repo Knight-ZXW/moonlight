@@ -9,6 +9,8 @@ import top.tangyh.basic.security.model.SysUser;
  * @date 2020年02月24日10:41:49
  */
 public interface UserResolverService {
+
+
     /**
      * 根据id查询用户
      *

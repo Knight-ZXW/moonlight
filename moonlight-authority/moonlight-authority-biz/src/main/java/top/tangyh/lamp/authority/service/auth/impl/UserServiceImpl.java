@@ -143,7 +143,12 @@ public class UserServiceImpl extends SuperCacheServiceImpl<UserMapper, User> imp
 
     @Override
     public User getByAccount(String account) {
-        Function<CacheKey, Object> loader = k -> getObj(Wraps.<User>lbQ().select(User::getId).eq(User::getAccount, account), Convert::toLong);
+        Function<CacheKey, Object> loader = new Function<CacheKey, Object>() {
+            @Override
+            public Object apply(CacheKey k) {
+                return UserServiceImpl.this.getObj(Wraps.<User>lbQ().select(User::getId).eq(User::getAccount, account), Convert::toLong);
+            }
+        };
         CacheKeyBuilder builder = new UserAccountCacheKeyBuilder();
         return getByKey(builder.key(account), loader);
     }
@@ -197,7 +202,10 @@ public class UserServiceImpl extends SuperCacheServiceImpl<UserMapper, User> imp
     @Override
     public boolean check(Long id, String account) {
         //这里不能用缓存，否则会导致用户无法登录
-        return count(Wraps.<User>lbQ().eq(User::getAccount, account).ne(User::getId, id)) > 0;
+        return count(
+                Wraps.<User>lbQ()
+                .eq(User::getAccount, account)
+                        .ne(User::getId, id)) > 0;
     }
 
     @Override
@@ -218,7 +226,15 @@ public class UserServiceImpl extends SuperCacheServiceImpl<UserMapper, User> imp
     @Override
     @Transactional(rollbackFor = Exception.class)
     public User saveUser(User user) {
-        ArgumentAssert.isFalse(check(null, user.getAccount()), "账号{}已经存在", user.getAccount());
+        ArgumentAssert.isFalse(check(null, user.getAccount()),
+                "账号{}已经存在", user.getAccount());
+
+        ArgumentAssert.isFalse(check(null, user.getEmail()),
+                "邮箱{}已经存在", user.getEmail());
+
+        ArgumentAssert.isFalse(check(null, user.getMobile()),
+                "手机号{}已经存在", user.getMobile());
+
         user.setSalt(RandomUtil.randomString(20));
         if (StrUtil.isEmpty(user.getPassword())) {
             user.setPassword(DEF_PASSWORD);

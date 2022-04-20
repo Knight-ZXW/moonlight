@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -30,15 +31,16 @@ import java.util.Map;
 @ApiModel(value = "PageParams", description = "分页参数")
 public class PageParams<T> {
 
-    @NotNull(message = "查询对象model不能为空")
-    @ApiModelProperty(value = "查询参数", required = true)
+//    @NotNull(message = "查询对象model不能为空")
+    @ApiModelProperty(value = "查询参数", required = false)
     private T model;
 
+    @JsonAlias({"pageSize","size"})
     @ApiModelProperty(value = "页面大小", example = "10")
-    private long size = 10;
+    private long pageSize = 10;
 
     @ApiModelProperty(value = "当前页", example = "1")
-    private long current = 1;
+    private long page = 1;
 
     @ApiModelProperty(value = "排序,默认createTime", allowableValues = "id,createTime,updateTime", example = "id")
     private String sort = SuperEntity.FIELD_ID;
@@ -50,9 +52,9 @@ public class PageParams<T> {
     private Map<String, Object> extra = new HashMap<>(16);
 
 
-    public PageParams(long current, long size) {
-        this.size = size;
-        this.current = current;
+    public PageParams(long page, long size) {
+        this.pageSize = size;
+        this.page = page;
     }
 
     /**
@@ -63,7 +65,7 @@ public class PageParams<T> {
     @JsonIgnore
     public <E> IPage<E> buildPage() {
         PageParams params = this;
-        return new Page(params.getCurrent(), params.getSize());
+        return new Page(params.getPage(), params.getPageSize());
     }
 
     /**
@@ -83,10 +85,10 @@ public class PageParams<T> {
         PageParams params = this;
         //没有排序参数
         if (StrUtil.isEmpty(params.getSort())) {
-            return new Page(params.getCurrent(), params.getSize());
+            return new Page(params.getPage(), params.getPageSize());
         }
 
-        Page<E> page = new Page(params.getCurrent(), params.getSize());
+        Page<E> page = new Page(params.getPage(), params.getPageSize());
 
         List<OrderItem> orders = new ArrayList<>();
         String[] sortArr = StrUtil.splitToArray(params.getSort(), StrPool.COMMA);
@@ -110,11 +112,11 @@ public class PageParams<T> {
      */
     @JsonIgnore
     public long offset() {
-        long current = this.current;
+        long current = this.page;
         if (current <= 1L) {
             return 0L;
         }
-        return (current - 1) * this.size;
+        return (current - 1) * this.pageSize;
     }
 
     @JsonIgnore
