@@ -25,7 +25,7 @@ import top.tangyh.basic.log.properties.OptLogProperties;
  * @author zuihou
  * @date 2019/2/1
  */
-@EnableAsync
+@EnableAsync(proxyTargetClass = true)
 @Configuration
 @AllArgsConstructor
 @ConditionalOnWebApplication

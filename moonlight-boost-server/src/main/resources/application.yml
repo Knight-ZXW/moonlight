@@ -1,3 +1,4 @@
+
 lamp:
   system:
     # 登录时否验证密码有效性 （常用于开发环境快速登录）
@@ -199,6 +200,8 @@ management:
       enabled: true
 
 spring:
+  aop:
+    proxy-target-class: true
   lifecycle:
     # 优雅停机宽限期时间
     timeout-per-shutdown-phase: 30s
@@ -231,8 +234,10 @@ spring:
     password: ${lamp.redis.password}
     port: ${lamp.redis.port}
     database: ${lamp.redis.database}
-    lettuce:
+    timeout: 2000
+    jedis:
       pool:
+        max-wait: 3000
         max-idle: 10
         min-idle: 10
         max-active: 100
@@ -286,6 +291,13 @@ spring:
         reset-enable: true    #允许清空统计数据
         login-username: lamp
         login-password: lamp
+shiro-redis:
+  enable: true
+  redis-manager:
+    deploy-mode: standalone
+    host: ${lamp.redis.ip}
+    password:
+
 
 mybatis-plus:
   mapper-locations:

@@ -93,8 +93,6 @@ public abstract class AbstractMLAuthenticate implements MoonLightAuthenticate {
 
     protected SysUser userConvert(User user){
         SysUser sysUser = BeanUtil.toBean(user, SysUser.class);
-        sysUser.setOrgId(user.getOrgId());
-        sysUser.setStationId(user.getStationId());
         return sysUser;
     }
 }

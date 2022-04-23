@@ -32,16 +32,13 @@ import top.tangyh.lamp.authority.controller.poi.ExcelUserVerifyHandlerImpl;
 import top.tangyh.lamp.authority.controller.poi.UserExcelDictHandlerImpl;
 import top.tangyh.lamp.authority.dto.auth.*;
 import top.tangyh.lamp.authority.entity.auth.User;
-import top.tangyh.lamp.authority.entity.core.Org;
 import top.tangyh.lamp.authority.service.auth.UserService;
-import top.tangyh.lamp.authority.service.core.OrgService;
 import top.tangyh.lamp.common.constant.BizConstant;
 import top.tangyh.lamp.file.service.AppendixService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.groups.Default;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -67,7 +64,6 @@ import static top.tangyh.lamp.common.constant.SwaggerConstants.*;
 @PreAuth(replace = "authority:user:")
 @RequiredArgsConstructor
 public class UserController extends SuperCacheController<UserService, Long, User, UserPageQuery, UserSaveDTO, UserUpdateDTO> {
-    private final OrgService orgService;
     private final EchoService echoService;
     private final AppendixService appendixService;
     private final ExcelUserVerifyHandlerImpl excelUserVerifyHandler;
@@ -285,16 +281,11 @@ public class UserController extends SuperCacheController<UserService, Long, User
         QueryWrap<User> wrap = handlerWrapper(null, params);
 
         LbqWrapper<User> wrapper = wrap.lambda();
-        if (userPage.getOrgId() != null && userPage.getOrgId() > 0) {
-            List<Org> children = orgService.findChildren(Arrays.asList(userPage.getOrgId()));
-            wrapper.in(User::getOrgId, children.stream().map(Org::getId).collect(Collectors.toList()));
-        }
         wrapper.like(User::getName, userPage.getName())
                 .like(User::getAccount, userPage.getAccount())
                 .eq(User::getReadonly, false)
                 .like(User::getEmail, userPage.getEmail())
                 .like(User::getMobile, userPage.getMobile())
-                .eq(User::getStationId, userPage.getStationId())
                 .in(User::getPositionStatus, userPage.getPositionStatus())
                 .in(User::getNation, userPage.getNation())
                 .in(User::getSex, userPage.getSex())
@@ -334,16 +325,11 @@ public class UserController extends SuperCacheController<UserService, Long, User
         QueryWrap<User> wrap = handlerWrapper(null, params);
 
         LbqWrapper<User> wrapper = wrap.lambda();
-        if (userPage.getOrgId() != null && userPage.getOrgId() > 0) {
-            List<Org> children = orgService.findChildren(Arrays.asList(userPage.getOrgId()));
-            wrapper.in(User::getOrgId, children.stream().map(Org::getId).collect(Collectors.toList()));
-        }
         wrapper.like(User::getName, userPage.getName())
                 .like(User::getAccount, userPage.getAccount())
                 .eq(User::getReadonly, false)
                 .like(User::getEmail, userPage.getEmail())
                 .like(User::getMobile, userPage.getMobile())
-                .eq(User::getStationId, userPage.getStationId())
                 .in(User::getPositionStatus, userPage.getPositionStatus())
                 .in(User::getNation, userPage.getNation())
                 .in(User::getSex, userPage.getSex())

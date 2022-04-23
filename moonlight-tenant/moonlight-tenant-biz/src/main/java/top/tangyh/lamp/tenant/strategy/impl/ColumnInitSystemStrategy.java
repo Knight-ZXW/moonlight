@@ -1,35 +1,24 @@
 package top.tangyh.lamp.tenant.strategy.impl;
 
 import com.baidu.fsg.uid.UidGenerator;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.tangyh.basic.context.ContextUtil;
-import top.tangyh.basic.database.mybatis.auth.DataScopeType;
-import top.tangyh.lamp.authority.entity.auth.Application;
-import top.tangyh.lamp.authority.entity.auth.Menu;
-import top.tangyh.lamp.authority.entity.auth.Resource;
-import top.tangyh.lamp.authority.entity.auth.Role;
-import top.tangyh.lamp.authority.entity.auth.RoleAuthority;
-import top.tangyh.lamp.authority.entity.auth.User;
+import top.tangyh.lamp.authority.entity.auth.*;
 import top.tangyh.lamp.authority.entity.common.Dictionary;
 import top.tangyh.lamp.authority.entity.common.Parameter;
 import top.tangyh.lamp.authority.enumeration.auth.ApplicationAppTypeEnum;
 import top.tangyh.lamp.authority.enumeration.auth.AuthorizeType;
 import top.tangyh.lamp.authority.enumeration.auth.Sex;
-import top.tangyh.lamp.authority.service.auth.ApplicationService;
-import top.tangyh.lamp.authority.service.auth.MenuService;
-import top.tangyh.lamp.authority.service.auth.ResourceService;
-import top.tangyh.lamp.authority.service.auth.RoleAuthorityService;
-import top.tangyh.lamp.authority.service.auth.RoleService;
-import top.tangyh.lamp.authority.service.auth.UserService;
+import top.tangyh.lamp.authority.service.auth.*;
 import top.tangyh.lamp.authority.service.common.DictionaryService;
 import top.tangyh.lamp.authority.service.common.ParameterService;
 import top.tangyh.lamp.common.constant.DictionaryType;
 import top.tangyh.lamp.common.constant.ParameterKey;
 import top.tangyh.lamp.tenant.dto.TenantConnectDTO;
 import top.tangyh.lamp.tenant.strategy.InitSystemStrategy;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,7 +41,6 @@ public class ColumnInitSystemStrategy implements InitSystemStrategy {
     private static final String DONE = "done";
     private static final String STARTED = "started";
     private static final String ORG = "org";
-    private static final String STATION = "station";
     private static final String USER = "user";
     private static final String MENU = "menu";
     private static final String ROLE = "role";
@@ -173,19 +161,12 @@ public class ColumnInitSystemStrategy implements InitSystemStrategy {
         resourceList.add(Resource.builder().code("authority:org:import").name("导入").menuId(orgId).build());
         resourceList.add(Resource.builder().code("authority:org:export").name("导出").menuId(orgId).build());
 
-        Long stationId = menuMap.get(STATION);
-        resourceList.add(Resource.builder().code("authority:station:add").name("新增").menuId(stationId).build());
-        resourceList.add(Resource.builder().code("authority:station:delete").name("删除").menuId(stationId).build());
-        resourceList.add(Resource.builder().code("authority:station:edit").name("编辑").menuId(stationId).build());
-        resourceList.add(Resource.builder().code("authority:station:view;authority:org:view").name("查看").menuId(stationId).build());
-        resourceList.add(Resource.builder().code("authority:station:import").name("导入").menuId(stationId).build());
-        resourceList.add(Resource.builder().code("authority:station:export").name("导出").menuId(stationId).build());
 
         Long userId = menuMap.get(USER);
         resourceList.add(Resource.builder().code("authority:user:add").name("新增").menuId(userId).build());
         resourceList.add(Resource.builder().code("authority:user:delete").name("删除").menuId(userId).build());
         resourceList.add(Resource.builder().code("authority:user:edit").name("编辑").menuId(userId).build());
-        resourceList.add(Resource.builder().code("authority:user:view;authority:station:view;authority:org:view").name("查看").menuId(userId).build());
+        resourceList.add(Resource.builder().code("authority:user:view;authority:org:view").name("查看").menuId(userId).build());
         resourceList.add(Resource.builder().code("authority:user:updateState").name("修改状态").menuId(userId).build());
         resourceList.add(Resource.builder().code("authority:user:resetPassword").name("重置密码").menuId(userId).build());
         resourceList.add(Resource.builder().code("authority:user:import").name("导入").menuId(userId).build());
@@ -309,9 +290,7 @@ public class ColumnInitSystemStrategy implements InitSystemStrategy {
         Long orgId = uidGenerator.getUid();
         menuMap.put(ORG, orgId);
         menuList.add(Menu.builder().id(orgId).parentId(organizationId).label("机构管理").path("/org/org").component("lamp/org/org/index").sortValue(10).readonly(true).build());
-        Long stationId = uidGenerator.getUid();
-        menuMap.put(STATION, stationId);
-        menuList.add(Menu.builder().id(stationId).parentId(organizationId).label("岗位管理").path("/org/station").component("lamp/org/station/index").sortValue(20).readonly(true).build());
+
         Long userId = uidGenerator.getUid();
         menuMap.put(USER, userId);
         menuList.add(Menu.builder().id(userId).parentId(organizationId).label("用户管理").path("/org/user").component("lamp/org/user/index").sortValue(30).readonly(true).build());

@@ -1,19 +1,25 @@
 package top.tangyh.basic.security.shiro;
 
+import org.apache.shiro.cache.CacheManager;
 import org.apache.shiro.mgt.DefaultSecurityManager;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.session.SessionListener;
 import org.apache.shiro.session.mgt.SessionFactory;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.session.mgt.eis.SessionDAO;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.Cookie;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
+import org.crazycake.shiro.RedisCacheManager;
+import org.crazycake.shiro.RedisManager;
+import org.crazycake.shiro.RedisSessionDAO;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import top.tangyh.basic.security.shiro.filter.UpmsAuthenticationFilter;
-import top.tangyh.basic.security.shiro.session.UpmsSessionDao;
 import top.tangyh.basic.security.shiro.session.UpmsSessionFactory;
 
 import javax.servlet.Filter;
@@ -29,9 +35,33 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
+//    @Autowired
+//    SessionDAO redisSessionDAO;
+//
+//    @Autowired
+//    CacheManager redisCacheManager;
+
+    @Bean
+    public RedisManager  shiroRedisManager(){
+        return new RedisManager();
+    }
+    @Bean
+    public CacheManager shiroCacheManager(RedisManager shiroRedisManager){
+        RedisCacheManager redisCacheManager = new RedisCacheManager();
+        redisCacheManager.setRedisManager(shiroRedisManager);
+        return redisCacheManager;
+    }
+
+    @Bean
+    public RedisSessionDAO redisSessionDAO(RedisManager shiroRedisManager){
+        RedisSessionDAO redisSessionDAO = new RedisSessionDAO();
+        redisSessionDAO.setRedisManager(shiroRedisManager);
+        return redisSessionDAO;
+    }
+
+
     @Bean(name = "shiroFilter")
-    public ShiroFilterFactoryBean shiroFilterFactoryBean(
-            @Qualifier("upmsSecurityManager") DefaultSecurityManager securityManager
+    public ShiroFilterFactoryBean shiroFilterFactoryBean(SecurityManager securityManager
     ){
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
         shiroFilterFactoryBean.setSecurityManager(securityManager);
@@ -63,24 +93,29 @@ public class ShiroConfig {
         filters.put("authc",new UpmsAuthenticationFilter());
         shiroFilterFactoryBean.setFilters(filters);
 
-
-
         return shiroFilterFactoryBean;
     }
 
     @Bean
-    DefaultSecurityManager upmsSecurityManager(@Qualifier("upmsRelam") UpmsRelam upmsRelam){
+    SecurityManager securityManager(@Qualifier("upmsRelam") UpmsRelam upmsRelam
+    , CacheManager shiroCacheManager, SessionManager sessionManager){
         DefaultSecurityManager securityManager = new DefaultWebSecurityManager();
         securityManager.setRealm(upmsRelam);
+        securityManager.setSessionManager(sessionManager);
+        securityManager.setCacheManager(shiroCacheManager);
+
+        // inject redisCacheManager
+//        securityManager.setCacheManager(redisCacheManager);
         //todo 支持remember me 管理
 //        securityManager.setRememberMeManager();
         return securityManager;
     }
 
     @Bean
-    SessionManager upmsSessionManager(){
+    SessionManager sessionManager(SessionDAO redisSessionDao){
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
-        sessionManager.setSessionDAO(new UpmsSessionDao());
+//        sessionManager.setSessionDAO(new UpmsSessionDao());
+        sessionManager.setSessionDAO(redisSessionDao);
         sessionManager.setSessionIdCookieEnabled(true);
         sessionManager.setSessionFactory(sessionFactory());
         sessionManager.setSessionIdCookie(sessionIdCookie());
@@ -90,7 +125,6 @@ public class ShiroConfig {
         ArrayList<SessionListener> sessionListeners = new ArrayList<>();
         sessionListeners.add(new UpmsSessionListener());
         sessionManager.setSessionListeners(sessionListeners);
-        sessionManager.setSessionFactory(sessionFactory());
         return sessionManager;
     }
 
@@ -98,6 +132,10 @@ public class ShiroConfig {
     @Bean
     public UpmsRelam upmsRelam() {
         UpmsRelam realm = new UpmsRelam();
+        //开启认证缓存
+        realm.setAuthenticationCachingEnabled(true);
+        //开启授权缓存
+        realm.setAuthorizationCachingEnabled(true);
         return realm;
     }
 
@@ -110,15 +148,28 @@ public class ShiroConfig {
     SessionFactory sessionFactory(){
         return new UpmsSessionFactory();
     }
+
+
     @Bean
     public Cookie sessionIdCookie(){
         SimpleCookie simpleCookie = new SimpleCookie();
+        simpleCookie.setName("JESESSION");
         //保证通过 js脚本无法读物cookie信息，防止xss攻击
         simpleCookie.setHttpOnly(true);
         //配置化 ms
         simpleCookie.setMaxAge(1000*60*60);
         return  simpleCookie;
     }
+
+
+    //开启对shior注解的支持
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor(SecurityManager securityManager) {
+        AuthorizationAttributeSourceAdvisor advisor = new AuthorizationAttributeSourceAdvisor();
+        advisor.setSecurityManager(securityManager);
+        return advisor;
+    }
+
 
 
 }

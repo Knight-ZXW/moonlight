@@ -14,9 +14,10 @@ import top.tangyh.basic.utils.StrPool;
  * @date 2019/08/07
  */
 @Slf4j
-@EnableCaching
+@EnableCaching(proxyTargetClass = true)
 @Import({
-        CaffeineAutoConfigure.class, RedisAutoConfigure.class
+        CaffeineAutoConfigure.class,
+        RedisAutoConfigure.class
 })
 public class CacheAutoConfigure {
 

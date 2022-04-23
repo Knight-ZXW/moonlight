@@ -5,7 +5,6 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.util.RandomUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.SecureUtil;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,9 +19,7 @@ import top.tangyh.basic.context.ContextUtil;
 import top.tangyh.basic.database.mybatis.conditions.Wraps;
 import top.tangyh.basic.database.mybatis.conditions.query.LbqWrapper;
 import top.tangyh.basic.security.feign.UserQuery;
-import top.tangyh.basic.security.model.SysOrg;
 import top.tangyh.basic.security.model.SysRole;
-import top.tangyh.basic.security.model.SysStation;
 import top.tangyh.basic.security.model.SysUser;
 import top.tangyh.basic.utils.ArgumentAssert;
 import top.tangyh.basic.utils.BeanPlusUtil;
@@ -37,31 +34,17 @@ import top.tangyh.lamp.authority.entity.auth.Resource;
 import top.tangyh.lamp.authority.entity.auth.Role;
 import top.tangyh.lamp.authority.entity.auth.User;
 import top.tangyh.lamp.authority.entity.auth.UserRole;
-import top.tangyh.lamp.authority.entity.core.Station;
 import top.tangyh.lamp.authority.service.auth.ResourceService;
-import top.tangyh.lamp.authority.service.auth.RoleOrgService;
 import top.tangyh.lamp.authority.service.auth.RoleService;
 import top.tangyh.lamp.authority.service.auth.UserRoleService;
 import top.tangyh.lamp.authority.service.auth.UserService;
-import top.tangyh.lamp.authority.service.core.OrgService;
-import top.tangyh.lamp.authority.service.core.StationService;
-import top.tangyh.lamp.common.cache.auth.UserAccountCacheKeyBuilder;
-import top.tangyh.lamp.common.cache.auth.UserCacheKeyBuilder;
-import top.tangyh.lamp.common.cache.auth.UserMenuCacheKeyBuilder;
-import top.tangyh.lamp.common.cache.auth.UserResourceCacheKeyBuilder;
-import top.tangyh.lamp.common.cache.auth.UserRoleCacheKeyBuilder;
+import top.tangyh.lamp.common.cache.auth.*;
 import top.tangyh.lamp.common.constant.BizConstant;
 import top.tangyh.lamp.file.service.AppendixService;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -84,12 +67,9 @@ import static top.tangyh.lamp.common.constant.BizConstant.DEF_PASSWORD;
 @Transactional(readOnly = true)
 public class UserServiceImpl extends SuperCacheServiceImpl<UserMapper, User> implements UserService {
 
-    private final StationService stationService;
     private final RoleService roleService;
     private final ResourceService resourceService;
     private final UserRoleService userRoleService;
-    private final RoleOrgService roleOrgService;
-    private final OrgService orgService;
     private final AppendixService appendixService;
 
     @Override
@@ -294,22 +274,6 @@ public class UserServiceImpl extends SuperCacheServiceImpl<UserMapper, User> imp
             return null;
         }
         SysUser sysUser = BeanUtil.toBean(user, SysUser.class);
-
-        sysUser.setOrgId(user.getOrgId());
-        sysUser.setStationId(user.getStationId());
-
-        if (query.getFull() || query.getOrg()) {
-            sysUser.setOrg(BeanUtil.toBean(orgService.getByIdCache(user.getOrgId()), SysOrg.class));
-        }
-
-        if (query.getFull() || query.getStation()) {
-            Station station = stationService.getByIdCache(user.getStationId());
-            if (station != null) {
-                SysStation sysStation = BeanUtil.toBean(station, SysStation.class);
-                sysStation.setOrgId(station.getOrgId());
-                sysUser.setStation(sysStation);
-            }
-        }
 
         if (query.getFull() || query.getRoles()) {
             List<Role> list = roleService.findRoleByUserId(id);

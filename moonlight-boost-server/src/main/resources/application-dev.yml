@@ -1,3 +1,4 @@
+debug: true
 lamp:
   nginx:
     ip: 127.0.0.1      # 正式环境需要将该ip设置成nginx对应的 公网ip

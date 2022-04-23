@@ -70,7 +70,6 @@ public class CaffeineAutoConfigure {
     @Primary
     public CacheManager caffeineCacheManager() {
         CaffeineCacheManager cacheManager = new CaffeineCacheManager();
-
         Caffeine caffeine = Caffeine.newBuilder()
                 .recordStats()
                 .initialCapacity(500)
@@ -78,7 +77,6 @@ public class CaffeineAutoConfigure {
                 .maximumSize(cacheProperties.getDef().getMaxSize());
         cacheManager.setAllowNullValues(cacheProperties.getDef().isCacheNullValues());
         cacheManager.setCaffeine(caffeine);
-
         //配置了这里，就必须事先在配置文件中指定key 缓存才生效
 //        Map<String, CustomCacheProperties.Redis> configs = cacheProperties.getConfigs();
 //        Optional.ofNullable(configs).ifPresent((config)->{

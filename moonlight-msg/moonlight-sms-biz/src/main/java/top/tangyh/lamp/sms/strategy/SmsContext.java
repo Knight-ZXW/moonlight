@@ -20,7 +20,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @date 2019-05-15
  */
 @Component
-
 public class SmsContext {
     private final Map<String, SmsStrategy> smsContextStrategyMap = new ConcurrentHashMap<>();
 

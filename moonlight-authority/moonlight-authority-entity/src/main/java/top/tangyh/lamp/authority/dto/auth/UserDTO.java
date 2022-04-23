@@ -4,9 +4,6 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import lombok.experimental.Accessors;
-import top.tangyh.basic.model.RemoteData;
-import top.tangyh.lamp.authority.entity.core.Org;
-import top.tangyh.lamp.authority.entity.core.Station;
 import top.tangyh.lamp.authority.enumeration.auth.Sex;
 
 import javax.validation.constraints.NotEmpty;
@@ -49,20 +46,6 @@ public class UserDTO implements Serializable {
     @NotEmpty(message = "姓名不能为空")
     @Size(max = 50, message = "姓名长度不能超过50")
     private String name;
-
-    /**
-     * 组织ID
-     * #c_org
-     */
-    @ApiModelProperty(value = "组织ID")
-    private RemoteData<Long, Org> org;
-
-    /**
-     * 岗位ID
-     * #c_station
-     */
-    @ApiModelProperty(value = "岗位ID")
-    private RemoteData<Long, Station> station;
 
     /**
      * 邮箱

@@ -5,8 +5,8 @@ import top.tangyh.basic.context.ContextUtil;
 import top.tangyh.basic.security.model.SysUser;
 
 /**
- * @author zuihou
- * @date 2020年02月24日10:41:49
+ * @author Knight-ZXW
+ * @date 2022年04月21日
  */
 public interface UserResolverService {
 

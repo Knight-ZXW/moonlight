@@ -12,7 +12,6 @@ import javax.validation.constraints.NotEmpty;
  * 登录参数
  *
  * @author zuihou
- * @date 2020年01月05日22:18:12
  */
 @Data
 @NoArgsConstructor

@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ import java.util.List;
 @EqualsAndHashCode
 @ToString(callSuper = true)
 @Builder
-public class SysUser {
+public class SysUser implements Serializable {
     private static final long serialVersionUID = -5886012896705137070L;
 
     private Long id;
@@ -35,11 +36,6 @@ public class SysUser {
      */
     private String name;
 
-    /**
-     * 组织ID
-     * #c_org
-     */
-    private Long orgId;
 
     /**
      * 岗位ID
@@ -91,10 +87,6 @@ public class SysUser {
      * 启用条件： LoginUser.isFull = true || LoginUser.isOrg = true
      */
     private SysOrg org;
-    /**
-     * 当前登录用户的 岗位
-     * 启用条件： LoginUser.isFull = true || LoginUser.isStation = true
-     */
-    private SysStation station;
+
 
 }

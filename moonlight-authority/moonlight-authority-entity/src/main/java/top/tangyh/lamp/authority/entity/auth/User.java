@@ -10,7 +10,6 @@ import lombok.experimental.Accessors;
 import top.tangyh.basic.annotation.echo.Echo;
 import top.tangyh.basic.base.entity.Entity;
 import top.tangyh.basic.model.EchoVO;
-import top.tangyh.lamp.authority.entity.core.Org;
 import top.tangyh.lamp.authority.enumeration.auth.Sex;
 import top.tangyh.lamp.common.constant.DictionaryType;
 
@@ -22,7 +21,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static com.baomidou.mybatisplus.annotation.SqlCondition.LIKE;
-import static top.tangyh.lamp.common.constant.EchoConstants.*;
+import static top.tangyh.lamp.common.constant.EchoConstants.DICTIONARY_ITEM_CLASS;
 
 /**
  * <p>
@@ -66,29 +65,7 @@ public class User extends Entity<Long> implements EchoVO {
     @Excel(name = "姓名")
     private String name;
 
-    /**
-     * 组织
-     * #c_org
-     *
-     * @Echo(api = ORG_ID_CLASS,  beanClass = Org.class)
-     */
-    @ApiModelProperty(value = "组织")
-    @TableField("org_id")
-    @Echo(api = ORG_ID_CLASS, beanClass = Org.class)
-    @Excel(name = "组织")
-    private Long orgId;
 
-    /**
-     * 岗位
-     * #c_station
-     *
-     * @Echo(api = STATION_ID_CLASS)
-     */
-    @ApiModelProperty(value = "岗位")
-    @TableField("station_id")
-    @Echo(api = STATION_ID_CLASS)
-    @Excel(name = "岗位")
-    private Long stationId;
 
     /**
      * 内置
@@ -224,7 +201,7 @@ public class User extends Entity<Long> implements EchoVO {
 
     @Builder
     public User(Long id, Long createdBy, LocalDateTime createTime, Long updatedBy, LocalDateTime updateTime,
-                String account, String name, Long orgId, Long stationId, Boolean readonly,
+                String account, String name,  Boolean readonly,
                 String email, String mobile, Sex sex, Boolean state, String avatar, String nation,
                 String positionStatus, String workDescribe, LocalDateTime passwordErrorLastTime, Integer passwordErrorNum, LocalDateTime passwordExpireTime,
                 String password, String salt, LocalDateTime lastLoginTime) {
@@ -235,8 +212,6 @@ public class User extends Entity<Long> implements EchoVO {
         this.updateTime = updateTime;
         this.account = account;
         this.name = name;
-        this.orgId = orgId;
-        this.stationId = stationId;
         this.readonly = readonly;
         this.email = email;
         this.mobile = mobile;

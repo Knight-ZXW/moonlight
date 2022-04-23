@@ -6,6 +6,9 @@ import org.apache.shiro.session.mgt.eis.CachingSessionDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.concurrent.TimeUnit;
 
@@ -17,6 +20,7 @@ import java.util.concurrent.TimeUnit;
 public class UpmsSessionDao extends CachingSessionDAO {
 
     private final static String UPMS_SHIRO_SESSION_ID = "moonlight-upms-session-id";
+    private final static String UPMS_SHIRO_SESSION_MAP = "moonlight-upms-session-map";
     @Autowired
     RedisTemplate<String, Session> redisTemplate;
 
@@ -55,6 +59,21 @@ public class UpmsSessionDao extends CachingSessionDAO {
     protected Session doReadSession(Serializable sessionId) {
         return redisTemplate.opsForValue().get(UPMS_SHIRO_SESSION_ID + "_" + sessionId);
     }
+
+
+    public byte[] sessionToByte(Session session) {
+        ByteArrayOutputStream bo = new ByteArrayOutputStream();
+        byte[] bytes = null;
+        try {
+            ObjectOutputStream oo = new ObjectOutputStream(bo);
+            oo.writeObject(session);
+            bytes = bo.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bytes;
+    }
+
 
 
 }

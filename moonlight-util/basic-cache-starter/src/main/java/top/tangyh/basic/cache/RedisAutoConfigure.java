@@ -45,7 +45,9 @@ import java.util.Optional;
  */
 @ConditionalOnClass(RedisConnectionFactory.class)
 @ConditionalOnProperty(prefix = CustomCacheProperties.PREFIX, name = "type", havingValue = "REDIS", matchIfMissing = true)
-@EnableConfigurationProperties({RedisProperties.class, CustomCacheProperties.class})
+@EnableConfigurationProperties({
+        RedisProperties.class,
+        CustomCacheProperties.class})
 @RequiredArgsConstructor
 @Slf4j
 public class RedisAutoConfigure {
@@ -86,7 +88,9 @@ public class RedisAutoConfigure {
         return new RedisObjectSerializer();
     }
 
-    private void setSerializer(RedisConnectionFactory factory, RedisTemplate template, RedisSerializer<Object> redisSerializer) {
+    private void setSerializer(RedisConnectionFactory factory,
+                               RedisTemplate template,
+                               RedisSerializer<Object> redisSerializer) {
         RedisSerializer stringSerializer = new StringRedisSerializer();
         template.setKeySerializer(stringSerializer);
         template.setHashKeySerializer(stringSerializer);
@@ -187,7 +191,8 @@ public class RedisAutoConfigure {
 
     @Bean
     @ConditionalOnMissingBean
-    public RedisOps getRedisOps(@Qualifier("redisTemplate") RedisTemplate<String, Object> redisTemplate, StringRedisTemplate stringRedisTemplate) {
+    public RedisOps getRedisOps(@Qualifier("redisTemplate") RedisTemplate<String, Object> redisTemplate,
+                                StringRedisTemplate stringRedisTemplate) {
         return new RedisOps(redisTemplate, stringRedisTemplate, cacheProperties.getCacheNullVal());
     }
 }

@@ -63,7 +63,8 @@ public class LampMetaObjectHandler implements MetaObjectHandler {
     public void insertFill(MetaObject metaObject) {
         fillCreated(metaObject);
         fillUpdated(metaObject);
-        fillId(metaObject);
+        //TODO 将这个类在上层实现
+//        fillId(metaObject);
     }
 
     private void fillId(MetaObject metaObject) {
@@ -90,7 +91,6 @@ public class LampMetaObjectHandler implements MetaObjectHandler {
             if (oldId != null) {
                 return;
             }
-
             Object idVal = StrPool.STRING_TYPE_NAME.equals(metaObject.getGetterType(SuperEntity.FIELD_ID).getName()) ? String.valueOf(id) : id;
             this.setFieldValByName(SuperEntity.FIELD_ID, idVal, metaObject);
             return;
@@ -134,7 +134,8 @@ public class LampMetaObjectHandler implements MetaObjectHandler {
         if (metaObject.hasGetter(Entity.CREATED_BY)) {
             Object oldVal = metaObject.getValue(Entity.CREATED_BY);
             if (oldVal == null) {
-                this.setFieldValByName(Entity.CREATED_BY, ContextUtil.getUserId(), metaObject);
+                this.setFieldValByName(Entity.CREATED_BY,
+                        ContextUtil.getUserId(), metaObject);
             }
         }
         if (metaObject.hasGetter(Entity.CREATE_TIME)) {

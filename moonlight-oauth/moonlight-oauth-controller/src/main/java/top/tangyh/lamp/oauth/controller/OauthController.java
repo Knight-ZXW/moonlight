@@ -1,7 +1,15 @@
 package top.tangyh.lamp.oauth.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.subject.Subject;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import top.tangyh.basic.annotation.base.IgnoreResponseBodyAdvice;
 import top.tangyh.basic.base.R;
 import top.tangyh.basic.exception.BizException;
@@ -14,17 +22,6 @@ import top.tangyh.lamp.authority.service.auth.OnlineService;
 import top.tangyh.lamp.authority.service.auth.UserService;
 import top.tangyh.lamp.oauth.granter.TokenGranterBuilder;
 import top.tangyh.lamp.oauth.service.ValidateCodeService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -62,7 +59,7 @@ public class OauthController {
     /**
      * 租户登录 lamp-ui 系统
      */
-    @ApiOperation(value = "登录接口", notes = "登录或者清空缓存时调用")
+    @ApiOperation(value = "登录接口2", notes = "登录或者清空缓存时调用")
     @PostMapping(value = "/login2")
     public R<User> login2(@Validated @RequestBody LoginParamDTO login) throws BizException {
         String account = login.getAccount();
@@ -72,10 +69,20 @@ public class OauthController {
             MoonLightAuthToken token = new MoonLightAuthToken(account, password, grantType);
             Subject subject = SecurityUtils.getSubject();
             subject.login(token);
-        }catch (Exception e){
+        }catch (AuthenticationException e){
             return R.fail("登录失败");
         }
         return R.success(userService.getByAccount(account));
+    }
+
+    /**
+     * 租户登录 lamp-ui 系统
+     */
+    @ApiOperation(value = "测试接口", notes = "登录或者清空缓存时调用")
+    @PostMapping(value = "/test")
+    @RequiresPermissions("authority:menu:add")
+    public R test(@Validated @RequestBody LoginParamDTO login) throws BizException {
+        return R.success();
     }
 
 

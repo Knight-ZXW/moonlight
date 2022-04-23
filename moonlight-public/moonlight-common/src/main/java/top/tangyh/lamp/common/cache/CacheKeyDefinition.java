@@ -45,6 +45,8 @@ public interface CacheKeyDefinition {
      */
     String RESOURCE = "resource";
 
+    String PERMISSION = "permission";
+
     /**
      * 角色 前缀
      * 完整key: role:{roleId}
@@ -236,6 +238,7 @@ public interface CacheKeyDefinition {
      */
     String BLOCKLIST_ID = "gateway:blocklist:id";
     String BLOCKLIST = "gateway:blocklist";
+
     /**
      * 限流
      */

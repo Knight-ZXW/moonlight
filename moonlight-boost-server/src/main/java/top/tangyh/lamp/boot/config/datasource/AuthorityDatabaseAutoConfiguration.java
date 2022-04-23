@@ -21,8 +21,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-import static top.tangyh.lamp.common.constant.BizConstant.BUSINESS_PACKAGE;
-import static top.tangyh.lamp.common.constant.BizConstant.UTIL_PACKAGE;
+import static top.tangyh.lamp.common.constant.BizConstant.*;
 
 /**
  * lamp.database.multiTenantType != DATASOURCE 时，该类启用.
@@ -43,7 +42,7 @@ import static top.tangyh.lamp.common.constant.BizConstant.UTIL_PACKAGE;
 @Configuration
 @Slf4j
 @MapperScan(
-        basePackages = {UTIL_PACKAGE, BUSINESS_PACKAGE},
+        basePackages = {UTIL_PACKAGE, BUSINESS_PACKAGE,MOONLIGHT_BUSINESS_PACKAGE},
         annotationClass = Repository.class,
         sqlSessionFactoryRef = BaseMasterDatabaseConfiguration.DATABASE_PREFIX + "SqlSessionFactory")
 @EnableConfigurationProperties({MybatisPlusProperties.class})

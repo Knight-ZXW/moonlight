@@ -11,8 +11,6 @@ import springfox.documentation.annotations.ApiIgnore;
 import top.tangyh.basic.annotation.base.IgnoreResponseBodyAdvice;
 import top.tangyh.lamp.authority.service.auth.UserService;
 import top.tangyh.lamp.authority.service.common.DictionaryService;
-import top.tangyh.lamp.authority.service.core.OrgService;
-import top.tangyh.lamp.authority.service.core.StationService;
 
 import java.io.Serializable;
 import java.util.Map;
@@ -32,10 +30,7 @@ import java.util.Set;
 @ApiIgnore
 public class EchoController {
     private final DictionaryService dictionaryService;
-    private final OrgService orgService;
-    private final StationService stationService;
     private final UserService userService;
-
 
     @ApiOperation(value = "根据id查询用户", notes = "根据id查询用户")
     @GetMapping("/user/findByIds")
@@ -43,15 +38,6 @@ public class EchoController {
         return userService.findByIds(ids);
     }
 
-    @GetMapping("/station/findByIds")
-    public Map<Serializable, Object> findStationByIds(@RequestParam("ids") Set<Serializable> ids) {
-        return stationService.findByIds(ids);
-    }
-
-    @GetMapping("/org/findByIds")
-    public Map<Serializable, Object> findOrgByIds(@RequestParam("ids") Set<Serializable> ids) {
-        return orgService.findByIds(ids);
-    }
 
     @ApiOperation(value = "查询字典项", notes = "根据字典编码查询字典项")
     @GetMapping("/dictionary/findByIds")

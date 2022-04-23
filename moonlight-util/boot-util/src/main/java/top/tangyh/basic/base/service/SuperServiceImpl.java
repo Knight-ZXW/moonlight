@@ -29,7 +29,7 @@ public class SuperServiceImpl<M extends SuperMapper<T>, T> extends ServiceImpl<M
 
     private Class<T> entityClass = null;
 
-    public SuperMapper getSuperMapper() {
+    public SuperMapper<T> getSuperMapper() {
         if (baseMapper instanceof SuperMapper) {
             return baseMapper;
         }

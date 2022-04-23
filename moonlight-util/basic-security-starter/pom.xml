@@ -75,6 +75,17 @@
             <groupId>com.knightboost.moonlight</groupId>
             <artifactId>basic-cache-starter</artifactId>
         </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.crazycake</groupId>-->
+<!--            <artifactId>shiro-redis-spring-boot-starter</artifactId>-->
+<!--            <version>3.3.1</version>-->
+<!--        </dependency>-->
+        <dependency>
+            <groupId>org.crazycake</groupId>
+            <artifactId>shiro-redis</artifactId>
+            <version>3.3.1</version>
+        </dependency>
     </dependencies>
 
 </project>
