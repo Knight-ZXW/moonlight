@@ -74,8 +74,6 @@ public class ApplicationService extends SuperServiceImpl<MLApplicationMapper, ML
     }
 
 
-
-
     /**
      * 将用户添加到应用中
      *

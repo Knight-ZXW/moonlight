@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="generate.CMenuDao">
+  <resultMap id="BaseResultMap" type="generate.CMenu">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="label" jdbcType="VARCHAR" property="label" />
+    <result column="resource_type" jdbcType="CHAR" property="resourceType" />
+    <result column="tree_grade" jdbcType="INTEGER" property="treeGrade" />
+    <result column="tree_path" jdbcType="VARCHAR" property="treePath" />
+    <result column="describe_" jdbcType="VARCHAR" property="describe" />
+    <result column="is_general" jdbcType="BIT" property="isGeneral" />
+    <result column="path" jdbcType="VARCHAR" property="path" />
+    <result column="component" jdbcType="VARCHAR" property="component" />
+    <result column="state" jdbcType="BIT" property="state" />
+    <result column="sort_value" jdbcType="INTEGER" property="sortValue" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="group_" jdbcType="VARCHAR" property="group" />
+    <result column="data_scope" jdbcType="CHAR" property="dataScope" />
+    <result column="custom_class" jdbcType="VARCHAR" property="customClass" />
+    <result column="is_def" jdbcType="BIT" property="isDef" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+    <result column="readonly_" jdbcType="BIT" property="readonly" />
+    <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, `label`, resource_type, tree_grade, tree_path, describe_, is_general, `path`, 
+    component, `state`, sort_value, icon, group_, data_scope, custom_class, is_def, parent_id, 
+    readonly_, created_by, create_time, updated_by, update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from c_menu
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from c_menu
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="generate.CMenu" useGeneratedKeys="true">
+    insert into c_menu (`label`, resource_type, tree_grade, 
+      tree_path, describe_, is_general, 
+      `path`, component, `state`, 
+      sort_value, icon, group_, 
+      data_scope, custom_class, is_def, 
+      parent_id, readonly_, created_by, 
+      create_time, updated_by, update_time
+      )
+    values (#{label,jdbcType=VARCHAR}, #{resourceType,jdbcType=CHAR}, #{treeGrade,jdbcType=INTEGER}, 
+      #{treePath,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, #{isGeneral,jdbcType=BIT}, 
+      #{path,jdbcType=VARCHAR}, #{component,jdbcType=VARCHAR}, #{state,jdbcType=BIT}, 
+      #{sortValue,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, #{group,jdbcType=VARCHAR}, 
+      #{dataScope,jdbcType=CHAR}, #{customClass,jdbcType=VARCHAR}, #{isDef,jdbcType=BIT}, 
+      #{parentId,jdbcType=BIGINT}, #{readonly,jdbcType=BIT}, #{createdBy,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="generate.CMenu" useGeneratedKeys="true">
+    insert into c_menu
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="label != null">
+        `label`,
+      </if>
+      <if test="resourceType != null">
+        resource_type,
+      </if>
+      <if test="treeGrade != null">
+        tree_grade,
+      </if>
+      <if test="treePath != null">
+        tree_path,
+      </if>
+      <if test="describe != null">
+        describe_,
+      </if>
+      <if test="isGeneral != null">
+        is_general,
+      </if>
+      <if test="path != null">
+        `path`,
+      </if>
+      <if test="component != null">
+        component,
+      </if>
+      <if test="state != null">
+        `state`,
+      </if>
+      <if test="sortValue != null">
+        sort_value,
+      </if>
+      <if test="icon != null">
+        icon,
+      </if>
+      <if test="group != null">
+        group_,
+      </if>
+      <if test="dataScope != null">
+        data_scope,
+      </if>
+      <if test="customClass != null">
+        custom_class,
+      </if>
+      <if test="isDef != null">
+        is_def,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="readonly != null">
+        readonly_,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="label != null">
+        #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null">
+        #{resourceType,jdbcType=CHAR},
+      </if>
+      <if test="treeGrade != null">
+        #{treeGrade,jdbcType=INTEGER},
+      </if>
+      <if test="treePath != null">
+        #{treePath,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="isGeneral != null">
+        #{isGeneral,jdbcType=BIT},
+      </if>
+      <if test="path != null">
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=BIT},
+      </if>
+      <if test="sortValue != null">
+        #{sortValue,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null">
+        #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="dataScope != null">
+        #{dataScope,jdbcType=CHAR},
+      </if>
+      <if test="customClass != null">
+        #{customClass,jdbcType=VARCHAR},
+      </if>
+      <if test="isDef != null">
+        #{isDef,jdbcType=BIT},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="readonly != null">
+        #{readonly,jdbcType=BIT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="generate.CMenu">
+    update c_menu
+    <set>
+      <if test="label != null">
+        `label` = #{label,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null">
+        resource_type = #{resourceType,jdbcType=CHAR},
+      </if>
+      <if test="treeGrade != null">
+        tree_grade = #{treeGrade,jdbcType=INTEGER},
+      </if>
+      <if test="treePath != null">
+        tree_path = #{treePath,jdbcType=VARCHAR},
+      </if>
+      <if test="describe != null">
+        describe_ = #{describe,jdbcType=VARCHAR},
+      </if>
+      <if test="isGeneral != null">
+        is_general = #{isGeneral,jdbcType=BIT},
+      </if>
+      <if test="path != null">
+        `path` = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="component != null">
+        component = #{component,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        `state` = #{state,jdbcType=BIT},
+      </if>
+      <if test="sortValue != null">
+        sort_value = #{sortValue,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null">
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null">
+        group_ = #{group,jdbcType=VARCHAR},
+      </if>
+      <if test="dataScope != null">
+        data_scope = #{dataScope,jdbcType=CHAR},
+      </if>
+      <if test="customClass != null">
+        custom_class = #{customClass,jdbcType=VARCHAR},
+      </if>
+      <if test="isDef != null">
+        is_def = #{isDef,jdbcType=BIT},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+      <if test="readonly != null">
+        readonly_ = #{readonly,jdbcType=BIT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=BIGINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="generate.CMenu">
+    update c_menu
+    set `label` = #{label,jdbcType=VARCHAR},
+      resource_type = #{resourceType,jdbcType=CHAR},
+      tree_grade = #{treeGrade,jdbcType=INTEGER},
+      tree_path = #{treePath,jdbcType=VARCHAR},
+      describe_ = #{describe,jdbcType=VARCHAR},
+      is_general = #{isGeneral,jdbcType=BIT},
+      `path` = #{path,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      `state` = #{state,jdbcType=BIT},
+      sort_value = #{sortValue,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      group_ = #{group,jdbcType=VARCHAR},
+      data_scope = #{dataScope,jdbcType=CHAR},
+      custom_class = #{customClass,jdbcType=VARCHAR},
+      is_def = #{isDef,jdbcType=BIT},
+      parent_id = #{parentId,jdbcType=BIGINT},
+      readonly_ = #{readonly,jdbcType=BIT},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -132,7 +132,6 @@ public class MenuServiceImpl extends SuperCacheServiceImpl<MenuMapper, Menu> imp
         return visibleMenu.stream().filter(menu -> group.equals(menu.getGroup())).collect(Collectors.toList());
     }
 
-
     @Override
     @Transactional(rollbackFor = Exception.class)
     public boolean removeByIdWithCache(List<Long> ids) {
