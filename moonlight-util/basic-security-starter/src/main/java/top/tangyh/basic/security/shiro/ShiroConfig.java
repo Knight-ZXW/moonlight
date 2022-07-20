@@ -35,11 +35,6 @@ import java.util.Map;
 @Configuration
 public class ShiroConfig {
 
-//    @Autowired
-//    SessionDAO redisSessionDAO;
-//
-//    @Autowired
-//    CacheManager redisCacheManager;
 
     @Bean
     public RedisManager  shiroRedisManager(){
@@ -67,6 +62,9 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
 
         Map<String, String> filterChainMap = new LinkedHashMap<>();
+        //todo 测试
+        filterChainMap.put("/apm/**", "anon");
+
         filterChainMap.put("/login", "anon");
         filterChainMap.put("/login2", "anon");
 

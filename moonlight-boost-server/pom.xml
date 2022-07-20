@@ -94,6 +94,14 @@
             <scope>test</scope>
         </dependency>
 
+
+        <dependency>
+            <groupId>com.knightboost.moonlight</groupId>
+            <artifactId>apm</artifactId>
+            <version>${moonlight.version}</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

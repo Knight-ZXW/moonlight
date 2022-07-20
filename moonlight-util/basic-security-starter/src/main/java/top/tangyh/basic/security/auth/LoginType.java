@@ -5,8 +5,6 @@ package top.tangyh.basic.security.auth;
  * email: nimdanoob@163.com
  */
 public interface LoginType {
-
     public static final String ACCOUNT_PASSWORD = "AccountPassword";
-
 
 }

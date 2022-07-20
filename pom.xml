@@ -31,8 +31,8 @@
         <module>moonlight-msg</module>
         <module>moonlight-admin</module>
 		<module>moonlight-upms</module>
-        <module>moonlight-user</module>
 		<module>moonlight-base</module>
+		<module>apm</module>
 	</modules>
 
 	<properties>
