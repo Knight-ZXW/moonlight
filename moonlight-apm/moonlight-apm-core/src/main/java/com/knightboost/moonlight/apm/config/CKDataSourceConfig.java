@@ -28,13 +28,14 @@ public class CKDataSourceConfig {
         return DataSourceBuilder.create().build();
     }
 
+    //todo yml配置化
     @Bean("clickHouseSqlSessionFactory")
     public SqlSessionFactory sqlSessionFactory(@Qualifier("clickHouseDataSource") DataSource dataSource) throws Exception {
         MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setMapperLocations(new PathMatchingResourcePatternResolver()
                 .getResources("classpath*:mapper/clickhouse/**.xml"));
-//        factoryBean.setTypeHandlersPackage("com.shizhuang.duapp.extension.handlers");
+        factoryBean.setTypeHandlersPackage("com.knightboost.moonlight.clickhouse.typehandlers");
         return factoryBean.getObject();
     }
 

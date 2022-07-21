@@ -32,8 +32,8 @@
         <module>moonlight-admin</module>
 		<module>moonlight-upms</module>
 		<module>moonlight-base</module>
-		<module>apm</module>
-	</modules>
+        <module>moonlight-apm</module>
+    </modules>
 
 	<properties>
 		<moonlight-basic.version>0.0.1-SNAPSHOT</moonlight-basic.version>

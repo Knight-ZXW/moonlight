@@ -95,9 +95,10 @@
         </dependency>
 
 
+
         <dependency>
             <groupId>com.knightboost.moonlight</groupId>
-            <artifactId>apm</artifactId>
+            <artifactId>moonlight-apm</artifactId>
             <version>${moonlight.version}</version>
         </dependency>
 
