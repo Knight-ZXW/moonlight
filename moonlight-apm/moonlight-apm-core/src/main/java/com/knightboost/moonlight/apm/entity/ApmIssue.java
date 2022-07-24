@@ -46,6 +46,8 @@ public class ApmIssue implements Serializable {
      */
     private String data;
 
+    private String groupId;
+
     /**
      * 聚合的hash值
      */

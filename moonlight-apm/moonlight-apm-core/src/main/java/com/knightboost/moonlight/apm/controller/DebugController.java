@@ -2,7 +2,7 @@ package com.knightboost.moonlight.apm.controller;
 
 import com.knightboost.moonlight.apm.config.User;
 import com.knightboost.moonlight.apm.entity.LogEvent;
-import com.knightboost.moonlight.apm.service.LogEventService;
+import com.knightboost.moonlight.apm.service.LogEventQueryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -21,16 +21,16 @@ import top.tangyh.basic.base.R;
 @Slf4j
 @Validated
 @RestController
-@RequestMapping("/apm")
+@RequestMapping("/apm/debug")
 @Api(value = "logevent", tags = "apm")
 @RequiredArgsConstructor
 public class DebugController {
-    final LogEventService logEventService;
+    final LogEventQueryService logEventService;
     final User user;
 
 
     @ApiOperation(value = "测试写入日志", notes = "issue")
-    @PostMapping("/debugInsert")
+    @PostMapping("/insertLog")
     public R<Boolean> createIssue(@RequestBody LogEvent logEvent) {
         logEventService.insertLog(logEvent);
         return R.success();

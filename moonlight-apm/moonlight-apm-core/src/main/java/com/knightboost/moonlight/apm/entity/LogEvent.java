@@ -5,29 +5,31 @@ package com.knightboost.moonlight.apm.entity;
  * email: nimdanoob@163.com
  */
 
-import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import org.apache.ibatis.type.JdbcType;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 
 @Data
+@TableName("log_event")
 public class LogEvent {
     private String eventId;
-    private String eventType;
     private String appKey;
+    //TODO rename to issueId ?
+    private Long groupId;//issueId
+    private Date timestamp;
+
+    private String groupHash;//issueId
+    private String platform;
+    private String title;
+    private String location;
+
+    private String userId;
+    private String eventType;
     private Date eventTimestamp;
-    private String groupId;//issueId
     private String version;
-    private String os;
+    private String deviceOs;
 
-    @TableField(value = "exception_frames.function",jdbcType = JdbcType.ARRAY)
-    private List<String> exceptionFramesFunction =new ArrayList<>();
-
-    @TableField(value = "exception_frames.in_app",jdbcType = JdbcType.ARRAY)
-    private List<String> inApp =new ArrayList<>();
 
 }

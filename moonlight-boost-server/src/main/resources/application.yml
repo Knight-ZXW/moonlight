@@ -318,6 +318,14 @@ mybatis-plus:
     #配置JdbcTypeForNull, oracle数据库必须配置
     jdbc-type-for-null: 'null'
 
+# 分页器配置
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  offset-as-page-num: true
+  params: count=countSql
+
 # 用于/actuator/info
 info:
   name: '@project.name@'
