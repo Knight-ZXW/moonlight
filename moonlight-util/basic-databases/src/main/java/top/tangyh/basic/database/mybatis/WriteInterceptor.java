@@ -63,7 +63,6 @@ public class WriteInterceptor implements Interceptor {
         }
         // userId=1 的超级管理员 放行
         Long userId = ContextUtil.getUserId();
-        String tenant = ContextUtil.getTenant();
         log.info("mapper id={}, userId={}", mappedStatement.getId(), userId);
 
 
@@ -73,9 +72,9 @@ public class WriteInterceptor implements Interceptor {
         }
 
         //内置的租户 不能 修改、删除 权限数据
-        boolean isAuthority = StrUtil.containsAnyIgnoreCase(mappedStatement.getId(), "Tenant", "GlobalUser", "User", "Menu", "Resource", "Role", "Dictionary", "Parameter", "Application");
+        boolean isAuthority = StrUtil.containsAnyIgnoreCase(mappedStatement.getId(), "GlobalUser", "User", "Menu", "Resource", "Role", "Dictionary", "Parameter", "Application");
         boolean isWrite = CollectionUtil.contains(Arrays.asList(DELETE, UPDATE, INSERT), mappedStatement.getSqlCommandType());
-        if ("0000".equals(tenant) && isWrite && isAuthority) {
+        if (isWrite && isAuthority) {
             throw new BizException(-1, "演示环境禁止修改、删除重要数据！请登录租户【0000】，账号【lamp_pt】创建其他租户管理员账号后测试全部功能");
         }
 

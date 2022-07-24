@@ -25,5 +25,4 @@ public class ParameterUpdate implements Serializable {
     private String value;
     private String oldValue;
 
-    private String tenant;
 }

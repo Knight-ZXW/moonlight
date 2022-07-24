@@ -54,11 +54,7 @@
             <artifactId>moonlight-oauth-controller</artifactId>
             <version>${moonlight.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.knightboost.moonlight</groupId>
-            <artifactId>moonlight-tenant-controller</artifactId>
-            <version>${moonlight.version}</version>
-        </dependency>
+
 
         <dependency>
             <groupId>com.knightboost.moonlight</groupId>

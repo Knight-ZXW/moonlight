@@ -16,7 +16,6 @@
 package top.tangyh.basic.uid.dao;
 
 import com.baidu.fsg.uid.worker.entity.WorkerNodeEntity;
-import com.baomidou.mybatisplus.annotation.InterceptorIgnore;
 import org.apache.ibatis.annotations.Insert;
 import org.springframework.stereotype.Repository;
 
@@ -26,7 +25,6 @@ import org.springframework.stereotype.Repository;
  * @author yutianbao
  */
 @Repository
-@InterceptorIgnore(tenantLine = "true", dynamicTableName = "true")
 public interface WorkerNodeDao {
 
     /**

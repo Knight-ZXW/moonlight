@@ -44,7 +44,6 @@ import top.tangyh.lamp.common.vo.result.AppendixResultVO;
 import top.tangyh.lamp.file.service.AppendixService;
 import top.tangyh.lamp.oauth.event.LoginEvent;
 import top.tangyh.lamp.oauth.event.model.LoginStatusDTO;
-import top.tangyh.lamp.tenant.service.TenantService;
 
 import java.time.LocalDateTime;
 
@@ -60,7 +59,6 @@ import static top.tangyh.basic.context.ContextConstants.BASIC_HEADER_KEY;
 public abstract class AbstractTokenGranter implements TokenGranter {
     protected final TokenUtil tokenUtil;
     protected final UserService userService;
-    protected final TenantService tenantService;
     protected final ApplicationService applicationService;
     protected final DatabaseProperties databaseProperties;
     protected final OnlineService onlineService;

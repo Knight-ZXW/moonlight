@@ -8,12 +8,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import top.tangyh.basic.cache.model.CacheKey;
 import top.tangyh.basic.cache.repository.CacheOps;
 import top.tangyh.basic.context.ContextConstants;
 import top.tangyh.basic.context.ContextUtil;
 import top.tangyh.basic.database.properties.DatabaseProperties;
-import top.tangyh.basic.database.properties.MultiTenantType;
 import top.tangyh.basic.exception.BizException;
 import top.tangyh.basic.exception.ForbiddenException;
 import top.tangyh.basic.exception.UnauthorizedException;
@@ -21,19 +19,12 @@ import top.tangyh.basic.jwt.TokenUtil;
 import top.tangyh.basic.jwt.model.AuthInfo;
 import top.tangyh.basic.jwt.utils.JwtUtil;
 import top.tangyh.basic.utils.StrPool;
-import top.tangyh.lamp.common.cache.common.TokenUserIdCacheKeyBuilder;
-import top.tangyh.lamp.common.constant.BizConstant;
 import top.tangyh.lamp.common.properties.IgnoreProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static top.tangyh.basic.context.ContextConstants.BASIC_HEADER_KEY;
-import static top.tangyh.basic.context.ContextConstants.BEARER_HEADER_KEY;
-import static top.tangyh.basic.context.ContextConstants.JWT_KEY_TENANT;
-import static top.tangyh.basic.context.ContextConstants.JWT_KEY_USER_ID;
-import static top.tangyh.basic.exception.code.ExceptionCode.JWT_NOT_LOGIN;
-import static top.tangyh.basic.exception.code.ExceptionCode.JWT_OFFLINE;
+import static top.tangyh.basic.context.ContextConstants.*;
 
 
 /**
@@ -70,8 +61,6 @@ public class TokenHandlerInterceptor extends HandlerInterceptorAdapter {
         ContextUtil.setPath(getHeader(ContextConstants.PATH_HEADER, request));
         MDC.put(ContextConstants.LOG_TRACE_ID, traceId);
         try {
-            //1, 解码 请求头中的租户信息
-            parseTenant(request);
 
             // 2,解码 Authorization 后面完善
             parseClient(request);
@@ -131,7 +120,7 @@ public class TokenHandlerInterceptor extends HandlerInterceptorAdapter {
 //            }
         }
 
-        //6, 转换，将 token 解析出来的用户身份 和 解码后的tenant、Authorization 重新封装到请求头
+        //6, 转换，将 token 解析出来的用户身份 和 解码后的Authorization 重新封装到请求头
         if (authInfo != null) {
             ContextUtil.setUserId(authInfo.getUserId());
             ContextUtil.setAccount(authInfo.getAccount());
@@ -146,32 +135,6 @@ public class TokenHandlerInterceptor extends HandlerInterceptorAdapter {
         if (StrUtil.isNotEmpty(base64Authorization)) {
             String[] client = JwtUtil.getClient(base64Authorization);
             ContextUtil.setClientId(client[0]);
-        }
-    }
-
-    /**
-     * 忽略 租户编码
-     *
-     * @return
-     */
-    protected boolean isIgnoreTenant(String path) {
-        return ignoreTokenProperties.isIgnoreTenant(path);
-    }
-
-    private void parseTenant(HttpServletRequest request) {
-        if (MultiTenantType.NONE.eq(databaseProperties.getMultiTenantType())) {
-            ContextUtil.setTenant(StrPool.EMPTY);
-            MDC.put(JWT_KEY_TENANT, StrPool.EMPTY);
-            return;
-        }
-        if (isIgnoreTenant(request.getRequestURI())) {
-            return;
-        }
-        String base64Tenant = getHeader(JWT_KEY_TENANT, request);
-        if (StrUtil.isNotEmpty(base64Tenant)) {
-            String tenant = JwtUtil.base64Decoder(base64Tenant);
-            ContextUtil.setTenant(tenant);
-            MDC.put(JWT_KEY_TENANT, ContextUtil.getTenant());
         }
     }
 

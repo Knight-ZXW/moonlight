@@ -7,7 +7,7 @@ import top.tangyh.lamp.common.cache.CacheKeyDefinition;
 
 /**
  * 参数 KEY
- * {tenant}:TOTAL_PV -> long
+ * TOTAL_PV -> long
  *
  * @author zuihou
  * @date 2020/9/20 6:45 下午

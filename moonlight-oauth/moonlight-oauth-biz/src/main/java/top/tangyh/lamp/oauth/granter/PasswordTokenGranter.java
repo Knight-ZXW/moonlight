@@ -26,7 +26,6 @@ import top.tangyh.lamp.authority.service.auth.OnlineService;
 import top.tangyh.lamp.authority.service.auth.UserService;
 import top.tangyh.lamp.common.properties.SystemProperties;
 import top.tangyh.lamp.file.service.AppendixService;
-import top.tangyh.lamp.tenant.service.TenantService;
 
 /**
  * 账号密码登录获取token
@@ -40,8 +39,8 @@ public class PasswordTokenGranter extends AbstractTokenGranter implements TokenG
 
     public static final String GRANT_TYPE = "password";
 
-    public PasswordTokenGranter(TokenUtil tokenUtil, UserService userService, TenantService tenantService, ApplicationService applicationService, DatabaseProperties databaseProperties, OnlineService onlineService, SystemProperties systemProperties, AppendixService appendixService) {
-        super(tokenUtil, userService, tenantService, applicationService, databaseProperties, onlineService, systemProperties, appendixService);
+    public PasswordTokenGranter(TokenUtil tokenUtil, UserService userService, ApplicationService applicationService, DatabaseProperties databaseProperties, OnlineService onlineService, SystemProperties systemProperties, AppendixService appendixService) {
+        super(tokenUtil, userService, applicationService, databaseProperties, onlineService, systemProperties, appendixService);
     }
 
 

@@ -37,10 +37,7 @@ public class LoginStatusDTO implements Serializable {
      * 账号
      */
     private String account;
-    /**
-     * 租户编码
-     */
-    private String tenant;
+
     /**
      * 登录类型
      */
@@ -67,7 +64,7 @@ public class LoginStatusDTO implements Serializable {
 
     public static LoginStatusDTO success(Long id, Online online) {
         LoginStatusDTO loginStatus = LoginStatusDTO.builder()
-                .id(id).tenant(ContextUtil.getTenant())
+                .id(id)
                 .type(Type.SUCCESS).description("登录成功")
                 .build().setInfo();
         online.setLoginIp(loginStatus.getIp());
@@ -78,21 +75,21 @@ public class LoginStatusDTO implements Serializable {
 
     public static LoginStatusDTO fail(Long id, String description) {
         return LoginStatusDTO.builder()
-                .id(id).tenant(ContextUtil.getTenant())
+                .id(id)
                 .type(Type.FAIL).description(description)
                 .build().setInfo();
     }
 
     public static LoginStatusDTO fail(String account, String description) {
         return LoginStatusDTO.builder()
-                .account(account).tenant(ContextUtil.getTenant())
+                .account(account)
                 .type(Type.FAIL).description(description)
                 .build().setInfo();
     }
 
     public static LoginStatusDTO pwdError(Long id, String description) {
         return LoginStatusDTO.builder()
-                .id(id).tenant(ContextUtil.getTenant())
+                .id(id)
                 .type(Type.PWD_ERROR).description(description)
                 .build().setInfo();
     }

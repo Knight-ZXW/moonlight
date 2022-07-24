@@ -4,11 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import lombok.experimental.Accessors;
-import top.tangyh.basic.base.entity.SuperEntity;
 import top.tangyh.lamp.authority.enumeration.auth.Sex;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
@@ -33,13 +30,6 @@ public class GlobalUserUpdateDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "主键")
-    @NotNull(message = "id不能为空", groups = SuperEntity.Update.class)
-    private Long id;
-    @ApiModelProperty(value = "企业编码")
-    @NotEmpty(message = "企业编码不能为空")
-    @Size(max = 10, message = "企业编码长度不能超过10")
-    private String tenantCode;
 
     /**
      * 手机

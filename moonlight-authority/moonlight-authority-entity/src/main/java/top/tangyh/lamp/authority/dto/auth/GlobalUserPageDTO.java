@@ -31,13 +31,6 @@ public class GlobalUserPageDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 租户编号
-     */
-    @ApiModelProperty(value = "租户编号")
-    @NotEmpty(message = "租户编号不能为空")
-    @Size(max = 10, message = "租户编号长度不能超过10")
-    private String tenantCode;
-    /**
      * 账号
      */
     @ApiModelProperty(value = "账号")

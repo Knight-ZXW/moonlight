@@ -104,7 +104,7 @@ public class RoleServiceImpl extends SuperCacheServiceImpl<RoleMapper, Role> imp
     }
 
     /**
-     * 1、根据 {tenant}:USER_ROLE:{userId} 查询用户拥有的角色ID集合
+     * 1、根据 USER_ROLE:{userId} 查询用户拥有的角色ID集合
      * 2、缓存中有，则根据角色ID集合查询 角色集合
      * 3、缓存中有查不到，则从DB查询，并写入缓存， 立即返回
      *

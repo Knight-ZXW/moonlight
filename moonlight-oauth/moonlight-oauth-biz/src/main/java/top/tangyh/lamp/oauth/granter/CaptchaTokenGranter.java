@@ -17,7 +17,6 @@ import top.tangyh.lamp.file.service.AppendixService;
 import top.tangyh.lamp.oauth.event.LoginEvent;
 import top.tangyh.lamp.oauth.event.model.LoginStatusDTO;
 import top.tangyh.lamp.oauth.service.ValidateCodeService;
-import top.tangyh.lamp.tenant.service.TenantService;
 
 /**
  * 验证码TokenGranter
@@ -32,10 +31,10 @@ public class CaptchaTokenGranter extends AbstractTokenGranter implements TokenGr
     private final ValidateCodeService validateCodeService;
 
     public CaptchaTokenGranter(TokenUtil tokenUtil, UserService userService, AppendixService appendixService,
-                               TenantService tenantService, ApplicationService applicationService,
+                                ApplicationService applicationService,
                                DatabaseProperties databaseProperties, ValidateCodeService validateCodeService,
                                OnlineService onlineService, SystemProperties systemProperties) {
-        super(tokenUtil, userService, tenantService, applicationService, databaseProperties,
+        super(tokenUtil, userService,  applicationService, databaseProperties,
                 onlineService, systemProperties, appendixService);
         this.validateCodeService = validateCodeService;
     }

@@ -32,13 +32,6 @@ public class GlobalUserSaveDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
-     * 企业编码
-     */
-    @ApiModelProperty(value = "企业编码")
-    @NotEmpty(message = "企业编码不能为空")
-    @Size(max = 10, message = "企业编码长度不能超过10")
-    private String tenantCode;
-    /**
      * 账号
      */
     @ApiModelProperty(value = "账号")

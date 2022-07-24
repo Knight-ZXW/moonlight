@@ -155,14 +155,6 @@ public interface BaseController<Entity> {
         return ContextUtil.getUserId();
     }
 
-    /**
-     * 当前请求租户
-     *
-     * @return 租户编码
-     */
-    default String getTenant() {
-        return ContextUtil.getTenant();
-    }
 
     /**
      * 登录人账号

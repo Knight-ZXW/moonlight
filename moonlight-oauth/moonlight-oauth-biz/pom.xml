@@ -23,11 +23,7 @@
             <version>${moonlight.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.knightboost.moonlight</groupId>
-            <artifactId>moonlight-tenant-biz</artifactId>
-            <version>${moonlight.version}</version>
-        </dependency>
+
 
         <!-- jwt 只有认证服务需要使用 -->
         <dependency>

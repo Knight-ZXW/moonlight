@@ -24,7 +24,6 @@
 		<module>moonlight-public/moonlight-common-api</module>
 		<module>moonlight-public/moonlight-common</module>
 		<module>moonlight-public/moonlight-file-sdk</module>
-		<module>moonlight-tenant</module>
 		<module>moonlight-oauth</module>
 		<module>moonlight-authority</module>
 		<module>moonlight-file</module>

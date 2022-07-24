@@ -7,7 +7,6 @@ import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
-import top.tangyh.basic.context.ContextUtil;
 import top.tangyh.basic.utils.ArgumentAssert;
 import top.tangyh.basic.utils.StrPool;
 
@@ -25,18 +24,6 @@ import static top.tangyh.basic.utils.StrPool.COLON;
  */
 @FunctionalInterface
 public interface CacheKeyBuilder {
-
-    /**
-     * 租户编码
-     * <p>
-     * 非租户模式设置成空字符串
-     *
-     * @return 租户编码
-     */
-    @NonNull
-    default String getTenant() {
-        return ContextUtil.getTenant();
-    }
 
     /**
      * key 前缀
@@ -69,20 +56,14 @@ public interface CacheKeyBuilder {
     /**
      * 获取通配符
      *
-     * @param tenant 企业编码
      * @param suffix 前缀
      * @return key 前缀
      */
-    default String getPattern(String tenant, Object... suffix) {
+    default String getPattern( Object... suffix) {
         String prefix = this.getPrefix();
         ArgumentAssert.notEmpty(prefix, "缓存前缀不能为空");
 
         List<String> regionList = new ArrayList<>();
-        tenant = StrUtil.isEmpty(tenant) ? StrPool.STAR : tenant;
-        // 企业id
-        if (StrUtil.isNotEmpty(tenant)) {
-            regionList.add(tenant);
-        }
         // 缓存前缀
         regionList.add(prefix);
 
@@ -140,10 +121,7 @@ public interface CacheKeyBuilder {
      */
     default String getKey(Object... suffix) {
         ArrayList<String> regionList = new ArrayList<>();
-        String tenant = this.getTenant();
-        if (StrUtil.isNotEmpty(tenant)) {
-            regionList.add(tenant);
-        }
+
         String prefix = this.getPrefix();
         ArgumentAssert.notEmpty(prefix, "缓存前缀不能为空");
         regionList.add(prefix);

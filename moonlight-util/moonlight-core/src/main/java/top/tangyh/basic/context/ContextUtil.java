@@ -156,26 +156,7 @@ public final class ContextUtil {
         set(ContextConstants.BEARER_HEADER_KEY, token);
     }
 
-    /**
-     * 获取租户编码
-     *
-     * @return 租户编码
-     */
-    public static String getTenant() {
-        return get(ContextConstants.JWT_KEY_TENANT, String.class, StrPool.EMPTY);
-    }
 
-    public static void setTenant(String val) {
-        set(ContextConstants.JWT_KEY_TENANT, val);
-    }
-
-    public static String getSubTenant() {
-        return get(ContextConstants.JWT_KEY_SUB_TENANT, String.class, StrPool.EMPTY);
-    }
-
-    public static void setSubTenant(String val) {
-        set(ContextConstants.JWT_KEY_SUB_TENANT, val);
-    }
 
     public static String getClientId() {
         return get(ContextConstants.JWT_KEY_CLIENT_ID, String.class);
@@ -214,9 +195,6 @@ public final class ContextUtil {
         set(ContextConstants.GRAY_VERSION, val);
     }
 
-    public static boolean isEmptyTenant() {
-        return isEmptyStr(ContextConstants.JWT_KEY_TENANT);
-    }
 
     private static boolean isEmptyLong(String key) {
         String val = getLocalMap().get(key);

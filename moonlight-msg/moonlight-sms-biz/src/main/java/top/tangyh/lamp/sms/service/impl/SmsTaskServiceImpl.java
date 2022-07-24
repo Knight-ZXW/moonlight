@@ -3,7 +3,6 @@ package top.tangyh.lamp.sms.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,8 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import top.tangyh.basic.base.R;
 import top.tangyh.basic.base.request.PageParams;
 import top.tangyh.basic.base.service.SuperServiceImpl;
-import top.tangyh.basic.context.ContextConstants;
-import top.tangyh.basic.context.ContextUtil;
 import top.tangyh.basic.database.mybatis.conditions.Wraps;
 import top.tangyh.basic.exception.BizException;
 import top.tangyh.basic.jackson.JsonUtil;
@@ -228,7 +225,6 @@ public class SmsTaskServiceImpl extends SuperServiceImpl<SmsTaskMapper, SmsTask>
         } else {
             JSONObject param = new JSONObject();
             param.set("id", smsTask.getId());
-            param.set(ContextConstants.JWT_KEY_TENANT, ContextUtil.getTenant());
             //推送定时任务
             R<String> r = jobApi.addTimingTask(
                     XxlJobInfoVO.create(JobConstant.DEF_EXTEND_JOB_GROUP_NAME,

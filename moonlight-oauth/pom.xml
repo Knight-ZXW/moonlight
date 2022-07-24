@@ -27,11 +27,7 @@
             <artifactId>moonlight-authority-biz</artifactId>
             <version>${moonlight.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.knightboost.moonlight</groupId>
-            <artifactId>moonlight-tenant-biz</artifactId>
-            <version>${moonlight.version}</version>
-        </dependency>
+
         <!-- jwt 只有Oauth服务需要使用 -->
         <dependency>
             <groupId>com.knightboost.moonlight</groupId>

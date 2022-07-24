@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 /**
  * 参数 KEY
- * {tenant}:TODAY_PV:{now} -> long
+ * TODAY_PV:{now} -> long
  * <p>
  *
  * @author zuihou

@@ -29,7 +29,6 @@ public class ParameterUpdateListener {
     public void saveSysLog(ParameterUpdateEvent event) {
         ParameterUpdate source = (ParameterUpdate) event.getSource();
 
-        ContextUtil.setTenant(source.getTenant());
         if (ParameterKey.LOGIN_POLICY.equals(source.getKey())) {
             onlineService.reset();
         }

@@ -40,14 +40,7 @@ public final class ContextConstants {
      */
     public static final String JWT_SIGN_KEY = "lamp-cloud_is_a_fantastic_project";
 
-    /**
-     * JWT中封装的 租户编码
-     */
-    public static final String JWT_KEY_TENANT = "tenant";
-    /**
-     * JWT中封装的 子租户编码
-     */
-    public static final String JWT_KEY_SUB_TENANT = "sub_tenant";
+
     /**
      * 刷新 Token
      */

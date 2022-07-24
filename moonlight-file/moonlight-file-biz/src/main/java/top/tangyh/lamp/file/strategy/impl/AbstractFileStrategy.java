@@ -96,7 +96,7 @@ public abstract class AbstractFileStrategy implements FileStrategy {
      * 企业/年/月/日/业务类型/唯一文件名
      */
     protected String getPath(String bizType, String uniqueFileName) {
-        return new StringJoiner(StrPool.SLASH).add(String.valueOf(ContextUtil.getTenant()))
+        return new StringJoiner(StrPool.SLASH)
                 .add(bizType).add(getDateFolder()).add(uniqueFileName).toString();
     }
 

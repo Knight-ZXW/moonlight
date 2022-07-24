@@ -1,14 +1,11 @@
 package top.tangyh.lamp.oauth.event.listener;
 
-import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
-import top.tangyh.basic.context.ContextUtil;
 import top.tangyh.basic.database.properties.DatabaseProperties;
-import top.tangyh.basic.database.properties.MultiTenantType;
 import top.tangyh.lamp.authority.service.auth.UserService;
 import top.tangyh.lamp.authority.service.common.LoginLogService;
 import top.tangyh.lamp.oauth.event.LoginEvent;
@@ -33,12 +30,8 @@ public class LoginListener {
     public void saveSysLog(LoginEvent event) {
         LoginStatusDTO loginStatus = (LoginStatusDTO) event.getSource();
         log.info("loginStatus={}", loginStatus);
-        if (!MultiTenantType.NONE.eq(databaseProperties.getMultiTenantType()) && StrUtil.isEmpty(loginStatus.getTenant())) {
-            log.warn("忽略记录登录日志:{}", loginStatus);
-            return;
-        }
 
-        ContextUtil.setTenant(loginStatus.getTenant());
+
         if (LoginStatusDTO.Type.SUCCESS == loginStatus.getType()) {
             // 重置错误次数 和 最后登录时间
             this.userService.resetPassErrorNum(loginStatus.getId());

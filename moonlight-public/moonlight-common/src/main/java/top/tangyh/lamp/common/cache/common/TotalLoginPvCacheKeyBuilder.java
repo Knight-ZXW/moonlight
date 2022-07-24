@@ -7,7 +7,7 @@ import top.tangyh.lamp.common.cache.CacheKeyDefinition;
 
 /**
  * 参数 KEY
- * {tenant}:TOTAL_LOGIN_PV -> long
+ * TOTAL_LOGIN_PV -> long
  * <p>
  * #c_login_log
  *

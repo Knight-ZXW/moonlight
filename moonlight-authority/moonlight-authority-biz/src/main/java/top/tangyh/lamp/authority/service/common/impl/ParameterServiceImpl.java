@@ -2,7 +2,6 @@ package top.tangyh.lamp.authority.service.common.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.extension.toolkit.SqlHelper;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 import top.tangyh.basic.base.service.SuperServiceImpl;
 import top.tangyh.basic.cache.model.CacheKey;
 import top.tangyh.basic.cache.repository.CacheOps;
-import top.tangyh.basic.context.ContextUtil;
 import top.tangyh.basic.database.mybatis.conditions.Wraps;
 import top.tangyh.basic.utils.ArgumentAssert;
 import top.tangyh.basic.utils.SpringUtils;
@@ -24,11 +22,7 @@ import top.tangyh.lamp.authority.service.common.ParameterService;
 import top.tangyh.lamp.common.cache.common.ParameterKeyCacheKeyBuilder;
 
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 
 /**
@@ -79,7 +73,7 @@ public class ParameterServiceImpl extends SuperServiceImpl<ParameterMapper, Para
             cacheOps.set(cacheKey, model.getValue());
 
             SpringUtils.publishEvent(new ParameterUpdateEvent(
-                    new ParameterUpdate(model.getKey(), model.getValue(), null, ContextUtil.getTenant())
+                    new ParameterUpdate(model.getKey(), model.getValue(), null)
             ));
         }
         return bool;
@@ -104,7 +98,7 @@ public class ParameterServiceImpl extends SuperServiceImpl<ParameterMapper, Para
 
         parameterList.forEach(model ->
                 SpringUtils.publishEvent(new ParameterUpdateEvent(
-                        new ParameterUpdate(model.getKey(), model.getValue(), null, ContextUtil.getTenant())
+                        new ParameterUpdate(model.getKey(), model.getValue(), null)
                 ))
         );
         return bool;

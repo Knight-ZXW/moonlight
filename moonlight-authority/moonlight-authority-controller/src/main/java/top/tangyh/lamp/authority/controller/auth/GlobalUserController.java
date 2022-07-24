@@ -52,7 +52,6 @@ public class GlobalUserController extends SuperController<UserService, Long, Use
 
     @Override
     public R<User> handlerSave(GlobalUserSaveDTO model) {
-        ContextUtil.setTenant(model.getTenantCode());
         User user = BeanPlusUtil.toBean(model, User.class);
         user.setName(StrHelper.getOrDef(model.getName(), model.getAccount()));
         if (StrUtil.isEmpty(user.getPassword())) {
@@ -65,20 +64,17 @@ public class GlobalUserController extends SuperController<UserService, Long, Use
 
     @Override
     public R<User> handlerUpdate(GlobalUserUpdateDTO model) {
-        ContextUtil.setTenant(model.getTenantCode());
         User user = BeanPlusUtil.toBean(model, User.class);
         baseService.updateUser(user);
         return success(user);
     }
 
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "tenantCode", value = "企业编码", dataType = DATA_TYPE_STRING, paramType = PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "account", value = "账号", dataType = DATA_TYPE_STRING, paramType = PARAM_TYPE_QUERY),
     })
     @ApiOperation(value = "检测账号是否可用", notes = "检测账号是否可用")
     @GetMapping("/check")
-    public R<Boolean> check(@RequestParam String tenantCode, @RequestParam String account) {
-        ContextUtil.setTenant(tenantCode);
+    public R<Boolean> check(@RequestParam String account) {
         return success(baseService.check(null, account));
     }
 
@@ -86,7 +82,6 @@ public class GlobalUserController extends SuperController<UserService, Long, Use
     public IPage<User> query(PageParams<GlobalUserPageDTO> params) {
         IPage<User> page = params.buildPage(User.class);
         GlobalUserPageDTO model = params.getModel();
-        ContextUtil.setTenant(model.getTenantCode());
 
         baseService.pageByRole(page, params);
 
@@ -101,11 +96,9 @@ public class GlobalUserController extends SuperController<UserService, Long, Use
     @ApiOperation(value = "删除用户")
     @DeleteMapping("/delete")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "tenantCode", value = "企业编码", dataType = DATA_TYPE_STRING, paramType = PARAM_TYPE_QUERY),
             @ApiImplicitParam(name = "ids[]", value = "主键id", dataType = DATA_TYPE_STRING, allowMultiple = true, paramType = PARAM_TYPE_QUERY),
     })
-    public R<Boolean> delete(@RequestParam String tenantCode, @RequestParam("ids[]") List<Long> ids) {
-        ContextUtil.setTenant(tenantCode);
+    public R<Boolean> delete(@RequestParam("ids[]") List<Long> ids) {
         return success(baseService.remove(ids));
     }
 
@@ -118,7 +111,6 @@ public class GlobalUserController extends SuperController<UserService, Long, Use
     @ApiOperation(value = "修改密码", notes = "修改密码")
     @PutMapping("/reset")
     public R<Boolean> updatePassword(@RequestBody @Validated(SuperEntity.Update.class) UserUpdatePasswordDTO model) {
-        ContextUtil.setTenant(model.getTenantCode());
         return success(baseService.reset(model));
     }
 }

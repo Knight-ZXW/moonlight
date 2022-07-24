@@ -170,7 +170,7 @@ public interface CacheKeyDefinition {
     String DICTIONARY = "dictionary";
     /**
      * 字典类型 前缀
-     * 完整key:  {tenant}:dictionary_type:{type}
+     * 完整key:  dictionary_type:{type}
      * field:   {code}
      * value:   itemId
      */
@@ -210,16 +210,6 @@ public interface CacheKeyDefinition {
     String TOKEN_USER_ID = "token_user_id";
 
 
-    /**
-     * 租户 前缀
-     * 完整key: tenant:{id} -> obj
-     */
-    String TENANT = "tenant";
-    /**
-     * 租户 前缀
-     * 完整key: tenant_code:{code} -> id
-     */
-    String TENANT_CODE = "tenant_code";
 
     // 权限系统缓存 end
 

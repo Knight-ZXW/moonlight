@@ -13,7 +13,6 @@ import java.io.Serializable;
 @Data
 public class ThreadLocalParam implements Serializable {
     private Boolean boot;
-    private String tenant;
     private Long userid;
     private String name;
     private String account;

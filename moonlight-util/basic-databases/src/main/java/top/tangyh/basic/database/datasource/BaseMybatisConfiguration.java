@@ -3,7 +3,6 @@ package top.tangyh.basic.database.datasource;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ReflectUtil;
-import cn.hutool.core.util.StrUtil;
 import com.baidu.fsg.uid.UidGenerator;
 import com.baidu.fsg.uid.buffer.RejectedPutBufferHandler;
 import com.baidu.fsg.uid.buffer.RejectedTakeBufferHandler;
@@ -13,25 +12,22 @@ import com.baidu.fsg.uid.impl.HuToolUidGenerator;
 import com.baidu.fsg.uid.worker.DisposableWorkerIdAssigner;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
-import com.baomidou.mybatisplus.extension.plugins.handler.TenantLineHandler;
-import com.baomidou.mybatisplus.extension.plugins.inner.*;
+import com.baomidou.mybatisplus.extension.plugins.inner.BlockAttackInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.IllegalSQLInnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.InnerInterceptor;
+import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
 import lombok.extern.slf4j.Slf4j;
-import net.sf.jsqlparser.expression.Expression;
-import net.sf.jsqlparser.expression.StringValue;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.annotation.Order;
-import top.tangyh.basic.context.ContextUtil;
 import top.tangyh.basic.database.injector.LampSqlInjector;
 import top.tangyh.basic.database.mybatis.WriteInterceptor;
 import top.tangyh.basic.database.mybatis.typehandler.FullLikeTypeHandler;
 import top.tangyh.basic.database.mybatis.typehandler.LeftLikeTypeHandler;
 import top.tangyh.basic.database.mybatis.typehandler.RightLikeTypeHandler;
-import top.tangyh.basic.database.plugins.SchemaInterceptor;
 import top.tangyh.basic.database.properties.DatabaseProperties;
-import top.tangyh.basic.database.properties.MultiTenantType;
 import top.tangyh.basic.uid.dao.WorkerNodeDao;
 
 import java.util.Collections;
@@ -86,37 +82,6 @@ public abstract class BaseMybatisConfiguration {
     @ConditionalOnMissingBean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
-        log.info("检测到 lamp.database.multiTenantType={}，已启用 {} 模式", databaseProperties.getMultiTenantType().name(), databaseProperties.getMultiTenantType().getDescribe());
-        if (StrUtil.equalsAny(databaseProperties.getMultiTenantType().name(),
-                MultiTenantType.SCHEMA.name(), MultiTenantType.SCHEMA_COLUMN.name())) {
-            // SCHEMA 动态表名插件
-            SchemaInterceptor schemaInterceptor = new SchemaInterceptor(databaseProperties.getTenantDatabasePrefix());
-            interceptor.addInnerInterceptor(schemaInterceptor);
-        }
-        if (StrUtil.equalsAny(databaseProperties.getMultiTenantType().name(),
-                MultiTenantType.COLUMN.name(), MultiTenantType.SCHEMA_COLUMN.name())) {
-            // COLUMN 模式 多租户插件
-            TenantLineInnerInterceptor tli = new TenantLineInnerInterceptor();
-            tli.setTenantLineHandler(new TenantLineHandler() {
-                @Override
-                public String getTenantIdColumn() {
-                    return databaseProperties.getTenantIdColumn();
-                }
-
-                @Override
-                public boolean ignoreTable(String tableName) {
-                    return databaseProperties.getIgnoreTables() != null && databaseProperties.getIgnoreTables().contains(tableName);
-                }
-
-                @Override
-                public Expression getTenantId() {
-                    return MultiTenantType.COLUMN.eq(databaseProperties.getMultiTenantType()) ?
-                            new StringValue(ContextUtil.getTenant()) :
-                            new StringValue(ContextUtil.getSubTenant());
-                }
-            });
-            interceptor.addInnerInterceptor(tli);
-        }
 
         List<InnerInterceptor> beforeInnerInterceptor = getPaginationBeforeInnerInterceptor();
         if (!beforeInnerInterceptor.isEmpty()) {

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 
 /**
  * 参数 KEY
- * {tenant}:TODAY_LOGIN_PV -> long
+ * TODAY_LOGIN_PV -> long
  * <p>
  * #c_login_log
  *

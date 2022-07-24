@@ -24,7 +24,7 @@ import java.util.List;
 import static top.tangyh.lamp.common.constant.BizConstant.*;
 
 /**
- * lamp.database.multiTenantType != DATASOURCE 时，该类启用.
+ * moonlight.database.multiTenantType != DATASOURCE 时，该类启用.
  * 此时，项目的多租户模式切换成：${lamp.database.multiTenantType}。
  * <p>
  * NONE("非租户模式"): 不存在租户的概念

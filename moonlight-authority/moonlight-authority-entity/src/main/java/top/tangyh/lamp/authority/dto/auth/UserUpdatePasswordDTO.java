@@ -58,9 +58,5 @@ public class UserUpdatePasswordDTO implements Serializable {
     @NotEmpty(message = "确认密码不能为空")
     @Size(min = 6, max = 64, message = "密码长度不能小于6且超过64个字符")
     private String confirmPassword;
-    /**
-     * 租户编码
-     */
-    @ApiModelProperty(value = "租户编码，lamp-admin-ui页面使用")
-    private String tenantCode;
+
 }

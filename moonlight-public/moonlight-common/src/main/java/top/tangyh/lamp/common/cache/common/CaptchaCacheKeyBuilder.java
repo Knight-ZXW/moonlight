@@ -19,10 +19,7 @@ public class CaptchaCacheKeyBuilder implements CacheKeyBuilder {
         return CacheKeyDefinition.CAPTCHA;
     }
 
-    @Override
-    public String getTenant() {
-        return null;
-    }
+
 
     @Override
     public Duration getExpire() {

@@ -6,7 +6,7 @@ import top.tangyh.lamp.common.cache.CacheKeyDefinition;
 
 /**
  * 参数 KEY
- * {tenant}:PARAMETER_KEY:{key} -> value
+ * PARAMETER_KEY:{key} -> value
  * <p>
  * #c_parameter
  *

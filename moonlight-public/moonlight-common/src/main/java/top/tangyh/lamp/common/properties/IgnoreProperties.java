@@ -53,14 +53,6 @@ public class IgnoreProperties {
             // 不需要租户编码、不需要登录、不需要权限即可访问的接口
             "/**/anno/**"
     );
-    /**
-     * 不需要携带 租户ID, 也不校验是否登录（token）。  即： 请求头中不携带 tenant
-     * <p>
-     * 注意： 此类接口，无法操作租户库(base_0000、extend_0000)的数据，因为后台无法获取租户信息，导致无法切换数据库
-     *
-     * @see 3.x
-     */
-    private List<String> tenant = CollUtil.newArrayList("/**/noTenant/**", "/**/anyTenant/**");
 
     /**
      * 不需要登录, 且不需要校验权限
@@ -84,10 +76,5 @@ public class IgnoreProperties {
         return all.stream().anyMatch(url -> path.startsWith(url) || ANT_PATH_MATCHER.match(url, path));
     }
 
-    public boolean isIgnoreTenant(String path) {
-        List<String> all = new ArrayList<>();
-        all.addAll(getBaseUri());
-        all.addAll(getTenant());
-        return all.stream().anyMatch(url -> path.startsWith(url) || ANT_PATH_MATCHER.match(url, path));
-    }
+
 }

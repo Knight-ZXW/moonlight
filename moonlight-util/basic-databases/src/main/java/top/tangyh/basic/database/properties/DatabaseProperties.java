@@ -9,11 +9,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static top.tangyh.basic.database.properties.DatabaseProperties.PREFIX;
-import static top.tangyh.basic.database.properties.MultiTenantType.SCHEMA;
 
 
 /**
@@ -62,27 +58,6 @@ public class DatabaseProperties {
      */
     private Boolean isDataScope = true;
 
-
-    /**
-     * 租户库 前缀
-     */
-    private String tenantDatabasePrefix = "lamp_base";
-
-    /**
-     * 多租户模式
-     */
-    private MultiTenantType multiTenantType = SCHEMA;
-    /**
-     * 租户id 列名
-     * <p>
-     * 使用于 COLUMN 模式
-     */
-    private String tenantIdColumn = "tenant_code";
-    /**
-     * 在执行sql时，忽略 租户插件自动拼接租户编码的表
-     * 仅 COLUMN 模式有效
-     */
-    private List<String> ignoreTables = new ArrayList<>();
     /**
      * id 类型
      */

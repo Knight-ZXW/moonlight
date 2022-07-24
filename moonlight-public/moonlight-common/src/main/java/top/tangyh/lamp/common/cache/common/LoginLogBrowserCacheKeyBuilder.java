@@ -6,7 +6,7 @@ import top.tangyh.lamp.common.cache.CacheKeyDefinition;
 
 /**
  * 参数 KEY
- * {tenant}:LOGIN_LOG_BROWSER -> long
+ * LOGIN_LOG_BROWSER -> long
  * <p>
  * #c_login_log
  *

@@ -84,11 +84,7 @@ public interface BizConstant {
      * method 的可选值为 {INIT_DS_PARAM_METHOD_INIT} 和 {INIT_DS_PARAM_METHOD_REMOVE}
      */
     String INIT_DS_PARAM_METHOD = "method";
-    /**
-     * 初始化数据源时json的参数，
-     * tenant 的值为 需要初始化的租户编码
-     */
-    String INIT_DS_PARAM_TENANT = "tenant";
+
     /**
      * 初始化数据源时，需要执行的方法
      * init 表示初始化数据源

@@ -34,7 +34,6 @@ import top.tangyh.lamp.common.properties.SystemProperties;
 import top.tangyh.lamp.file.service.AppendixService;
 import top.tangyh.lamp.oauth.event.LoginEvent;
 import top.tangyh.lamp.oauth.event.model.LoginStatusDTO;
-import top.tangyh.lamp.tenant.service.TenantService;
 
 import java.time.LocalDateTime;
 
@@ -50,10 +49,10 @@ public class RefreshTokenGranter extends AbstractTokenGranter implements TokenGr
 
     public static final String GRANT_TYPE = "refresh_token";
 
-    public RefreshTokenGranter(TokenUtil tokenUtil, UserService userService, TenantService tenantService, AppendixService appendixService,
+    public RefreshTokenGranter(TokenUtil tokenUtil, UserService userService, AppendixService appendixService,
                                ApplicationService applicationService, DatabaseProperties databaseProperties,
                                OnlineService onlineService, SystemProperties systemProperties) {
-        super(tokenUtil, userService, tenantService, applicationService,
+        super(tokenUtil, userService, applicationService,
                 databaseProperties, onlineService, systemProperties, appendixService);
     }
 
