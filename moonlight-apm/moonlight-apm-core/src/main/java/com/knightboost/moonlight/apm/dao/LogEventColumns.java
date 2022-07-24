@@ -13,8 +13,8 @@ public interface LogEventColumns {
     public static final String COLUMN_APP_KEY = "app_key";
     public static final String COLUMN_EVENT_TYPE = "event_type";
 
-    public static final String COLUMN_EVENT_TIME = "event_timestamp";
-    public static final String COLUMN_EVENT_TIMESTAMP = "timestamp";
+    public static final String COLUMN_EVENT_TIME = "event_time";
+    public static final String COLUMN_TIMESTAMP = "timestamp";
 
     public static final String COLUMN_APP_NAME = "app_name";
     public static final String COLUMN_APP_VERSION = "version";

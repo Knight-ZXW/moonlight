@@ -26,6 +26,10 @@ public interface ApmLogEventMapper extends BaseMapper<LogEvent> {
     @SelectProvider(type = SqlProviderAdapter.class, method = "select")
     List<SqlResultEntity> selectIssuesMetric(SelectStatementProvider statementProvider);
 
+
+    @SelectProvider(type= SqlProviderAdapter.class, method="select")
+    List<MetricTrendResultPTO> queryAggregateMetricTrend(SelectStatementProvider  statementProvider);
+
     @SelectProvider(type = SqlProviderAdapter.class, method = "select")
     List<DistributionItem> selectDimensionValues(SelectStatementProvider statementProvider);
 

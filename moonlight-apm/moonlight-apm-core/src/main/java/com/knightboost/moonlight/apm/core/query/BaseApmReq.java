@@ -14,8 +14,11 @@ import java.util.List;
 @Data
 public class BaseApmReq {
     private String appKey;
+
     private String issueType;
+
     private long beginTime;
+
     private long endTime;
 
     //具体查询的指标
@@ -23,6 +26,14 @@ public class BaseApmReq {
     protected List<MetricAggregateQuery> metricAggregateQueries;
 
     public List<FilterRule> filterRules =new ArrayList<>();
+
+
+    /**
+     * TODO group by 条件对象化
+     * group by 时间的聚合类型
+     */
+    protected String timeAggregationType;
+
 
     /**
      *

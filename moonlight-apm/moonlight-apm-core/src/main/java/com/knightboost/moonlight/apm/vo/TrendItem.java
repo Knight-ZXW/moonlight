@@ -1,9 +1,9 @@
-package com.knightboost.moonlight.apm.dto;
+package com.knightboost.moonlight.apm.vo;
 
 import java.util.Date;
 
 /*
- * Created by Knight-ZXW on 2022/7/23
+ * Created by Knight-ZXW on 2022/7/24
  * email: nimdanoob@163.com
  */
 public interface TrendItem {

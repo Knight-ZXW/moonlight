@@ -1,5 +1,6 @@
 package com.knightboost.moonlight.apm.controller;
 
+import com.knightboost.moonlight.apm.core.query.BaseApmReq;
 import com.knightboost.moonlight.apm.core.query.PagingLogEventReq;
 import com.knightboost.moonlight.apm.dto.IssueListReq;
 import com.knightboost.moonlight.apm.entity.ApmIssue;
@@ -42,7 +43,7 @@ public class ApmIssueController {
         return R.success(apmIssueService.insertIssue(apmIssue));
     }
 
-    @PostMapping("list")
+    @PostMapping("issue/list")
     public R<PageImpl<ApmIssueListItem>> pagingIssues(@RequestBody IssueListReq req) {
         return R.success(apmIssueService.pagingQueryIssues(req));
     }
@@ -51,6 +52,18 @@ public class ApmIssueController {
     public R pagingLogEvents(@RequestBody PagingLogEventReq req) {
         return R.success(logEventQueryService.pagingQueryApmLogEvent(req));
     }
+
+    /**
+     * 日志/问题 Metric 趋势
+     * @param req
+     * @return
+     */
+    @PostMapping("eventMetricTrend")
+    public R eventMetricTrend(@RequestBody BaseApmReq req){
+        return R.success(logEventQueryService.metricAggregateByTime(req));
+    }
+
+
 
 
 }

@@ -17,6 +17,9 @@ public class MetricAggregateQuery {
     private Map<String,Object> params = new LinkedHashMap<>();
     private String alias;
 
+    //todo support groupBy
+
+
     public void addParam(String k,Object v){
         params.put(k,v);
     }

@@ -10,6 +10,8 @@ import com.knightboost.moonlight.dynamicsql.select.function.CountIf;
 import com.knightboost.moonlight.dynamicsql.select.function.IfBetween;
 import com.knightboost.moonlight.dynamicsql.select.function.JsonExtractFloat;
 import com.knightboost.moonlight.dynamicsql.select.function.ToNumber;
+import com.knightboost.moonlight.dynamicsql.where.condition.IsGreaterThanOrEqualToDateTime;
+import com.knightboost.moonlight.dynamicsql.where.condition.IsLessThanToDateTime;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.dynamic.sql.*;
 import org.mybatis.dynamic.sql.render.TableAliasCalculator;
@@ -19,8 +21,6 @@ import org.mybatis.dynamic.sql.select.aggregate.Count;
 import org.mybatis.dynamic.sql.select.aggregate.CountDistinct;
 import org.mybatis.dynamic.sql.where.AbstractWhereDSL;
 import org.mybatis.dynamic.sql.where.condition.IsEqualTo;
-import org.mybatis.dynamic.sql.where.condition.IsGreaterThanOrEqualTo;
-import org.mybatis.dynamic.sql.where.condition.IsLessThan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import top.tangyh.basic.utils.CamelCaseUtil;
@@ -43,13 +43,29 @@ public class LogEventQueryHelper {
     public void filterConditionBuild(AbstractWhereDSL selectDsl,
                                      BaseApmReq req) {
         selectDsl.and(ApmLogEventDSS.appKey, IsEqualTo.of(req.getAppKey()));
+        ;
+
+//        if (req.getBeginTime() > 0) {
+//            selectDsl.and(ApmLogEventDSS.eventTime,
+//                    IsGreaterThanOrEqualToDateTime.of(DateFormatUtils.format(req.getBeginTime(),"yyyy-MM-dd HH:mm:ss")));
+//        }
+//
+//        if (req.getEndTime() > 0) {
+//            selectDsl.and(ApmLogEventDSS.eventTime, IsLessThanToDateTime.of(
+//                    DateFormatUtils.format(req.getEndTime(),"yyyy-MM-dd HH:mm:ss")));
+//        }
+
+        //eventTime 只精确到秒
         if (req.getBeginTime() > 0) {
-            selectDsl.and(ApmLogEventDSS.time, IsGreaterThanOrEqualTo.of(req.getBeginTime()));
+            selectDsl.and(ApmLogEventDSS.eventTime,
+                    IsGreaterThanOrEqualToDateTime.of(req.getBeginTime()/1000));
         }
 
         if (req.getEndTime() > 0) {
-            selectDsl.and(ApmLogEventDSS.time, IsLessThan.of(req.getBeginTime()));
+            selectDsl.and(ApmLogEventDSS.eventTime, IsLessThanToDateTime.of(
+                   req.getEndTime()/1000));
         }
+
         //todo 将group id转为 filter 条件?
 
 //        if ((req.getGroupIds() != null && req.getGroupIds().size() > 0) || req.getGroupId() > 0) {

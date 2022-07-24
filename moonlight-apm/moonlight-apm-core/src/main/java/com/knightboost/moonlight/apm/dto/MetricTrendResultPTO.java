@@ -1,6 +1,7 @@
 package com.knightboost.moonlight.apm.dto;
 
 import com.fasterxml.jackson.annotation.JsonGetter;
+import com.knightboost.moonlight.apm.vo.TrendItem;
 import lombok.Data;
 
 import java.util.Date;

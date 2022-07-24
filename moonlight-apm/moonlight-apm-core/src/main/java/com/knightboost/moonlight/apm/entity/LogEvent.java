@@ -18,7 +18,9 @@ public class LogEvent {
     private String appKey;
     //TODO rename to issueId ?
     private Long groupId;//issueId
-    private Date timestamp;
+    private long timestamp;
+    private Date eventTime;
+
 
     private String groupHash;//issueId
     private String platform;
@@ -27,7 +29,6 @@ public class LogEvent {
 
     private String userId;
     private String eventType;
-    private Date eventTimestamp;
     private String version;
     private String deviceOs;
 

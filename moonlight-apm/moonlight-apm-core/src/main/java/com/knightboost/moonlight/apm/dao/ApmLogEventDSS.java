@@ -28,8 +28,8 @@ public class ApmLogEventDSS {
     public static final SqlColumn<Integer> id = logEvent.eventId;
     public static final SqlColumn<String> appKey = logEvent.appKey;
     public static final SqlColumn<String> eventType = logEvent.eventType;
-    public static final SqlColumn<Date> time = logEvent.time;
-    public static final SqlColumn<Date> timestamp = logEvent.timestamp;
+    public static final SqlColumn<Date> eventTime = logEvent.eventTime;
+    public static final SqlColumn<Long> timestamp = logEvent.timestamp;
     public static final SqlColumn<String> appVersion = logEvent.version;
     public static final SqlColumn<String> deviceModel = logEvent.deviceModel;
     public static final SqlColumn<String> deviceName = logEvent.deviceName;
@@ -51,13 +51,13 @@ public class ApmLogEventDSS {
         switch (timeAggregateType) {
             case TimeAggergateType
                     .ONE_HOUR:
-                return ToStartOfHour.from(timestamp).as(alias);
+                return ToStartOfHour.from(eventTime).as(alias);
             case TimeAggergateType
                     .ONE_DAY:
-                return ToStartOfDay.from(timestamp).as(alias);
+                return ToStartOfDay.from(eventTime).as(alias);
             case TimeAggergateType
                     .ONE_MINUTE:
-                return ToStartOfMinute.from(timestamp).as(alias);
+                return ToStartOfMinute.from(eventTime).as(alias);
         }
         throw new IllegalArgumentException("不支持的日期聚合" + timeAggregateType);
     }
@@ -84,15 +84,15 @@ public class ApmLogEventDSS {
         @ColumnGroup({"basic", "detail"})
         public final SqlColumn<Integer> eventId = column(LogEventColumns.COLUMN_EVENT_ID, JDBCType.CHAR);
         @ColumnGroup({"basic", "detail"})
-        public final SqlColumn<String> appKey = column(LogEventColumns.COLUMN_APP_KEY, JDBCType.DATE);
+        public final SqlColumn<String> appKey = column(LogEventColumns.COLUMN_APP_KEY, JDBCType.CHAR);
 
 
         @ColumnGroup({"basic", "detail"})
         public final SqlColumn<String> eventType = column(LogEventColumns.COLUMN_EVENT_TYPE, JDBCType.CHAR);
         @ColumnGroup({"basic", "detail"})
-        public final SqlColumn<Date> time = column(LogEventColumns.COLUMN_EVENT_TIME, JDBCType.DATE);
+        public final SqlColumn<Date> eventTime = column(LogEventColumns.COLUMN_EVENT_TIME, JDBCType.TIMESTAMP);
         @ColumnGroup({"basic", "detail"})
-        public final SqlColumn<Date> timestamp = column(LogEventColumns.COLUMN_EVENT_TIMESTAMP, JDBCType.DATE);
+        public final SqlColumn<Long> timestamp = column(LogEventColumns.COLUMN_TIMESTAMP, JDBCType.BIGINT);
 //        @ColumnGroup({"basic", "detail"})
 //        public final SqlColumn<String> appName = column(LogEventColumns.COLUMN_APP_NAME, JDBCType.CHAR);
         @ColumnGroup({"basic", "detail"})
